@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-import { useInput } from 'hooks/useInput';
-import { ISearchWindowProps } from 'types';
 import Button from 'userInterface/button/Button';
 import Input from 'userInterface/input/Input';
+import { useInput } from 'hooks/useInput';
+import { ISearchWindowProps } from 'types';
 
 const SearchWindow: FC<ISearchWindowProps> = ({ callback }) => {
   const { value: nickname, onChange } = useInput('');
