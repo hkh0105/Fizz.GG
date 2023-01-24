@@ -5,7 +5,9 @@ import { Provider } from 'react-wrap-balancer';
 import { DefaultSeo } from 'next-seo';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import Layout from './layout';
+import ErrorBoundary from './ErrorBoundary';
 
 const DEFAULT_SEO = {
   title: 'Search engine for League Of Legend',
@@ -39,16 +41,18 @@ function App({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <Layout>
-      <Provider>
-        <QueryClientProvider client={queryClient}>
-          <RecoilRoot>
-            <DefaultSeo {...DEFAULT_SEO} />
-            <Component {...pageProps} />
-          </RecoilRoot>
-        </QueryClientProvider>
-      </Provider>
-    </Layout>
+    <ErrorBoundary>
+      <Layout>
+        <Provider>
+          <QueryClientProvider client={queryClient}>
+            <RecoilRoot>
+              <DefaultSeo {...DEFAULT_SEO} />
+              <Component {...pageProps} />
+            </RecoilRoot>
+          </QueryClientProvider>
+        </Provider>
+      </Layout>
+    </ErrorBoundary>
   );
 }
 
