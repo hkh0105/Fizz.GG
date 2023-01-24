@@ -2,5 +2,6 @@ import { instance } from './config';
 import { PATH } from '../constant';
 
 export const API = {
-  example: () => instance.get(PATH.getTodo),
+  getSummonerByNickname: (nickname: string) =>
+    instance.get(PATH.getSummonerByNickname.replace('{nickname}', nickname)),
 };
