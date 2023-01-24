@@ -1,3 +1,3 @@
 export const PATH = {
-  getTodo: 'todo',
+  getSummonerByNickname: 'summoner/v4/summoners/by-name/{nickname}',
 };
