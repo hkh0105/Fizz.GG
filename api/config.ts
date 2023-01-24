@@ -1,30 +1,31 @@
-import axios from 'axios';
-
-const serverUrl = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export const instance = axios.create({
-  baseURL: serverUrl ?? 'https://localhost:3000/',
   headers: {
-    'Access-Control-Allow-Origin': '*',
-    Authorization: 'Bearer test',
+    'X-Riot-Token': process.env.NEXT_PUBLIC_RIOT_API_KEY,
+    'Content-Type': 'application/json',
   },
 });
 
 instance.interceptors.request.use(
-  (config) => {
+  (config: AxiosRequestConfig) => {
+    console.log(config);
     return config;
   },
-  (err) => {
+  (err: AxiosError) => {
     console.log('ERROR:', err);
     return err;
   }
 );
 
 instance.interceptors.response.use(
-  (res) => {
+  (res: AxiosResponse) => {
+    console.log('RESPONSE:', res);
     return res;
   },
-  (err) => {
-    return err;
+  (err: AxiosError) => {
+    console.log('RESPONSE ERROR', err);
+
+    throw new Error(err.message);
   }
 );
