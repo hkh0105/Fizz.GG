@@ -5,48 +5,48 @@ export interface SearchWindowProps {
   onSubmit: (value: string) => void;
 }
 
-export type TQueryOptions = Omit<
+export type QueryOptions = Omit<
   UseQueryOptions<unknown, unknown, unknown, QueryKey>,
   'queryKey' | 'queryFn'
 >;
 
 export interface ButtonProps {
   label: string;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-  size?: keyof TButtonSize;
-  borderColor?: keyof TButtonColor;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  size?: keyof ButtonSize;
+  borderColor?: keyof ButtonColor;
   type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
-export type TButtonColor = {
+export type ButtonColor = {
   blue: string;
   gray: string;
   transparent: string;
 };
 
-export type TButtonSize = {
+export type ButtonSize = {
   small: string;
   medium: string;
   big: string;
 };
 
-export interface IInputProps {
+export interface InputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string | number;
   labelFor: string;
   disabled?: boolean;
   placeholder?: string;
-  size?: keyof TInputSize;
-  color?: keyof TInputBorderColor;
+  size?: keyof InputSize;
+  color?: keyof InputBorderColor;
   required?: boolean;
 }
 
-export type TInputBorderColor = {
+export type InputBorderColor = {
   blue: string;
   gray: string;
 };
 
-export type TInputSize = {
+export type InputSize = {
   small: string;
   medium: string;
   big: string;
