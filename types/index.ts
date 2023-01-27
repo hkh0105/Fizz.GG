@@ -1,8 +1,8 @@
 import { QueryKey, UseQueryOptions } from '@tanstack/react-query';
 import { ChangeEvent, MouseEvent, ReactNode } from 'react';
 
-export interface ISearchWindowProps {
-  callback: (value: string) => Promise<void>;
+export interface SearchWindowProps {
+  onSubmit: (value: string) => void;
 }
 
 export type TQueryOptions = Omit<

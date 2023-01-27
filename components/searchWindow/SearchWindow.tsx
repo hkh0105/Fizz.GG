@@ -4,9 +4,9 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import Button from 'userInterface/button/Button';
 import Input from 'userInterface/input/Input';
 import { useInput } from 'hooks/useInput';
-import { ISearchWindowProps } from 'types';
+import { SearchWindowProps } from 'types';
 
-const SearchWindow: FC<ISearchWindowProps> = ({ callback: onSubmit }) => {
+const SearchWindow: FC<SearchWindowProps> = ({ onSubmit }) => {
   const { value: nickname, onChange } = useInput('');
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
