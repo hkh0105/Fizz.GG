@@ -4,10 +4,15 @@ import type { AppProps } from 'next/app';
 import { Provider } from 'react-wrap-balancer';
 import { DefaultSeo } from 'next-seo';
 import { RecoilRoot } from 'recoil';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 
-import Layout from './layout';
+import Layout from '../components/layout/layout';
 import ErrorBoundary from './ErrorBoundary';
+import { Suspense, useState } from 'react';
 
 const DEFAULT_SEO = {
   title: 'Search engine for League Of Legend',
@@ -32,27 +37,35 @@ const DEFAULT_SEO = {
 };
 
 function App({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        suspense: true, // useErrorBoundary 자동 True
+  const [queryClient] = useState(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          suspense: true, // useErrorBoundary 자동 True
+          retry: false,
+          refetchOnWindowFocus: false,
+        },
       },
-    },
-  });
+    })
+  );
 
   return (
-    <ErrorBoundary>
-      <Layout>
-        <Provider>
-          <QueryClientProvider client={queryClient}>
-            <RecoilRoot>
-              <DefaultSeo {...DEFAULT_SEO} />
-              <Component {...pageProps} />
-            </RecoilRoot>
-          </QueryClientProvider>
-        </Provider>
-      </Layout>
-    </ErrorBoundary>
+    <Layout>
+      <Suspense fallback={<div>LOADING..</div>}>
+        <ErrorBoundary>
+          <Provider>
+            <QueryClientProvider client={queryClient}>
+              <Hydrate state={pageProps.dehydratedState}>
+                <RecoilRoot>
+                  <DefaultSeo {...DEFAULT_SEO} />
+                  <Component {...pageProps} />
+                </RecoilRoot>
+              </Hydrate>
+            </QueryClientProvider>
+          </Provider>
+        </ErrorBoundary>
+      </Suspense>
+    </Layout>
   );
 }
 
