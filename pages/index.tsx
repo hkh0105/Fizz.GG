@@ -25,7 +25,7 @@ const Home: NextPage = () => {
             string='당신의 전적, 캐릭터 별 승률이 궁금하다면 
             지금 바로 검색하세요 !'
           />
-          <SearchWindow callback={onClickSearchButton} />
+          <SearchWindow onSubmit={onClickSearchButton} />
         </section>
       </ErrorBoundary>
     </Suspense>
