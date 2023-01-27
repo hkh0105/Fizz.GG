@@ -2,19 +2,19 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { AxiosResponse } from 'axios';
 
 import { API } from 'api';
-import { Error, Response, TSummonerInfo } from 'types';
+import { Error, Response, SummonerInfo } from 'types';
 
 async function getSummonerInfo(nickname: string) {
-  const response: AxiosResponse<TSummonerInfo, any> =
+  const response: AxiosResponse<SummonerInfo, any> =
     await API.getSummonerByNickname(nickname);
-  const summonerInfo: TSummonerInfo = response.data;
+  const summonerInfo: SummonerInfo = response.data;
 
   return summonerInfo;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response<TSummonerInfo> | Error>
+  res: NextApiResponse<Response<SummonerInfo> | Error>
 ) {
   const { nickname } = req.query;
 
