@@ -7,4 +7,5 @@ export const PATH = {
 
 export const BFF_PATH = {
   getSummonerByNickname: '/api/getSummonerByNickname?nickname={nickname}',
+  getLeagueInfoById: '/api/getLeagueInfo?id={id}',
 };

@@ -18,4 +18,6 @@ export const API = {
 export const CLIENT_API = {
   getSummonerByNickname: (nickname: string) =>
     browser.get(BFF_PATH.getSummonerByNickname.replace('{nickname}', nickname)),
+  getLeagueInfoById: (id: string) =>
+    browser.get(BFF_PATH.getLeagueInfoById.replace('{id}', id)),
 };
