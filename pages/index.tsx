@@ -9,8 +9,8 @@ import Typography from 'userInterface/typography/Typography';
 const Home: NextPage = () => {
   const router = useRouter();
 
-  const onClickSearchButton = (nickname: string) => {
-    router.push({
+  const onClickSearchButton = async (nickname: string) => {
+    await router.push({
       pathname: `/search/[nickname]`,
       query: { nickname },
     });
