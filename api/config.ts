@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { AuthError, ForbiddenError, NotFoundError } from 'error';
+// import { AuthError, ForbiddenError, NotFoundError } from 'error';
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_RIOT_URL_PLATFORM,
@@ -89,26 +89,26 @@ regionInstance.interceptors.response.use(
   },
   (err) => {
     console.log('RESPONSE ERROR', err.response.data);
-    const res = err.response;
-    if (!res.data) throw new Error(err.message);
+    // const res = err.response;
+    // if (!res.data) throw new Error(err.message);
 
-    const { status, statusText, data } = res;
+    // const { status, statusText, data } = res;
 
-    let message = '';
+    // let message = '';
 
-    if (data && data.status && data.status.message) {
-      message = data.status.message;
-    } else if (statusText) {
-      message = statusText;
-    }
+    // if (data && data.status && data.status.message) {
+    //   message = data.status.message;
+    // } else if (statusText) {
+    //   message = statusText;
+    // }
 
-    if (status === 404) {
-      throw new NotFoundError(message);
-    } else if (status === 403) {
-      throw new ForbiddenError(message);
-    } else if (status === 401) {
-      throw new AuthError(message);
-    }
+    // if (status === 404) {
+    //   throw new NotFoundError(message);
+    // } else if (status === 403) {
+    //   throw new ForbiddenError(message);
+    // } else if (status === 401) {
+    //   throw new AuthError(message);
+    // }
 
     throw new Error(err.message);
   }
