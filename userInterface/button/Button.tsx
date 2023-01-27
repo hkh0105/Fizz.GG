@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+
 import { IButtonProps, TButtonColor, TButtonSize } from 'types';
 
 const Button: FC<IButtonProps> = ({
@@ -6,10 +7,13 @@ const Button: FC<IButtonProps> = ({
   onClick,
   borderColor = 'blue',
   size = 'medium',
+  type = 'button',
 }) => {
+  const defaultVariants = 'font-medium rounded-lg';
   const borderColorVariants: TButtonColor = {
-    blue: 'font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-500 focus:ring-blue-300 ',
+    blue: 'text-white bg-blue-700 hover:bg-blue-500  ',
     gray: '',
+    transparent: 'hover:border-blue-500 border-transparent border-2 rounded-lg',
   };
   const sizeVariants: TButtonSize = {
     small: '',
@@ -17,11 +21,15 @@ const Button: FC<IButtonProps> = ({
     big: '',
   };
 
+  // size: sm, md, lg
+  // blue: primary, gray: secondary or ghost or disabled || ex) btn-disabled
+
+  // 예를들어서, 프라이머 색 ? 변하지 않죠. 버튼 사이즈 ?
   return (
     <button
-      type='button'
+      type={type}
       onClick={onClick}
-      className={`${sizeVariants[size]} ${borderColorVariants[borderColor]}`}
+      className={`${defaultVariants} ${sizeVariants[size]} ${borderColorVariants[borderColor]}`}
     >
       {label}
     </button>
