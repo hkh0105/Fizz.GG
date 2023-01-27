@@ -1,5 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { FC } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Box from 'userInterface/box/Box';
 import RankContents from './RankContents';
@@ -10,7 +11,6 @@ import {
   LeagueInfo,
   LeagueInfoArr,
   RankProps,
-  RankTitleMapper,
   Response,
   SummonerInfo,
 } from 'types';
@@ -49,7 +49,7 @@ const Rank: FC<RankProps> = ({ nickname }) => {
         };
 
         return (
-          <Box {...BoxProps}>
+          <Box {...BoxProps} key={uuidv4()}>
             <RankContents {...RankContentsProps} />
           </Box>
         );
