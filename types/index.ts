@@ -109,11 +109,22 @@ export type RankTier =
   | 'CHALLENGER'
   | 'UNRANKED';
 
+export type ChartData<T> = { id: string; value: T; color: string };
+
+export interface RankContentsProps {
+  wins: number;
+  losses: number;
+  queueType: keyof RankTitleMapper;
+  tier: string;
+  rank: string;
+  leaguePoints: number;
+}
+
 export interface BoxProps {
-  children: ReactNode;
   size: keyof BoxSizeMapper;
   width?: string;
   height?: string;
+  children?: ReactNode;
 }
 
 export type BoxSizeMapper = {
@@ -151,3 +162,27 @@ export type TypographyMapper = {
 export interface ProfileProps {
   nickname: string;
 }
+
+export interface RankProps {
+  nickname: string;
+}
+
+export type TierImages = {
+  [key in RankTier]: string;
+};
+
+export type Images = TierImages & {
+  logo: string;
+};
+
+export interface PieChartProps<T> {
+  data: T[];
+  margin?: ChartMargin;
+}
+
+export type ChartMargin = {
+  left?: number;
+  right?: number;
+  top?: number;
+  bottom?: number;
+};
