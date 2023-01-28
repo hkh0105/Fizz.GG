@@ -36,7 +36,7 @@ const DEFAULT_SEO = {
   },
 };
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps<{ dehydratedState: unknown }>) {
   const [queryClient] = useState(
     new QueryClient({
       defaultOptions: {

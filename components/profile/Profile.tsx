@@ -30,19 +30,19 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
   const { name, summonerLevel, profileIconId } =
     summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
 
-  const onClickIngameButton = () => {
-    router.push({
+  const onClickIngameButton = async () => {
+    await router.push({
       pathname: `/search/[nickname]/ingame`,
       query: { nickname },
     });
   };
 
-  const onClickUpdateButton = () => {
-    refetchUserInfo();
+  const onClickUpdateButton = async () => {
+    await refetchUserInfo();
   };
 
-  const onClickSummonerButton = () => {
-    router.push({
+  const onClickSummonerButton = async () => {
+    await router.push({
       pathname: `/search/[nickname]/summoner`,
       query: { nickname },
     });

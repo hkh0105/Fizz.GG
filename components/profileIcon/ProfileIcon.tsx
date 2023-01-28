@@ -9,15 +9,17 @@ const ProfileIcon: FC<ProfileIconProps> = ({
   width,
   height,
 }) => {
+  const ImageProps = {
+    className: 'rounded-xl',
+    src: `http://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/${profileIconId}.png`,
+    alt: '소환사 아이콘 이미지',
+    width,
+    height,
+  };
+
   return (
     <div className='flex-col w-[140px] mx-3 my-5 font-medium flex items-center'>
-      <Image
-        className='rounded-xl'
-        src={`http://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/${profileIconId}.png`}
-        width={width}
-        height={height}
-        alt={'소환사 아이콘 이미지'}
-      />
+      <Image {...ImageProps} />
       <p className='w-[50px] text-white bg-black border text-center rounded-xl'>
         {summonerLevel ?? 0}
       </p>
