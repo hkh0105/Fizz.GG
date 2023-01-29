@@ -21,6 +21,10 @@ export const API = {
     await instance.get<LeagueInfoArr>(
       PATH.getLeagueById.replace('{encryptedSummonerId}', id)
     ),
+  getGameByMatchId: async (matchId: string) =>
+    await regionInstance.get(
+      PATH.getGameByMatchId.replace('{matchId}', matchId)
+    ),
 };
 
 export const CLIENT_API = {
@@ -28,4 +32,10 @@ export const CLIENT_API = {
     browser.get(BFF_PATH.getSummonerByNickname.replace('{nickname}', nickname)),
   getLeagueInfoById: (id: string) =>
     browser.get(BFF_PATH.getLeagueInfoById.replace('{id}', id)),
+  getMatchArrByPuuid: (puuid: string) =>
+    browser.get(BFF_PATH.getMatchArrByPuuid.replace('{puuid}', puuid)),
+  getGameByMatchId: (matchId: string) =>
+    browser.get(BFF_PATH.getGameByMatchId.replace('{matchId}', matchId)),
+  getSpell: () => browser.get(PATH.getSpell),
+  getRune: () => browser.get(PATH.getRune),
 };
