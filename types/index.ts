@@ -126,6 +126,7 @@ export interface BoxProps {
   width?: string;
   height?: string;
   children?: ReactNode;
+  marginClass?: string;
 }
 
 export type BoxSizeMapper = {
@@ -160,6 +161,7 @@ export interface TypographyProps {
 export type TypoGraphySizeMapper = {
   medium: string;
   small: string;
+  xSmall: string;
 };
 
 export type TypographyTypeMapper = {
@@ -433,4 +435,47 @@ export interface TeamChampionProps {
   width: number;
   team: MatchInfoByUser[];
   typoSize: keyof TypoGraphySizeMapper;
+}
+
+export interface UserStatRowProps {
+  summoner: MatchInfoByUser;
+  maxTotalDamage: number;
+  maxTotalTakenDamage: number;
+}
+
+export interface DetailSectionHeaderProps {
+  color: keyof DetailHeaderColorMapper;
+}
+export type DetailHeaderColorMapper = {
+  red: string;
+  blue: string;
+};
+
+export type SingleBarColorMapper = {
+  red: string;
+  blue: string;
+  white: string;
+  gray: string;
+};
+
+export interface SingleBarChartProps {
+  width: number;
+  height: number;
+  title?: string;
+  startValue: number;
+  totalValue: number;
+  startColor: keyof SingleBarColorMapper;
+  endColor: keyof SingleBarColorMapper;
+  endValue?: string | number;
+  marginClass?: string;
+  titleSize?: keyof TypoGraphySizeMapper;
+  titleColor?: keyof TypoGraphyColorMapper;
+  valueSize?: keyof TypoGraphySizeMapper;
+  valueColor?: keyof TypoGraphyColorMapper;
+  isValueShow: boolean;
+}
+
+export interface DetailSectionProps {
+  summonerTeam: MatchInfoByUser[];
+  enemyTeam: MatchInfoByUser[];
 }
