@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { FC } from 'react';
 
+import { IMAGES } from 'constant';
 import { ProfileIconProps } from 'types';
 
 const ProfileIcon: FC<ProfileIconProps> = ({
@@ -9,9 +10,11 @@ const ProfileIcon: FC<ProfileIconProps> = ({
   width,
   height,
 }) => {
+  const source = IMAGES.ICON.replace('{profileIconId}', String(profileIconId));
+
   const ImageProps = {
     className: 'rounded-xl',
-    src: `http://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/${profileIconId}.png`,
+    src: source,
     alt: '소환사 아이콘 이미지',
     width,
     height,
