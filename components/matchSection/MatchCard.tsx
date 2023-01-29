@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import Box from 'userInterface/box/Box';
@@ -23,8 +23,10 @@ import {
   SpellInfoArr,
   BoxProps,
 } from 'types';
+import DetailSection from './DetailSection';
 
 const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
+  const [isShowDetail, setShowDetail] = useState(false);
   const { data: gameResponse }: UseQueryResult<Response<GameInfo>> = useQuery(
     [QUERY_KEYS.getGameByMatchId, { matchId }],
     () => CLIENT_API.getGameByMatchId(matchId)
@@ -160,15 +162,36 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     height: 'h-32',
     width: 'w-full',
     color: isWin ? 'blue' : 'red',
+    marginClass: isShowDetail ? '' : 'mb-2',
+  };
+
+  const ShowDetailButtonProps = {
+    className: isWin
+      ? 'bg-blue-200 text-blue-500 hover:bg-blue-500 hover:text-blue-700'
+      : 'bg-red-200 text-red-500 hover:bg-red-500 hover:text-red-700',
+    onClick: () => setShowDetail(!isShowDetail),
+  };
+
+  const DetailBoxProps: BoxProps = {
+    size: 'custom',
+    height: 'h-[350px]',
+    width: 'w-full',
+    color: isWin ? 'blue' : 'red',
   };
 
   return (
-    <Box {...BoxProps}>
-      <div className='flex'>
-        <MatchOverView {...MatchOverViewProps} />
-        <MatchSummonerOverView {...SummonerOverViewProps} />
-      </div>
-    </Box>
+    <>
+      <Box {...BoxProps}>
+        <div className='flex'>
+          <MatchOverView {...MatchOverViewProps} />
+          <MatchSummonerOverView {...SummonerOverViewProps} />
+          <button {...ShowDetailButtonProps}>&darr;</button>
+        </div>
+      </Box>
+      {isShowDetail && (
+        <DetailSection summonerTeam={summonerTeam} enemyTeam={enemyTeam} />
+      )}
+    </>
   );
 };
 
