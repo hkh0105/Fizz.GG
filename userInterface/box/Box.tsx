@@ -1,9 +1,21 @@
-import type { FC, PropsWithChildren, ReactNode } from 'react';
-import { BoxProps, BoxSizeMapper } from 'types';
+import type { FC } from 'react';
+import { BoxColorMapper, BoxProps, BoxSizeMapper } from 'types';
 
-const Box: FC<BoxProps> = ({ children, size, width, height }) => {
+const Box: FC<BoxProps> = ({
+  children,
+  size,
+  width,
+  height,
+  color = 'default',
+}) => {
   const defaultClassName =
-    'mx-5 my-1 overflow-hidden bg-white border border-gray-200 shadow-md rounded-xl';
+    'mb-2 overflow-hidden border border-gray-200 shadow-md rounded-xl';
+
+  const colorMapper: BoxColorMapper = {
+    default: 'bg-white',
+    red: 'bg-red-100',
+    blue: 'bg-blue-100',
+  };
 
   const sizeMapper: BoxSizeMapper = {
     small: 'w-1/4',
@@ -13,8 +25,11 @@ const Box: FC<BoxProps> = ({ children, size, width, height }) => {
     full: 'w-full',
     custom: width + ' ' + height,
   };
+
   return (
-    <section className={`${sizeMapper[size]} ${defaultClassName}`}>
+    <section
+      className={`${sizeMapper[size]} ${colorMapper[color]} ${defaultClassName}`}
+    >
       {children}
     </section>
   );

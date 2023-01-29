@@ -12,4 +12,10 @@ export const IMAGES: Images = {
   GRANDMASTER: '/Grandmaster.png',
   CHALLENGER: '/Challenger.png',
   UNRANKED: '/Unranked.png',
+  ICON: 'http://ddragon.leagueoflegends.com/cdn/13.1.1/img/profileicon/{profileIconId}.png',
+  CHAMPION:
+    'https://ddragon.leagueoflegends.com/cdn/13.1.1/img/champion/{champion}.png',
+  ITEM: 'https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/{item}.png',
+  SPELL: 'https://ddragon.leagueoflegends.com/cdn/13.1.1/img/spell/{spell}.png',
+  RUNE: 'https://ddragon.leagueoflegends.com/cdn/img/{rune}',
 };

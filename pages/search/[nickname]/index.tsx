@@ -1,30 +1,31 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { FC, Suspense } from 'react';
 
 import SearchLayout from 'components/layout/SearchLayout';
 import Profile from 'components/profile/Profile';
-import Rank from 'components/rank/Rank';
+import RankSection from 'components/rankSection/RankSection';
+import MatchSection from 'components/matchSection/MatchSection';
 import ErrorBoundary from './ErrorBoundary';
-import { CLIENT_API } from 'api/api';
-import { QUERY_KEYS } from 'constant';
-import { useRouter } from 'next/router';
-import { FC, Suspense } from 'react';
-import { Response, SummonerInfo } from 'types';
 
 const Search: FC = () => {
   const router = useRouter();
   const { nickname } = (router.query as { nickname: string }) || '';
 
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
-
   return (
     <Suspense fallback={<div>LOADING</div>}>
       <ErrorBoundary>
         <SearchLayout>
-          <Profile nickname={nickname} />
-          <Rank nickname={nickname} />
+          <div className='w-[1110px] max-lg:w-[800px]'>
+            <Profile nickname={nickname} />
+          </div>
+          <div className='flex'>
+            <div className='w-[300px] max-lg:hidden mr-3'>
+              <RankSection nickname={nickname} />
+            </div>
+            <div className='w-[800px]'>
+              <MatchSection nickname={nickname} />
+            </div>
+          </div>
         </SearchLayout>
       </ErrorBoundary>
     </Suspense>

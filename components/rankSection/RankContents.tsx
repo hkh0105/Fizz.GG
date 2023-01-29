@@ -6,7 +6,7 @@ import PieChart from 'components/pieChart/PieChart';
 import { IMAGES } from 'constant';
 import {
   ChartData,
-  ChartMargin,
+  Margin,
   Images,
   PieChartProps,
   RankContentsProps,
@@ -23,7 +23,7 @@ const RankContents: FC<RankContentsProps> = ({
   leaguePoints,
 }) => {
   const winRate = parseInt(String((wins / (wins + losses)) * 100)) + '%';
-  const margin: ChartMargin = { top: 0, left: -40, right: 0, bottom: 0 };
+  const margin: Margin = { top: 0, left: -40, right: 0, bottom: 0 };
   const chartData: ChartData<number>[] = [
     { id: 'Win', value: wins, color: 'blue' },
     { id: 'Lose', value: losses, color: 'red' },
@@ -43,7 +43,7 @@ const RankContents: FC<RankContentsProps> = ({
       ' ' +
       rank +
       ' ' +
-      leaguePoints +
+      String(leaguePoints) +
       'LP',
   };
 
