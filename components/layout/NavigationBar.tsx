@@ -6,7 +6,7 @@ import { IMAGES } from 'constant';
 
 const NavigationBar: FC = () => {
   return (
-    <div className='flex items-center h-24 mx-3'>
+    <nav className='flex items-center h-24 mx-3'>
       <Link href='/' className='flex items-center'>
         <Image
           src={IMAGES.logo}
@@ -25,7 +25,7 @@ const NavigationBar: FC = () => {
       <Link href='/' className='mx-3 hover:underline'>
         <p>Contact</p>
       </Link>
-    </div>
+    </nav>
   );
 };
 export default NavigationBar;
