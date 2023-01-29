@@ -40,7 +40,7 @@ const MatchOverView: FC<MatchOverViewProps> = ({
   };
 
   return (
-    <div className='flex flex-col py-5 ml-10 gap-y-[1px] w-[80px]'>
+    <div className='flex flex-col py-5 ml-5 gap-y-[1px] w-[80px]'>
       <Typography {...MatchTypeTypographyProps} />
       <Typography {...DayDiffTypographyProps} />
       <Divider />

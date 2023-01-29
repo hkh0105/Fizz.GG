@@ -25,6 +25,7 @@ const Typography: FC<TypographyProps> = ({
   const sizeMapper: TypoGraphySizeMapper = {
     medium: '',
     small: 'text-sm',
+    xSmall: 'text-xs',
   };
 
   const colorMapper: TypoGraphyColorMapper = {

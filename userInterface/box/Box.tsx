@@ -7,9 +7,10 @@ const Box: FC<BoxProps> = ({
   width,
   height,
   color = 'default',
+  marginClass = 'mb-2',
 }) => {
   const defaultClassName =
-    'mb-2 overflow-hidden border border-gray-200 shadow-md rounded-xl';
+    'overflow-hidden border border-gray-200 shadow-md rounded-xl';
 
   const colorMapper: BoxColorMapper = {
     default: 'bg-white',
@@ -28,7 +29,7 @@ const Box: FC<BoxProps> = ({
 
   return (
     <section
-      className={`${sizeMapper[size]} ${colorMapper[color]} ${defaultClassName}`}
+      className={`${sizeMapper[size]} ${colorMapper[color]} ${defaultClassName} ${marginClass}`}
     >
       {children}
     </section>
