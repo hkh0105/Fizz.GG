@@ -23,13 +23,13 @@ export default async function handler(
     const summonerInfo = await getSummonerInfo(String(nickname));
     res.status(200).json({ items: summonerInfo, message: 'UserInfo' });
   } catch (error) {
-    let message = 'Unknown Error';
-    let status = 500;
+    const message = 'Unknown Error';
+    const status = 500;
 
-    if (error instanceof Error) {
-      message = error.message;
-      status = 500;
-    }
+    // if (error instanceof Error) {
+    //   message = error.message;
+    //   status = 500;
+    // }
     res.status(500).json({ message: message, status: status });
   }
 }
