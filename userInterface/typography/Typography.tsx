@@ -1,16 +1,47 @@
 import { FC } from 'react';
 
-import { TypographyProps } from 'types';
+import {
+  TypoGraphyColorMapper,
+  TypographyProps,
+  TypoGraphySizeMapper,
+  TypographyTypeMapper,
+} from 'types';
 
-const Typography: FC<TypographyProps> = ({ string, type }) => {
-  const typographyMapper = {
+const Typography: FC<TypographyProps> = ({
+  string,
+  type,
+  size = 'medium',
+  isTitle = true,
+  color = 'black',
+}) => {
+  const typeMapper: TypographyTypeMapper = {
     mainTitle:
       'bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center text-6xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm leading-[5rem] my-20',
     title: 'text-2xl font-medium',
+    semibold: 'font-semibold',
     default: '',
   };
 
-  return <h1 className={typographyMapper[type]}>{string}</h1>;
+  const sizeMapper: TypoGraphySizeMapper = {
+    medium: '',
+    small: 'text-sm',
+  };
+
+  const colorMapper: TypoGraphyColorMapper = {
+    black: '',
+    blue: 'text-blue-600',
+    red: 'text-red-600',
+    gray: 'text-gray-600',
+  };
+
+  const className =
+    typeMapper[type] + ' ' + sizeMapper[size] + ' ' + colorMapper[color];
+
+  if (isTitle) {
+    return <h1 className={className}>{string}</h1>;
+  }
+
+  return <p className={className}>{string}</p>;
 };
 
 export default Typography;
