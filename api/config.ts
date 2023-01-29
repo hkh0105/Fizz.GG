@@ -73,7 +73,6 @@ instance.interceptors.response.use(
 
 regionInstance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    console.log(config);
     return config;
   },
   (err: AxiosError) => {
@@ -84,7 +83,6 @@ regionInstance.interceptors.request.use(
 
 regionInstance.interceptors.response.use(
   (res: AxiosResponse) => {
-    console.log('RESPONSE:', res.data);
     return res;
   },
   (err) => {
