@@ -5,7 +5,7 @@ import Header from 'components/layout/Header';
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className='fixed w-full h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-100'>
+    <div className='fixed w-full h-screen overflow-y-scroll bg-gradient-to-br from-indigo-50 via-white to-cyan-100'>
       <Header />
       {children}
       <Footer />
