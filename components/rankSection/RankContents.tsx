@@ -22,7 +22,7 @@ const RankContents: FC<RankContentsProps> = ({
   rank,
   leaguePoints,
 }) => {
-  const winRate = parseInt(String((wins / (wins + losses)) * 100)) + '%';
+  const winRate = ((wins / (wins + losses)) * 100).toFixed(0) + '%';
   const margin: Margin = { top: 0, left: -40, right: 0, bottom: 0 };
   const chartData: ChartData<number>[] = [
     { id: 'Win', value: wins, color: 'blue' },
@@ -66,7 +66,7 @@ const RankContents: FC<RankContentsProps> = ({
         <Image {...ImageProps} />
         <div className='flex items-center w-[240px] h-[100px] my-5'>
           <PieChart {...PieChartProps} />
-          <p className='translate-x-[-125px]'>{winRate}</p>
+          <p className='translate-x-[-127px]'>{winRate}</p>
         </div>
       </div>
     </div>
