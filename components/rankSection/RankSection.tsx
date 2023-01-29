@@ -15,14 +15,16 @@ import {
   SummonerInfo,
 } from 'types';
 
-const Rank: FC<RankProps> = ({ nickname }) => {
+const RankSection: FC<RankProps> = ({ nickname }) => {
   const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }]);
+    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
+      CLIENT_API.getSummonerByNickname(nickname)
+    );
   const { id } = summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
 
   const { data: leagueInfo }: UseQueryResult<Response<LeagueInfoArr>> =
     useQuery(
-      ['getLeagueInfo', { nickname }],
+      [QUERY_KEYS.getLeagueInfoById, { nickname }],
       () => CLIENT_API.getLeagueInfoById(id),
       { enabled: !!id }
     );
@@ -58,4 +60,4 @@ const Rank: FC<RankProps> = ({ nickname }) => {
   );
 };
 
-export default Rank;
+export default RankSection;
