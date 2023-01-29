@@ -7,6 +7,7 @@ import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
 import { INITIAL_DATA, QUERY_KEYS } from 'constant';
+import { CLIENT_API } from 'api/api';
 import {
   ButtonGroupProps,
   ProfileIconProps,
@@ -22,10 +23,10 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
   const {
     data: summonerResponse,
     refetch: refetchUserInfo,
-  }: UseQueryResult<Response<SummonerInfo>> = useQuery([
-    QUERY_KEYS.getSummonerByNickname,
-    { nickname },
-  ]);
+  }: UseQueryResult<Response<SummonerInfo>> = useQuery(
+    [QUERY_KEYS.getSummonerByNickname, { nickname }],
+    () => CLIENT_API.getSummonerByNickname(nickname)
+  );
 
   const { name, summonerLevel, profileIconId } =
     summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
