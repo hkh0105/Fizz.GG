@@ -1,12 +1,15 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import Box from 'userInterface/box/Box';
 import MatchOverView from './MatchOverView';
 import MatchSummonerOverView from './MatchSummonerOverView';
+import DetailSection from './DetailSection';
 import { QUERY_KEYS } from 'constant';
 import { CLIENT_API } from 'api/api';
 import { getDateDiff } from 'utils';
+import { useRecoilState } from 'recoil';
+import { recentInfo } from 'store';
 import {
   GameDetailInfo,
   GameInfo,
@@ -22,11 +25,14 @@ import {
   RuneInfo,
   SpellInfoArr,
   BoxProps,
+  RecentMatchUserInfo,
 } from 'types';
-import DetailSection from './DetailSection';
 
 const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   const [isShowDetail, setShowDetail] = useState(false);
+  const [recentMatchArr, setRecentMatchArr] =
+    useRecoilState<RecentMatchUserInfo[]>(recentInfo);
+
   const { data: gameResponse }: UseQueryResult<Response<GameInfo>> = useQuery(
     [QUERY_KEYS.getGameByMatchId, { matchId }],
     () => CLIENT_API.getGameByMatchId(matchId)
@@ -46,6 +52,7 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   const searchedUser = gameResponse?.items.info.participants.find(
     (user: MatchInfoByUser) => user.summonerName === nickname
   ) as MatchInfoByUser;
+
   const summonerTeamInfo = gameInfo.teams.find(
     (data) => data.win === searchedUser.win
   ) as MatchTeam;
@@ -76,6 +83,10 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     quadraKills,
     pentaKills,
   } = searchedUser;
+
+  useEffect(() => {
+    setMatchInfo();
+  }, [matchId]);
 
   //DayDiff
   const dayDiff = getDateDiff(gameCreation);
@@ -132,6 +143,25 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     (user: MatchInfoByUser) => user.teamId !== searchedUser.teamId
   );
 
+  const setMatchInfo = () => {
+    const isPrevData = recentMatchArr.some(
+      (info: RecentMatchUserInfo) => info.id === matchId
+    );
+
+    if (isPrevData) {
+      return;
+    }
+
+    const recentMatchUserInfo: RecentMatchUserInfo = {
+      id: matchId,
+      kda: kda,
+      championName: championName,
+      win: isWin ? true : false,
+    };
+
+    setRecentMatchArr((prev) => [...prev, recentMatchUserInfo]);
+  };
+
   const MatchOverViewProps: MatchOverViewProps = {
     matchType: queueTypeMapper[queueId] ?? '특별모드',
     dayDiff,
@@ -170,13 +200,6 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
       ? 'bg-blue-200 text-blue-500 hover:bg-blue-500 hover:text-blue-700'
       : 'bg-red-200 text-red-500 hover:bg-red-500 hover:text-red-700',
     onClick: () => setShowDetail(!isShowDetail),
-  };
-
-  const DetailBoxProps: BoxProps = {
-    size: 'custom',
-    height: 'h-[350px]',
-    width: 'w-full',
-    color: isWin ? 'blue' : 'red',
   };
 
   return (

@@ -6,6 +6,7 @@ import Profile from 'components/profile/Profile';
 import RankSection from 'components/rankSection/RankSection';
 import MatchSection from 'components/matchSection/MatchSection';
 import ErrorBoundary from './ErrorBoundary';
+import RecentStatSection from 'components/resentStatSection/RecentStatSection';
 
 const Search: FC = () => {
   const router = useRouter();
@@ -21,6 +22,7 @@ const Search: FC = () => {
           <div className='flex'>
             <div className='w-[300px] max-lg:hidden mr-3'>
               <RankSection nickname={nickname} />
+              <RecentStatSection />
             </div>
             <div className='w-[800px]'>
               <MatchSection nickname={nickname} />
