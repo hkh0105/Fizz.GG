@@ -16,11 +16,13 @@ import useIntersectionObserver from 'hooks/useInterSectionObserver';
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
   const [count, setCount] = useState(10);
 
-  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+  const onIntersect: IntersectionObserverCallback = async ([
+    { isIntersecting },
+  ]) => {
     if (isIntersecting) {
       setCount((prev) => prev + 10);
 
-      refetchMatchArr();
+      await refetchMatchArr();
     }
   };
 
