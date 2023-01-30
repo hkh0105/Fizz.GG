@@ -46,6 +46,10 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     CLIENT_API.getRune
   );
 
+  useEffect(() => {
+    setMatchInfo();
+  }, [matchId]);
+
   const gameInfo: GameDetailInfo = gameResponse?.items.info as GameDetailInfo;
   const spellData: SpellData = riotSpellData?.data as SpellData;
 
@@ -83,10 +87,6 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     quadraKills,
     pentaKills,
   } = searchedUser;
-
-  useEffect(() => {
-    setMatchInfo();
-  }, [matchId]);
 
   //DayDiff
   const dayDiff = getDateDiff(gameCreation);

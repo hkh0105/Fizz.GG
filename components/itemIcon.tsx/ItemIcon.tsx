@@ -11,6 +11,16 @@ const ItemIcon: FC<ItemIconProps> = ({ width, summonerItems, marginClass }) => {
   return (
     <div className={wrapperClassName}>
       {summonerItems?.map((item) => {
+        if (item === 0) {
+          return (
+            <div
+              className='bg-gray-300 border-r-2'
+              style={{ width: width, height: width }}
+              key={uuidv4()}
+            />
+          );
+        }
+
         const itemSource = IMAGES.ITEM.replace('{item}', String(item));
         const imageProps = {
           src: itemSource,

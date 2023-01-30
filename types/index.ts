@@ -508,3 +508,10 @@ export type recentWinInfo = {
 };
 
 export type ChampTotalMatchInfoArray = [string, TotalMatchChampData][];
+
+export interface useIntersectionObserverProps {
+  root?: null;
+  rootMargin?: string;
+  threshold?: number;
+  onIntersect: IntersectionObserverCallback;
+}
