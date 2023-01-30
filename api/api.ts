@@ -28,6 +28,8 @@ export const API = {
     await regionInstance.get(
       PATH.getGameByMatchId.replace('{matchId}', matchId)
     ),
+  getInGameByPuuid: async (puuid: string) =>
+    await instance.get(PATH.getInGameByPuuid.replace('{puuid}', puuid)),
 };
 
 export const CLIENT_API = {
@@ -45,4 +47,6 @@ export const CLIENT_API = {
     browser.get(BFF_PATH.getGameByMatchId.replace('{matchId}', matchId)),
   getSpell: () => browser.get(PATH.getSpell),
   getRune: () => browser.get(PATH.getRune),
+  getInGameByPuuid: async (puuid: string) =>
+    await browser.get(BFF_PATH.getInGameByPuuid.replace('{puuid}', puuid)),
 };

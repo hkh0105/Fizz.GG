@@ -9,6 +9,7 @@ export const PATH = {
     'https://ddragon.leagueoflegends.com/cdn/13.1.1/data/ko_KR/summoner.json',
   getRune:
     'https://ddragon.leagueoflegends.com/cdn/13.1.1/data/en_US/runesReforged.json',
+  getInGameByPuuid: 'spectator/v4/active-games/by-summoner/{puuid}',
 };
 
 export const BFF_PATH = {
@@ -16,4 +17,5 @@ export const BFF_PATH = {
   getLeagueInfoById: '/api/getLeagueInfo?id={id}',
   getMatchArrByPuuid: '/api/getMatchIdArr?puuid={puuid}&count={count}',
   getGameByMatchId: '/api/getGame?matchId={matchId}',
+  getInGameByPuuid: '/api/getInGame?puuid={puuid}',
 };

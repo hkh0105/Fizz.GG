@@ -23,9 +23,11 @@ const ProfileIcon: FC<ProfileIconProps> = ({
   return (
     <div className='flex-col w-[140px] mx-3 my-5 font-medium flex items-center'>
       <Image {...ImageProps} />
-      <p className='w-[50px] text-white bg-black border text-center rounded-xl'>
-        {summonerLevel ?? 0}
-      </p>
+      {summonerLevel && (
+        <p className='w-[50px] text-white bg-black border text-center rounded-xl'>
+          {summonerLevel}
+        </p>
+      )}
     </div>
   );
 };

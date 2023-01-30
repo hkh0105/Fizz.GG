@@ -52,9 +52,12 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
 
   const gameInfo: GameDetailInfo = gameResponse?.items.info as GameDetailInfo;
   const spellData: SpellData = riotSpellData?.data as SpellData;
-
   const searchedUser = gameResponse?.items.info.participants.find(
-    (user: MatchInfoByUser) => user.summonerName === nickname
+    (user: MatchInfoByUser) => {
+      return (
+        user.summonerName.toLowerCase().trim() === nickname.toLowerCase().trim()
+      );
+    }
   ) as MatchInfoByUser;
 
   const summonerTeamInfo = gameInfo.teams.find(

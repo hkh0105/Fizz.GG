@@ -5,4 +5,6 @@ export const QUERY_KEYS = {
   getGameByMatchId: 'GameInfo',
   getSpell: 'RiotSummonerData',
   getRune: 'RiotRuneData',
+  getInGameByPuuid: 'IngameInfo',
+  getChamp: 'RiotChampData',
 };

@@ -140,7 +140,7 @@ export type BoxSizeMapper = {
 
 export interface ProfileIconProps {
   profileIconId: number;
-  summonerLevel: number;
+  summonerLevel?: number;
   width: number;
   height: number;
 }
@@ -514,4 +514,49 @@ export interface useIntersectionObserverProps {
   rootMargin?: string;
   threshold?: number;
   onIntersect: IntersectionObserverCallback;
+}
+
+export type InGameInfo = {
+  gameId: string;
+  mapId: number;
+  gameMode: string;
+  gameType: string;
+  gameQueueConfigId: number;
+  participants: InGameUser[];
+  observers: { encryptionKey: string };
+  platformId: MatchInfoByUser;
+  bannedChampions: Champ[];
+  gameStartTime: number;
+  gameLength: number;
+};
+
+export type InGameUser = {
+  bot: boolean;
+  championId: number;
+  perks: {
+    perkIds: number[];
+    perkStyle: number;
+    perkSubStyle: number;
+  };
+  profileIconId: number;
+  spell1Id: number;
+  spell2Id: number;
+  summonerId: string;
+  summonerName: string;
+  teamId: number;
+};
+
+export interface InGameTeamColumnProps {
+  team: InGameUser[];
+}
+
+export interface InGameUserRowProps {
+  nickname: string;
+  rune: RuneInfo[];
+  spell: SpellInfoArr;
+  profileIconId: number;
+}
+
+export interface IngameSectionProps {
+  nickname: string;
 }
