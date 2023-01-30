@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { API } from 'api';
 import { Error, Response } from 'types';
 
-async function getMatchIdArr(puuid: string) {
-  const response = await API.getMatchArrByPUUID(puuid);
+async function getMatchIdArr(puuid: string, count: string) {
+  const response = await API.getMatchArrByPUUID(puuid, count);
   const matchIdArr: string[] = response.data;
 
   return matchIdArr;
@@ -14,10 +14,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Response<string[]> | Error>
 ) {
-  const { puuid } = req.query;
+  const { puuid, count } = req.query;
 
   try {
-    const matchIdArr = await getMatchIdArr(String(puuid));
+    const matchIdArr = await getMatchIdArr(String(puuid), String(count));
     res.status(200).json({ items: matchIdArr, message: 'MatchArr' });
   } catch (error) {
     const message = 'Unknown Error';
