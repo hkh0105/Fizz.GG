@@ -2,7 +2,7 @@ export const PATH = {
   getSummonerByNickname: 'summoner/v4/summoners/by-name/{nickname}',
   getSummonerByPUUID: 'summoner/v4/summoners/by-puuid/{puuid}',
   getMatchArrByPUUID:
-    'match/v5/matches/by-puuid/{puuid}/ids?start=0&count={count}',
+    'match/v5/matches/by-puuid/{puuid}/ids?start={count}&count=10',
   getLeagueById: 'league/v4/entries/by-summoner/{encryptedSummonerId}',
   getGameByMatchId: 'match/v5/matches/{matchId}',
   getSpell:

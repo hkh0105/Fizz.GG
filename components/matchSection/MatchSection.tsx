@@ -15,6 +15,7 @@ import useIntersectionObserver from 'hooks/useInterSectionObserver';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
   const [count, setCount] = useState(10);
+  const [cash, setCash] = useState<string[]>([]);
 
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
@@ -41,12 +42,18 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
   }: UseQueryResult<Response<MatchIdArr>> = useQuery(
     [QUERY_KEYS.getMatchIdArrByPuuid, { nickname }],
     () => CLIENT_API.getMatchArrByPuuid(puuid, count),
-    { enabled: !!puuid, suspense: false }
+    {
+      enabled: !!puuid,
+      suspense: false,
+      onSuccess: (response) => {
+        setCash((prev) => prev.concat(response.items));
+      },
+    }
   );
 
   return (
     <>
-      {matchIdArrResponse?.items.map((matchId: string) => {
+      {cash.map((matchId: string) => {
         const MatchCardProps: MatchCardProps = {
           matchId,
           nickname,
