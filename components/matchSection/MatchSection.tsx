@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import MatchCard from './MatchCard';
@@ -11,8 +11,21 @@ import {
   Response,
   SummonerInfo,
 } from 'types';
+import useIntersectionObserver from 'hooks/useInterSectionObserver';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
+  const [count, setCount] = useState(10);
+
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    if (isIntersecting) {
+      setCount((prev) => prev + 10);
+
+      refetchMatchArr();
+    }
+  };
+
+  const { setTarget } = useIntersectionObserver({ onIntersect });
+
   const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
     useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
       CLIENT_API.getSummonerByNickname(nickname)
@@ -20,12 +33,14 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
 
   const { puuid } = summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
 
-  const { data: matchIdArrResponse }: UseQueryResult<Response<MatchIdArr>> =
-    useQuery(
-      [QUERY_KEYS.getMatchIdArrByPuuid, { nickname }],
-      () => CLIENT_API.getMatchArrByPuuid(puuid),
-      { enabled: !!puuid }
-    );
+  const {
+    data: matchIdArrResponse,
+    refetch: refetchMatchArr,
+  }: UseQueryResult<Response<MatchIdArr>> = useQuery(
+    [QUERY_KEYS.getMatchIdArrByPuuid, { nickname }],
+    () => CLIENT_API.getMatchArrByPuuid(puuid, count),
+    { enabled: !!puuid, suspense: false }
+  );
 
   return (
     <>
@@ -37,6 +52,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
 
         return <MatchCard {...MatchCardProps} key={matchId} />;
       })}
+      <div ref={setTarget} />
     </>
   );
 };
