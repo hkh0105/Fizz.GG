@@ -83,12 +83,19 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
     team: enemyTeam,
   };
 
+  const VersusTypoProps: TypographyProps = {
+    string: 'VS',
+    type: 'title',
+    color: 'gray',
+  };
+
   return (
     <section className='flex flex-col items-center my-3 gap-y-3'>
       <Typography {...GameModeTypoProps} />
       <Box {...BoxProps}>
-        <div className='flex'>
+        <div className='flex items-center justify-evenly'>
           <InGameTeamColumn {...SummonerColumnProps} />
+          <Typography {...VersusTypoProps} />
           <InGameTeamColumn {...EnemyColumnProps} />
         </div>
       </Box>
