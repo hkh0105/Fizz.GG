@@ -53,6 +53,8 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     (user: MatchInfoByUser) => user.summonerName === nickname
   ) as MatchInfoByUser;
 
+  if (!searchedUser) return;
+
   const summonerTeamInfo = gameInfo.teams.find(
     (data) => data.win === searchedUser.win
   ) as MatchTeam;
