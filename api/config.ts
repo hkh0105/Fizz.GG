@@ -39,7 +39,11 @@ instance.interceptors.response.use(
     return res;
   },
   (err) => {
-    // console.log('RESPONSE ERROR', err);
+    console.log('INSTANCE ERROR', err.response.data);
+    if (err.response.data.status.status_code === 404) {
+      return { status: 404 };
+    }
+
     const res = err.response;
     // console.log(res);
     if (!res?.data) throw new Error(err.message);
@@ -126,6 +130,7 @@ browser.interceptors.response.use(
     return res.data;
   },
   (err) => {
+    console.log('BROWSER ERROR', err.response.data);
     // console.log(err);
     // const res = err.response;
     // const { status, message } = err;
