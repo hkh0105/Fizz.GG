@@ -7,4 +7,5 @@ export const QUERY_KEYS = {
   getRune: 'RiotRuneData',
   getInGameByPuuid: 'IngameInfo',
   getChamp: 'RiotChampData',
+  getMasteryById: 'MasteryInfo',
 };
