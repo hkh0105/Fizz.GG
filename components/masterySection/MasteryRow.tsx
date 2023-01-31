@@ -1,24 +1,13 @@
 import moment from 'moment';
 import { FC } from 'react';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import Typography from 'userInterface/typography/Typography';
 import ChampionIcon from 'components/championIcon/ChampionIcon';
-import { QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
-import {
-  ChampDetails,
-  ChampionIconProps,
-  MasteryRowProps,
-  RiotChampInfo,
-  TypographyProps,
-} from 'types';
+import { useGetChampJson } from 'hooks/queries';
+import { ChampionIconProps, MasteryRowProps, TypographyProps } from 'types';
 
 const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
-  const { data: champData }: UseQueryResult<RiotChampInfo> = useQuery(
-    [QUERY_KEYS.getChamp],
-    CLIENT_API.getChamp
-  );
+  const { champData } = useGetChampJson();
   const { championLevel, championPoints, lastPlayTime, championId } =
     masteryInfo;
 
@@ -28,9 +17,8 @@ const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
     '일전';
 
   //Champ Name
-  const riotChampData = champData?.data as ChampDetails;
   let champName = '';
-  const champDetail = Object.entries(riotChampData).find(
+  const champDetail = Object.entries(champData).find(
     (champ) => champ[1]?.key === String(championId)
   );
 
