@@ -7,19 +7,13 @@ import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
 import {
   BoxProps,
-  InGameInfo,
   IngameSectionProps,
-  InGameTeamColumnProps,
-  InGameUser,
   MasteryInfo,
   MasteryRowProps,
-  QueueTypeMapper,
   Response,
-  RiotChampInfo,
   SummonerInfo,
   TypographyProps,
 } from 'types';
-import axios from 'axios';
 import MasteryRow from './MasteryRow';
 import MasteryHeader from './MasteryHeader';
 
@@ -58,7 +52,7 @@ const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
             masteryInfo: mastery,
           };
 
-          return <MasteryRow {...MasteryRowProps} />;
+          return <MasteryRow {...MasteryRowProps} key={mastery.championId} />;
         })}
       </Box>
     </section>
