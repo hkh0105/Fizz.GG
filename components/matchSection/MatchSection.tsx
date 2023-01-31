@@ -1,14 +1,11 @@
 import { FC, Suspense, useEffect, useState } from 'react';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { useRecoilState } from 'recoil';
 
 import MatchCard from './MatchCard';
 import useIntersectionObserver from 'hooks/useInterSectionObserver';
 import ErrorBoundary from 'pages/ErrorBoundary';
-import { CLIENT_API } from 'api/api';
-import { QUERY_KEYS } from 'constant';
 import { recentInfo } from 'store';
-import { useGetSummoner } from 'hooks/queries/useGetSummoner';
+import { useGetMatchIdArr, useGetSummoner } from 'hooks/queries';
 import {
   MatchCardProps,
   MatchIdArr,
@@ -35,20 +32,13 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
   };
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
-
   const { puuid } = useGetSummoner(nickname);
 
-  const { refetch: refetchMatchArr }: UseQueryResult<Response<MatchIdArr>> =
-    useQuery(
-      [QUERY_KEYS.getMatchIdArrByPuuid, { nickname }],
-      () => CLIENT_API.getMatchArrByPuuid(puuid, count),
-      {
-        enabled: !!puuid,
-        onSuccess: (response) => {
-          setCash((prev) => prev.concat(response.items));
-        },
-      }
-    );
+  const onSuccess = (response: Response<MatchIdArr>) => {
+    setCash((prev) => prev.concat(response.items));
+  };
+
+  const { refetchMatchArr } = useGetMatchIdArr(puuid, count, { onSuccess });
 
   useEffect(() => {
     setRecentMatchArr([]);
@@ -56,7 +46,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
 
   return (
     <>
-      {cash.map((matchId: string) => {
+      {cash.map((matchId: string, index) => {
         const MatchCardProps: MatchCardProps = {
           matchId,
           nickname,
@@ -65,7 +55,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
         return (
           <Suspense fallback={<div>LOADING</div>}>
             <ErrorBoundary>
-              <MatchCard {...MatchCardProps} key={matchId} />
+              <MatchCard {...MatchCardProps} key={matchId + String(index)} />
             </ErrorBoundary>
           </Suspense>
         );
