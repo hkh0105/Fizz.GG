@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, Suspense, useEffect, useState } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import MatchCard from './MatchCard';
@@ -8,22 +8,29 @@ import {
   MatchCardProps,
   MatchIdArr,
   MatchSection,
+  RecentMatchUserInfo,
   Response,
   SummonerInfo,
 } from 'types';
 import useIntersectionObserver from 'hooks/useInterSectionObserver';
+import ErrorBoundary from 'pages/ErrorBoundary';
+import { useRecoilState } from 'recoil';
+import { recentInfo } from 'store';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
   const [count, setCount] = useState(10);
   const [cash, setCash] = useState<string[]>([]);
+  const [recentMatchArr, setRecentMatchArr] =
+    useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
   ]) => {
     if (isIntersecting) {
-      setCount((prev) => prev + 10);
-
-      await refetchMatchArr();
+      if (count < 70) {
+        setCount((prev) => prev + 10);
+        await refetchMatchArr();
+      }
     }
   };
 
@@ -36,20 +43,21 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
 
   const { puuid } = summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
 
-  const {
-    data: matchIdArrResponse,
-    refetch: refetchMatchArr,
-  }: UseQueryResult<Response<MatchIdArr>> = useQuery(
-    [QUERY_KEYS.getMatchIdArrByPuuid, { nickname }],
-    () => CLIENT_API.getMatchArrByPuuid(puuid, count),
-    {
-      enabled: !!puuid,
-      suspense: false,
-      onSuccess: (response) => {
-        setCash((prev) => prev.concat(response.items));
-      },
-    }
-  );
+  const { refetch: refetchMatchArr }: UseQueryResult<Response<MatchIdArr>> =
+    useQuery(
+      [QUERY_KEYS.getMatchIdArrByPuuid, { nickname }],
+      () => CLIENT_API.getMatchArrByPuuid(puuid, count),
+      {
+        enabled: !!puuid,
+        onSuccess: (response) => {
+          setCash((prev) => prev.concat(response.items));
+        },
+      }
+    );
+
+  useEffect(() => {
+    setRecentMatchArr([]);
+  }, []);
 
   return (
     <>
@@ -59,7 +67,13 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
           nickname,
         };
 
-        return <MatchCard {...MatchCardProps} key={matchId} />;
+        return (
+          <Suspense fallback={<div>LOADING</div>}>
+            <ErrorBoundary>
+              <MatchCard {...MatchCardProps} key={matchId} />
+            </ErrorBoundary>
+          </Suspense>
+        );
       })}
       <div ref={setTarget} />
     </>

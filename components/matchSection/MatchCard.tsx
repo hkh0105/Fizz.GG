@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
 
 import Box from 'userInterface/box/Box';
 import MatchOverView from './MatchOverView';
@@ -8,7 +9,6 @@ import DetailSection from './DetailSection';
 import { QUERY_KEYS } from 'constant';
 import { CLIENT_API } from 'api/api';
 import { getDateDiff } from 'utils';
-import { useRecoilState } from 'recoil';
 import { recentInfo } from 'store';
 import {
   GameDetailInfo,
@@ -47,8 +47,10 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   );
 
   useEffect(() => {
-    setMatchInfo();
-  }, [matchId]);
+    if (gameResponse?.items) {
+      setMatchInfo();
+    }
+  }, [gameResponse]);
 
   const gameInfo: GameDetailInfo = gameResponse?.items.info as GameDetailInfo;
   const spellData: SpellData = riotSpellData?.data as SpellData;
