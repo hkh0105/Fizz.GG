@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FC } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
@@ -10,12 +11,11 @@ import Typography from 'userInterface/typography/Typography';
 import SingleBarChart from 'components/singleBarChart/SingleBarChart';
 import { QUERY_KEYS } from 'constant';
 import { CLIENT_API } from 'api/api';
+import { useGetSpellJson } from 'hooks/queries';
 import {
   SingleBarChartProps,
   ChampionIconProps,
-  RiotSpellData,
   RuneData,
-  SpellData,
   SpellIconProps,
   UserStatRowProps,
   SpellInfoArr,
@@ -25,23 +25,18 @@ import {
   TypographyProps,
   ItemIconProps,
 } from 'types';
-import Link from 'next/link';
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
   maxTotalDamage,
   maxTotalTakenDamage,
 }) => {
-  const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(
-    [QUERY_KEYS.getSpell],
-    CLIENT_API.getSpell
-  );
+  const { spellData } = useGetSpellJson();
   const { data: riotRuneData }: UseQueryResult<RuneData> = useQuery(
     [QUERY_KEYS.getRune],
     CLIENT_API.getRune
   );
 
-  const spellData: SpellData = riotSpellData?.data as SpellData;
   const {
     summoner1Id,
     summoner2Id,

@@ -10,6 +10,7 @@ import { QUERY_KEYS } from 'constant';
 import { CLIENT_API } from 'api/api';
 import { getDateDiff } from 'utils';
 import { recentInfo } from 'store';
+import { useGetSpellJson } from 'hooks/queries';
 import {
   GameDetailInfo,
   GameInfo,
@@ -19,7 +20,6 @@ import {
   MatchTeam,
   QueueTypeMapper,
   Response,
-  RiotSpellData,
   RuneData,
   SpellData,
   RuneInfo,
@@ -33,13 +33,10 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   const [recentMatchArr, setRecentMatchArr] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
+  const { spellData } = useGetSpellJson();
   const { data: gameResponse }: UseQueryResult<Response<GameInfo>> = useQuery(
     [QUERY_KEYS.getGameByMatchId, { matchId }],
     () => CLIENT_API.getGameByMatchId(matchId)
-  );
-  const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(
-    [QUERY_KEYS.getSpell],
-    CLIENT_API.getSpell
   );
   const { data: riotRuneData }: UseQueryResult<RuneData> = useQuery(
     [QUERY_KEYS.getRune],
@@ -53,7 +50,6 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   }, [gameResponse]);
 
   const gameInfo: GameDetailInfo = gameResponse?.items.info as GameDetailInfo;
-  const spellData: SpellData = riotSpellData?.data as SpellData;
   const searchedUser = gameResponse?.items.info.participants.find(
     (user: MatchInfoByUser) => {
       return (

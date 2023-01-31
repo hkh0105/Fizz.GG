@@ -1,32 +1,27 @@
 import { FC } from 'react';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import InGameUserRow from './InGameUserRow';
+import { QUERY_KEYS } from 'constant';
+import { CLIENT_API } from 'api/api';
+import { useGetSpellJson } from 'hooks/queries';
 import {
   InGameTeamColumnProps,
   InGameUser,
   InGameUserRowProps,
-  RiotSpellData,
   RuneData,
   RuneInfo,
-  SpellData,
   SpellInfoArr,
 } from 'types';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
 
 const InGameTeamColumn: FC<InGameTeamColumnProps> = ({ team }) => {
-  const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(
-    [QUERY_KEYS.getSpell],
-    CLIENT_API.getSpell
-  );
+  const { spellData } = useGetSpellJson();
   const { data: riotRuneData }: UseQueryResult<RuneData> = useQuery(
     [QUERY_KEYS.getRune],
     CLIENT_API.getRune
   );
 
   //Spell
-  const spellData: SpellData = riotSpellData?.data as SpellData;
   const spellEntries = Object?.entries(spellData);
 
   return (
