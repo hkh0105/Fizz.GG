@@ -5,10 +5,15 @@ export interface SearchWindowProps {
   onSubmit: (value: string) => void;
 }
 
-export type QueryOptions = Omit<
-  UseQueryOptions<unknown, unknown, unknown, QueryKey>,
-  'queryKey' | 'queryFn'
->;
+// export type QueryOptions = Omit<
+//   UseQueryOptions<unknown, unknown, unknown, QueryKey>,
+//   'queryKey' | 'queryFn'
+// >;
+
+export type QueryOptions<T> = {
+  enabled?: boolean;
+  onSuccess?: (response: T) => void;
+};
 
 export interface ButtonProps {
   label: string;
