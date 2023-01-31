@@ -1,25 +1,18 @@
 import { FC, useEffect, useState } from 'react';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { useRecoilState } from 'recoil';
 
 import Box from 'userInterface/box/Box';
 import MatchOverView from './MatchOverView';
 import MatchSummonerOverView from './MatchSummonerOverView';
 import DetailSection from './DetailSection';
-import { QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
 import { getDateDiff } from 'utils';
 import { recentInfo } from 'store';
-import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
+import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
 import {
-  GameDetailInfo,
-  GameInfo,
   MatchCardProps,
   MatchInfoByUser,
   MatchOverViewProps,
-  MatchTeam,
   QueueTypeMapper,
-  Response,
   RuneInfo,
   SpellInfoArr,
   BoxProps,
@@ -33,33 +26,9 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
 
   const { spellData } = useGetSpellJson();
   const { runeData } = useGetRuneJson();
-  const { data: gameResponse }: UseQueryResult<Response<GameInfo>> = useQuery(
-    [QUERY_KEYS.getGameByMatchId, { matchId }],
-    () => CLIENT_API.getGameByMatchId(matchId)
-  );
-
-  useEffect(() => {
-    if (gameResponse?.items) {
-      setMatchInfo();
-    }
-  }, [gameResponse]);
-
-  const gameInfo: GameDetailInfo = gameResponse?.items.info as GameDetailInfo;
-  const searchedUser = gameResponse?.items.info.participants.find(
-    (user: MatchInfoByUser) => {
-      return (
-        user.summonerName.toLowerCase().trim() === nickname.toLowerCase().trim()
-      );
-    }
-  ) as MatchInfoByUser;
-
-  const summonerTeamInfo = gameInfo.teams.find(
-    (data) => data.win === searchedUser.win
-  ) as MatchTeam;
-
-  const { gameDuration, queueId, gameCreation, participants } = gameInfo;
   const {
-    win: isWin,
+    summonerTeamInfo,
+    isWin,
     summoner1Id,
     summoner2Id,
     perks,
@@ -82,7 +51,19 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     doubleKills,
     quadraKills,
     pentaKills,
-  } = searchedUser;
+    searchedUser,
+    gameDuration,
+    queueId,
+    gameCreation,
+    participants,
+    gameInfo,
+  } = useGetGameInfo(matchId, nickname);
+
+  useEffect(() => {
+    if (gameInfo) {
+      setMatchInfo();
+    }
+  }, [gameInfo]);
 
   //DayDiff
   const dayDiff = getDateDiff(gameCreation);
