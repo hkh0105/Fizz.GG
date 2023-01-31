@@ -1,24 +1,24 @@
 import { FC, Suspense, useEffect, useState } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
 
 import MatchCard from './MatchCard';
+import useIntersectionObserver from 'hooks/useInterSectionObserver';
+import ErrorBoundary from 'pages/ErrorBoundary';
 import { CLIENT_API } from 'api/api';
-import { INITIAL_DATA, QUERY_KEYS } from 'constant';
+import { QUERY_KEYS } from 'constant';
+import { recentInfo } from 'store';
+import { useGetSummoner } from 'hooks/queries/useGetSummoner';
 import {
   MatchCardProps,
   MatchIdArr,
   MatchSection,
   RecentMatchUserInfo,
   Response,
-  SummonerInfo,
 } from 'types';
-import useIntersectionObserver from 'hooks/useInterSectionObserver';
-import ErrorBoundary from 'pages/ErrorBoundary';
-import { useRecoilState } from 'recoil';
-import { recentInfo } from 'store';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(0);
   const [cash, setCash] = useState<string[]>([]);
   const [recentMatchArr, setRecentMatchArr] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
@@ -36,12 +36,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
-
-  const { puuid } = summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
+  const { puuid } = useGetSummoner(nickname);
 
   const { refetch: refetchMatchArr }: UseQueryResult<Response<MatchIdArr>> =
     useQuery(

@@ -6,6 +6,7 @@ import Typography from 'userInterface/typography/Typography';
 import InGameTeamColumn from './InGameTeamColumn';
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
+import { useGetSummoner } from 'hooks/queries/useGetSummoner';
 import {
   BoxProps,
   InGameInfo,
@@ -14,17 +15,11 @@ import {
   InGameUser,
   QueueTypeMapper,
   Response,
-  SummonerInfo,
   TypographyProps,
 } from 'types';
 
 const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
-
-  const { id } = summonerResponse?.items as SummonerInfo;
+  const { id } = useGetSummoner(nickname);
 
   const { data: ingameResponse }: UseQueryResult<Response<InGameInfo>> =
     useQuery([QUERY_KEYS.getInGameByPuuid, { nickname }], () =>

@@ -6,21 +6,17 @@ import Box from 'userInterface/box/Box';
 import RankContents from './RankContents';
 import { INITIAL_DATA, QUERY_KEYS } from 'constant';
 import { CLIENT_API } from 'api/api';
+import { useGetSummoner } from 'hooks/queries/useGetSummoner';
 import {
   BoxProps,
   LeagueInfo,
   LeagueInfoArr,
   RankProps,
   Response,
-  SummonerInfo,
 } from 'types';
 
 const RankSection: FC<RankProps> = ({ nickname }) => {
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
-  const { id } = summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
+  const { id } = useGetSummoner(nickname);
 
   const { data: leagueInfo }: UseQueryResult<Response<LeagueInfoArr>> =
     useQuery(
@@ -28,6 +24,7 @@ const RankSection: FC<RankProps> = ({ nickname }) => {
       () => CLIENT_API.getLeagueInfoById(id),
       { enabled: !!id }
     );
+
   const leagueInfoArr = leagueInfo?.items.length
     ? leagueInfo?.items
     : INITIAL_DATA.leagueInfoArr;

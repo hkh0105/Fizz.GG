@@ -3,27 +3,22 @@ import { FC } from 'react';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
+import MasteryRow from './MasteryRow';
+import MasteryHeader from './MasteryHeader';
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
+import { useGetSummoner } from 'hooks/queries/useGetSummoner';
 import {
   BoxProps,
   IngameSectionProps,
   MasteryInfo,
   MasteryRowProps,
   Response,
-  SummonerInfo,
   TypographyProps,
 } from 'types';
-import MasteryRow from './MasteryRow';
-import MasteryHeader from './MasteryHeader';
 
 const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
-
-  const { id } = summonerResponse?.items as SummonerInfo;
+  const { id } = useGetSummoner(nickname);
 
   const { data: masteryResponse }: UseQueryResult<Response<MasteryInfo[]>> =
     useQuery([QUERY_KEYS.getMasteryById, { nickname }], () =>
