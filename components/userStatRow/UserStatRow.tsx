@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import SpellIcon from 'components/spellIcon/SpellIcon';
@@ -9,13 +8,10 @@ import RuneIcon from 'components/runeIcon/RuneIcon';
 import Kda from 'components/kda/Kda';
 import Typography from 'userInterface/typography/Typography';
 import SingleBarChart from 'components/singleBarChart/SingleBarChart';
-import { QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
-import { useGetSpellJson } from 'hooks/queries';
+import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
 import {
   SingleBarChartProps,
   ChampionIconProps,
-  RuneData,
   SpellIconProps,
   UserStatRowProps,
   SpellInfoArr,
@@ -32,10 +28,7 @@ const UserStatRow: FC<UserStatRowProps> = ({
   maxTotalTakenDamage,
 }) => {
   const { spellData } = useGetSpellJson();
-  const { data: riotRuneData }: UseQueryResult<RuneData> = useQuery(
-    [QUERY_KEYS.getRune],
-    CLIENT_API.getRune
-  );
+  const { runeData } = useGetRuneJson();
 
   const {
     summoner1Id,
@@ -71,13 +64,13 @@ const UserStatRow: FC<UserStatRowProps> = ({
   const spell = [spellD, spellF] as SpellInfoArr;
 
   //Rune
-  const mainRuneTheme = riotRuneData?.find(
+  const mainRuneTheme = runeData.find(
     (rune) => rune.id === perks.styles[0].style
   );
   const mainRune = mainRuneTheme?.slots[0].runes.find(
     (rune) => rune.id === perks.styles[0].selections[0].perk
   );
-  const subRuneTheme = riotRuneData?.find(
+  const subRuneTheme = runeData.find(
     (rune) => rune.id === perks.styles[1].style
   );
   const rune = [mainRune, subRuneTheme] as RuneInfo[];

@@ -10,7 +10,7 @@ import { QUERY_KEYS } from 'constant';
 import { CLIENT_API } from 'api/api';
 import { getDateDiff } from 'utils';
 import { recentInfo } from 'store';
-import { useGetSpellJson } from 'hooks/queries';
+import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
 import {
   GameDetailInfo,
   GameInfo,
@@ -20,8 +20,6 @@ import {
   MatchTeam,
   QueueTypeMapper,
   Response,
-  RuneData,
-  SpellData,
   RuneInfo,
   SpellInfoArr,
   BoxProps,
@@ -34,13 +32,10 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
   const { spellData } = useGetSpellJson();
+  const { runeData } = useGetRuneJson();
   const { data: gameResponse }: UseQueryResult<Response<GameInfo>> = useQuery(
     [QUERY_KEYS.getGameByMatchId, { matchId }],
     () => CLIENT_API.getGameByMatchId(matchId)
-  );
-  const { data: riotRuneData }: UseQueryResult<RuneData> = useQuery(
-    [QUERY_KEYS.getRune],
-    CLIENT_API.getRune
   );
 
   useEffect(() => {
@@ -104,13 +99,13 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   );
 
   //Rune
-  const mainRuneTheme = riotRuneData?.find(
+  const mainRuneTheme = runeData.find(
     (rune) => rune.id === perks.styles[0].style
   );
   const mainRune = mainRuneTheme?.slots[0].runes.find(
     (rune) => rune.id === perks.styles[0].selections[0].perk
   );
-  const subRuneTheme = riotRuneData?.find(
+  const subRuneTheme = runeData.find(
     (rune) => rune.id === perks.styles[1].style
   );
 
