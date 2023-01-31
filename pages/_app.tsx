@@ -42,7 +42,6 @@ function App({ Component, pageProps }: AppProps<{ dehydratedState: unknown }>) {
       defaultOptions: {
         queries: {
           suspense: true, // useErrorBoundary 자동 True
-          retry: false,
           refetchOnWindowFocus: false,
         },
       },
