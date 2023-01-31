@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import { browser, instance, regionInstance } from './config';
 import { PATH } from '../constant';
@@ -30,6 +30,8 @@ export const API = {
     ),
   getInGameByPuuid: async (puuid: string) =>
     await instance.get(PATH.getInGameByPuuid.replace('{puuid}', puuid)),
+  getMasteryById: async (id: string) =>
+    await instance.get(PATH.getMasteryById.replace('{id}', id)),
 };
 
 export const CLIENT_API = {
@@ -49,4 +51,10 @@ export const CLIENT_API = {
   getRune: () => browser.get(PATH.getRune),
   getInGameByPuuid: async (puuid: string) =>
     await browser.get(BFF_PATH.getInGameByPuuid.replace('{puuid}', puuid)),
+  getMasteryById: async (id: string) =>
+    await browser.get(BFF_PATH.getMasteryById.replace('{id}', id)),
+  getChamp: async () =>
+    await browser.get(
+      'http://ddragon.leagueoflegends.com/cdn/13.1.1/data/en_US/champion.json'
+    ),
 };

@@ -560,3 +560,36 @@ export interface InGameUserRowProps {
 export interface IngameSectionProps {
   nickname: string;
 }
+
+export type MasteryInfo = {
+  championId: number;
+  championLevel: number;
+  championPoints: number;
+  lastPlayTime: number;
+  championPointsSinceLastLevel: number;
+  championPointsUntilNextLevel: number;
+  chestGranted: boolean;
+  tokensEarned: number;
+  summonerId: string;
+};
+
+export type RiotChampInfo = {
+  data: ChampDetails;
+};
+
+export type ChampDetails = {
+  [index: string]: {
+    key: string;
+    name: string;
+    blurb: string;
+    id: string;
+    partype: string;
+    title: string;
+    stats: {};
+    info: {};
+  };
+};
+
+export interface MasteryRowProps {
+  masteryInfo: MasteryInfo;
+}
