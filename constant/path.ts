@@ -10,6 +10,7 @@ export const PATH = {
   getRune:
     'https://ddragon.leagueoflegends.com/cdn/13.1.1/data/en_US/runesReforged.json',
   getInGameByPuuid: 'spectator/v4/active-games/by-summoner/{puuid}',
+  getMasteryById: 'champion-mastery/v4/champion-masteries/by-summoner/{id}',
 };
 
 export const BFF_PATH = {
@@ -18,4 +19,5 @@ export const BFF_PATH = {
   getMatchArrByPuuid: '/api/getMatchIdArr?puuid={puuid}&count={count}',
   getGameByMatchId: '/api/getGame?matchId={matchId}',
   getInGameByPuuid: '/api/getInGame?puuid={puuid}',
+  getMasteryById: '/api/getMastery?id={id}',
 };
