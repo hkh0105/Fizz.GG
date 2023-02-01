@@ -6,26 +6,33 @@ interface Props {
 
 interface State {
   hasError: boolean;
+  error: string;
 }
 
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
+    error: '',
   };
 
   public static getDerivedStateFromError(error: Error): State {
-    console.log(error);
     // Update state so the next render will show the fallback UI.
-    return { hasError: true };
+    return { hasError: true, error: error.message };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    console.error('Uncaught error:', 'ㄸㄲ꺆', error, 'ㅑㅜ럐', errorInfo);
   }
 
   public render() {
+    const { error } = this.state;
+
+    if (error) {
+      return <h1>{error}</h1>;
+    }
+
     if (this.state.hasError) {
-      return <h1>Sorry.. there was an error on Search</h1>;
+      return <h1>Sorry.. there was an error</h1>;
     }
 
     return this.props.children;
