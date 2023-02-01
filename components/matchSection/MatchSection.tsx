@@ -53,9 +53,9 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
         };
 
         return (
-          <Suspense fallback={<div>LOADING</div>}>
+          <Suspense fallback={<div>LOADING</div>} key={matchId}>
             <ErrorBoundary>
-              <MatchCard {...MatchCardProps} key={matchId + String(index)} />
+              <MatchCard {...MatchCardProps} />
             </ErrorBoundary>
           </Suspense>
         );
