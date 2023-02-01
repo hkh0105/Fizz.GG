@@ -5,7 +5,7 @@ import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
-import { useGetSummoner } from 'hooks/queries/useGetSummoner';
+import { useGetSummoner } from 'hooks/queries';
 import {
   ButtonGroupProps,
   ProfileIconProps,
