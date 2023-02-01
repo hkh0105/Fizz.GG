@@ -1,35 +1,20 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { FC } from 'react';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
-import { CLIENT_API } from 'api/api';
-import { QUERY_KEYS } from 'constant';
+import MasteryRow from './MasteryRow';
+import MasteryHeader from './MasteryHeader';
+import { useGetSummoner, useGetMastery } from 'hooks/queries';
 import {
   BoxProps,
   IngameSectionProps,
-  MasteryInfo,
   MasteryRowProps,
-  Response,
-  SummonerInfo,
   TypographyProps,
 } from 'types';
-import MasteryRow from './MasteryRow';
-import MasteryHeader from './MasteryHeader';
 
 const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
-
-  const { id } = summonerResponse?.items as SummonerInfo;
-
-  const { data: masteryResponse }: UseQueryResult<Response<MasteryInfo[]>> =
-    useQuery([QUERY_KEYS.getMasteryById, { nickname }], () =>
-      CLIENT_API.getMasteryById(id)
-    );
-  const masteryInfo = masteryResponse?.items as MasteryInfo[];
+  const { id } = useGetSummoner(nickname);
+  const { masteryInfo } = useGetMastery(id);
 
   const GameModeTypoProps: TypographyProps = {
     color: 'gray',

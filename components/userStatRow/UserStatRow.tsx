@@ -1,5 +1,5 @@
+import Link from 'next/link';
 import { FC } from 'react';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import SpellIcon from 'components/spellIcon/SpellIcon';
@@ -8,14 +8,10 @@ import RuneIcon from 'components/runeIcon/RuneIcon';
 import Kda from 'components/kda/Kda';
 import Typography from 'userInterface/typography/Typography';
 import SingleBarChart from 'components/singleBarChart/SingleBarChart';
-import { QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
+import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
 import {
   SingleBarChartProps,
   ChampionIconProps,
-  RiotSpellData,
-  RuneData,
-  SpellData,
   SpellIconProps,
   UserStatRowProps,
   SpellInfoArr,
@@ -25,23 +21,15 @@ import {
   TypographyProps,
   ItemIconProps,
 } from 'types';
-import Link from 'next/link';
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
   maxTotalDamage,
   maxTotalTakenDamage,
 }) => {
-  const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(
-    [QUERY_KEYS.getSpell],
-    CLIENT_API.getSpell
-  );
-  const { data: riotRuneData }: UseQueryResult<RuneData> = useQuery(
-    [QUERY_KEYS.getRune],
-    CLIENT_API.getRune
-  );
+  const { spellData } = useGetSpellJson();
+  const { runeData } = useGetRuneJson();
 
-  const spellData: SpellData = riotSpellData?.data as SpellData;
   const {
     summoner1Id,
     summoner2Id,
@@ -76,13 +64,13 @@ const UserStatRow: FC<UserStatRowProps> = ({
   const spell = [spellD, spellF] as SpellInfoArr;
 
   //Rune
-  const mainRuneTheme = riotRuneData?.find(
+  const mainRuneTheme = runeData.find(
     (rune) => rune.id === perks.styles[0].style
   );
   const mainRune = mainRuneTheme?.slots[0].runes.find(
     (rune) => rune.id === perks.styles[0].selections[0].perk
   );
-  const subRuneTheme = riotRuneData?.find(
+  const subRuneTheme = runeData.find(
     (rune) => rune.id === perks.styles[1].style
   );
   const rune = [mainRune, subRuneTheme] as RuneInfo[];

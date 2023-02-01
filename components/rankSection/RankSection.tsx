@@ -1,36 +1,14 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { FC } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import Box from 'userInterface/box/Box';
 import RankContents from './RankContents';
-import { INITIAL_DATA, QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
-import {
-  BoxProps,
-  LeagueInfo,
-  LeagueInfoArr,
-  RankProps,
-  Response,
-  SummonerInfo,
-} from 'types';
+import { useGetLeagueInfo, useGetSummoner } from 'hooks/queries';
+import { BoxProps, LeagueInfo, RankProps } from 'types';
 
 const RankSection: FC<RankProps> = ({ nickname }) => {
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
-  const { id } = summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
-
-  const { data: leagueInfo }: UseQueryResult<Response<LeagueInfoArr>> =
-    useQuery(
-      [QUERY_KEYS.getLeagueInfoById, { nickname }],
-      () => CLIENT_API.getLeagueInfoById(id),
-      { enabled: !!id }
-    );
-  const leagueInfoArr = leagueInfo?.items.length
-    ? leagueInfo?.items
-    : INITIAL_DATA.leagueInfoArr;
+  const { id } = useGetSummoner(nickname);
+  const { leagueInfoArr } = useGetLeagueInfo(id);
 
   const BoxProps: BoxProps = {
     size: 'custom',
@@ -39,8 +17,9 @@ const RankSection: FC<RankProps> = ({ nickname }) => {
 
   return (
     <>
-      {leagueInfoArr.map((rankInfo: LeagueInfo) => {
-        const { wins, losses, queueType, tier, rank, leaguePoints } = rankInfo;
+      {leagueInfoArr.map((leagueInfo: LeagueInfo) => {
+        const { wins, losses, queueType, tier, rank, leaguePoints } =
+          leagueInfo;
         const RankContentsProps = {
           wins,
           losses,

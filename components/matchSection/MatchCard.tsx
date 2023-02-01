@@ -1,27 +1,18 @@
 import { FC, useEffect, useState } from 'react';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
 
 import Box from 'userInterface/box/Box';
 import MatchOverView from './MatchOverView';
 import MatchSummonerOverView from './MatchSummonerOverView';
 import DetailSection from './DetailSection';
-import { QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
 import { getDateDiff } from 'utils';
-import { useRecoilState } from 'recoil';
 import { recentInfo } from 'store';
+import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
 import {
-  GameDetailInfo,
-  GameInfo,
   MatchCardProps,
   MatchInfoByUser,
   MatchOverViewProps,
-  MatchTeam,
   QueueTypeMapper,
-  Response,
-  RiotSpellData,
-  RuneData,
-  SpellData,
   RuneInfo,
   SpellInfoArr,
   BoxProps,
@@ -33,40 +24,11 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   const [recentMatchArr, setRecentMatchArr] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
-  const { data: gameResponse }: UseQueryResult<Response<GameInfo>> = useQuery(
-    [QUERY_KEYS.getGameByMatchId, { matchId }],
-    () => CLIENT_API.getGameByMatchId(matchId)
-  );
-  const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(
-    [QUERY_KEYS.getSpell],
-    CLIENT_API.getSpell
-  );
-  const { data: riotRuneData }: UseQueryResult<RuneData> = useQuery(
-    [QUERY_KEYS.getRune],
-    CLIENT_API.getRune
-  );
-
-  useEffect(() => {
-    setMatchInfo();
-  }, [matchId]);
-
-  const gameInfo: GameDetailInfo = gameResponse?.items.info as GameDetailInfo;
-  const spellData: SpellData = riotSpellData?.data as SpellData;
-  const searchedUser = gameResponse?.items.info.participants.find(
-    (user: MatchInfoByUser) => {
-      return (
-        user.summonerName.toLowerCase().trim() === nickname.toLowerCase().trim()
-      );
-    }
-  ) as MatchInfoByUser;
-
-  const summonerTeamInfo = gameInfo.teams.find(
-    (data) => data.win === searchedUser.win
-  ) as MatchTeam;
-
-  const { gameDuration, queueId, gameCreation, participants } = gameInfo;
+  const { spellData } = useGetSpellJson();
+  const { runeData } = useGetRuneJson();
   const {
-    win: isWin,
+    summonerTeamInfo,
+    isWin,
     summoner1Id,
     summoner2Id,
     perks,
@@ -89,7 +51,19 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     doubleKills,
     quadraKills,
     pentaKills,
-  } = searchedUser;
+    searchedUser,
+    gameDuration,
+    queueId,
+    gameCreation,
+    participants,
+    gameInfo,
+  } = useGetGameInfo(matchId, nickname);
+
+  useEffect(() => {
+    if (gameInfo) {
+      setMatchInfo();
+    }
+  }, [gameInfo]);
 
   //DayDiff
   const dayDiff = getDateDiff(gameCreation);
@@ -106,13 +80,13 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   );
 
   //Rune
-  const mainRuneTheme = riotRuneData?.find(
+  const mainRuneTheme = runeData.find(
     (rune) => rune.id === perks.styles[0].style
   );
   const mainRune = mainRuneTheme?.slots[0].runes.find(
     (rune) => rune.id === perks.styles[0].selections[0].perk
   );
-  const subRuneTheme = riotRuneData?.find(
+  const subRuneTheme = runeData.find(
     (rune) => rune.id === perks.styles[1].style
   );
 

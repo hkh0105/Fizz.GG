@@ -1,32 +1,20 @@
 import { FC } from 'react';
 
 import InGameUserRow from './InGameUserRow';
+import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
 import {
   InGameTeamColumnProps,
   InGameUser,
   InGameUserRowProps,
-  RiotSpellData,
-  RuneData,
   RuneInfo,
-  SpellData,
   SpellInfoArr,
 } from 'types';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
 
 const InGameTeamColumn: FC<InGameTeamColumnProps> = ({ team }) => {
-  const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(
-    [QUERY_KEYS.getSpell],
-    CLIENT_API.getSpell
-  );
-  const { data: riotRuneData }: UseQueryResult<RuneData> = useQuery(
-    [QUERY_KEYS.getRune],
-    CLIENT_API.getRune
-  );
+  const { spellData } = useGetSpellJson();
+  const { runeData } = useGetRuneJson();
 
   //Spell
-  const spellData: SpellData = riotSpellData?.data as SpellData;
   const spellEntries = Object?.entries(spellData);
 
   return (
@@ -41,13 +29,13 @@ const InGameTeamColumn: FC<InGameTeamColumnProps> = ({ team }) => {
         );
         const spell = [spellD, spellF] as SpellInfoArr;
         //Rune
-        const mainRuneTheme = riotRuneData?.find(
+        const mainRuneTheme = runeData?.find(
           (rune) => rune.id === user.perks.perkStyle
         );
         const mainRune = mainRuneTheme?.slots[0].runes.find(
           (rune) => rune.id === user.perks.perkIds?.[0]
         );
-        const subRuneTheme = riotRuneData?.find(
+        const subRuneTheme = runeData?.find(
           (rune) => rune.id === user.perks.perkSubStyle
         );
         const rune = [mainRune, subRuneTheme] as RuneInfo[];

@@ -1,18 +1,14 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
-import { INITIAL_DATA, QUERY_KEYS } from 'constant';
-import { CLIENT_API } from 'api/api';
+import { useGetSummoner } from 'hooks/queries';
 import {
   ButtonGroupProps,
   ProfileIconProps,
-  Response,
-  SummonerInfo,
   ProfileProps,
   TypographyProps,
 } from 'types';
@@ -21,15 +17,11 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
   const router = useRouter();
 
   const {
-    data: summonerResponse,
+    name,
+    summonerLevel,
+    profileIconId,
     refetch: refetchUserInfo,
-  }: UseQueryResult<Response<SummonerInfo>> = useQuery(
-    [QUERY_KEYS.getSummonerByNickname, { nickname }],
-    () => CLIENT_API.getSummonerByNickname(nickname)
-  );
-
-  const { name, summonerLevel, profileIconId } =
-    summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
+  } = useGetSummoner(nickname);
 
   const onClickIngameButton = async () => {
     await router.push({

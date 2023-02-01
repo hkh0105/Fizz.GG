@@ -1,56 +1,21 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { FC } from 'react';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import InGameTeamColumn from './InGameTeamColumn';
-import { CLIENT_API } from 'api/api';
-import { QUERY_KEYS } from 'constant';
+import { useGetInGame, useGetSummoner } from 'hooks/queries';
 import {
   BoxProps,
-  InGameInfo,
   IngameSectionProps,
   InGameTeamColumnProps,
-  InGameUser,
   QueueTypeMapper,
-  Response,
-  SummonerInfo,
   TypographyProps,
 } from 'types';
 
 const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
+  const { id } = useGetSummoner(nickname);
 
-  const { id } = summonerResponse?.items as SummonerInfo;
-
-  const { data: ingameResponse }: UseQueryResult<Response<InGameInfo>> =
-    useQuery([QUERY_KEYS.getInGameByPuuid, { nickname }], () =>
-      CLIENT_API.getInGameByPuuid(id)
-    );
-
-  if (ingameResponse?.message === '404') {
-    return <div>진행중인 게임이 없습니다</div>;
-  }
-
-  const inGameInfo = ingameResponse?.items as InGameInfo;
-  const { gameQueueConfigId: queueType, participants } = inGameInfo;
-
-  //User
-  const searchedUser: InGameUser = participants.find(
-    (user: InGameUser) =>
-      user.summonerName.toLowerCase().trim() === nickname.toLowerCase().trim()
-  ) as InGameUser;
-
-  //팀찾기
-  const summonerTeam: InGameUser[] = participants.filter(
-    (user: InGameUser) => user.teamId === searchedUser.teamId
-  );
-  const enemyTeam: InGameUser[] = participants.filter(
-    (user: InGameUser) => user.teamId !== searchedUser.teamId
-  );
+  const { summonerTeam, enemyTeam, queueType } = useGetInGame(nickname);
 
   const queueTypeMapper: QueueTypeMapper = {
     0: '커스텀 게임',

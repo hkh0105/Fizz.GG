@@ -1,65 +1,64 @@
-import { FC, useState } from 'react';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { FC, Suspense, useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import MatchCard from './MatchCard';
-import { CLIENT_API } from 'api/api';
-import { INITIAL_DATA, QUERY_KEYS } from 'constant';
+import useIntersectionObserver from 'hooks/useInterSectionObserver';
+import ErrorBoundary from 'pages/ErrorBoundary';
+import { recentInfo } from 'store';
+import { useGetMatchIdArr, useGetSummoner } from 'hooks/queries';
 import {
   MatchCardProps,
   MatchIdArr,
   MatchSection,
+  RecentMatchUserInfo,
   Response,
-  SummonerInfo,
 } from 'types';
-import useIntersectionObserver from 'hooks/useInterSectionObserver';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(0);
   const [cash, setCash] = useState<string[]>([]);
+  const [recentMatchArr, setRecentMatchArr] =
+    useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
   ]) => {
     if (isIntersecting) {
-      setCount((prev) => prev + 10);
-
-      await refetchMatchArr();
+      if (count < 70) {
+        setCount((prev) => prev + 10);
+        await refetchMatchArr();
+      }
     }
   };
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
+  const { puuid } = useGetSummoner(nickname);
 
-  const { data: summonerResponse }: UseQueryResult<Response<SummonerInfo>> =
-    useQuery([QUERY_KEYS.getSummonerByNickname, { nickname }], () =>
-      CLIENT_API.getSummonerByNickname(nickname)
-    );
+  const onSuccess = (response: Response<MatchIdArr>) => {
+    setCash((prev) => prev.concat(response.items));
+  };
 
-  const { puuid } = summonerResponse?.items ?? INITIAL_DATA.summonerInfo;
+  const { refetchMatchArr } = useGetMatchIdArr(puuid, count, { onSuccess });
 
-  const {
-    data: matchIdArrResponse,
-    refetch: refetchMatchArr,
-  }: UseQueryResult<Response<MatchIdArr>> = useQuery(
-    [QUERY_KEYS.getMatchIdArrByPuuid, { nickname }],
-    () => CLIENT_API.getMatchArrByPuuid(puuid, count),
-    {
-      enabled: !!puuid,
-      suspense: false,
-      onSuccess: (response) => {
-        setCash((prev) => prev.concat(response.items));
-      },
-    }
-  );
+  useEffect(() => {
+    setRecentMatchArr([]);
+  }, []);
 
   return (
     <>
-      {cash.map((matchId: string) => {
+      {cash.map((matchId: string, index) => {
         const MatchCardProps: MatchCardProps = {
           matchId,
           nickname,
         };
 
-        return <MatchCard {...MatchCardProps} key={matchId} />;
+        return (
+          <Suspense fallback={<div>LOADING</div>} key={matchId}>
+            <ErrorBoundary>
+              <MatchCard {...MatchCardProps} />
+            </ErrorBoundary>
+          </Suspense>
+        );
       })}
       <div ref={setTarget} />
     </>
