@@ -8,7 +8,7 @@ import {
 } from 'types';
 
 const Typography: FC<TypographyProps> = ({
-  string,
+  text,
   type,
   size = 'medium',
   isTitle = true,
@@ -39,10 +39,10 @@ const Typography: FC<TypographyProps> = ({
     typeMapper[type] + ' ' + sizeMapper[size] + ' ' + colorMapper[color];
 
   if (isTitle) {
-    return <h1 className={className}>{string}</h1>;
+    return <h1 className={className}>{text}</h1>;
   }
 
-  return <p className={className}>{string}</p>;
+  return <p className={className}>{text}</p>;
 };
 
 export default Typography;

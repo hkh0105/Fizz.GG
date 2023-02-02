@@ -1,5 +1,4 @@
-import { QueryKey, UseQueryOptions } from '@tanstack/react-query';
-import { ChangeEvent, MouseEvent, ReactNode } from 'react';
+import { ChangeEvent, MouseEventHandler, ReactNode } from 'react';
 
 export interface SearchWindowProps {
   onSubmit: (value: string) => void;
@@ -15,9 +14,11 @@ export type QueryOptions<T> = {
   onSuccess?: (response: T) => void;
 };
 
+export type OptionalQueryOptions<T> = Partial<QueryOptions<T>>;
+
 export interface ButtonProps {
   label: string;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   size?: keyof ButtonSize;
   borderColor?: keyof ButtonColor;
   type?: 'button' | 'submit' | 'reset' | undefined;
@@ -101,7 +102,7 @@ export type RankTitleMapper = {
 };
 
 export type Rank = 'III' | 'I' | 'II' | 'IIII' | '';
-
+//나만의 것으로 Parsing
 export type RankTier =
   | 'IRON'
   | 'BRONZE'
@@ -156,7 +157,7 @@ export interface ButtonGroupProps {
 }
 
 export interface TypographyProps {
-  string: string;
+  text: string;
   type: keyof TypographyTypeMapper;
   isTitle?: boolean;
   color?: keyof TypoGraphyColorMapper;
@@ -226,9 +227,16 @@ export type GameInfo = {
   metadata: Metadata;
 };
 
+export type Game = {
+  Creation: number;
+  Duration: number;
+};
+
+type GameDuration = number;
+
 export type GameDetailInfo = {
-  gameCreation: number;
-  gameDuration: number;
+  gameCreation: Game['Creation'];
+  gameDuration: GameDuration;
   gameEndTimestamp: number;
   gameId: number;
   gameStartTimestamp: number;
@@ -241,7 +249,7 @@ export type GameDetailInfo = {
   platformId: string;
   tournamentCode: string;
   participants: MatchInfoByUser[];
-  teams: teams;
+  teams: Teams;
 };
 
 export type Objectives = {
@@ -253,15 +261,17 @@ export type Metadata = {
   participants: Participants;
 };
 
-export type teams = [MatchTeam, MatchTeam];
+export type Teams = [MatchTeam, MatchTeam];
 export type MatchTeam = {
-  bans: ban[];
+  bans: Ban[];
   objectives: Objectives;
   teamId: number;
   win: boolean;
 };
 
-export type ban = {
+export type Bans = Ban[];
+
+export type Ban = {
   championId: string;
   pickTurn: number;
 };
