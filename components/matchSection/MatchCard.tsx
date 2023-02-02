@@ -20,7 +20,7 @@ import {
 } from 'types';
 
 const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
-  const [isShowDetail, setShowDetail] = useState(false);
+  const [isShowDetail, setShowDetail] = useState(false); // isShown
   const [recentMatchArr, setRecentMatchArr] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
@@ -58,12 +58,6 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     participants,
     gameInfo,
   } = useGetGameInfo(matchId, nickname);
-
-  useEffect(() => {
-    if (gameInfo) {
-      setMatchInfo();
-    }
-  }, [gameInfo]);
 
   //DayDiff
   const dayDiff = getDateDiff(gameCreation);
@@ -178,6 +172,12 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
       : 'bg-red-200 text-red-500 hover:bg-red-500 hover:text-red-700',
     onClick: () => setShowDetail(!isShowDetail),
   };
+
+  useEffect(() => {
+    if (gameInfo) {
+      setMatchInfo();
+    }
+  }, [gameInfo]);
 
   return (
     <>
