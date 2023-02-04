@@ -26,31 +26,31 @@ const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
     champName = champDetail[0];
   }
 
-  const ChampNameTypographyProps: TypographyProps = {
+  const ChampNameProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: champName,
+    text: champName,
   };
 
-  const ChampLevelTypographyProps: TypographyProps = {
+  const ChampLevelProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: String(championLevel),
+    text: String(championLevel),
   };
 
-  const ChampPointTypographyProps: TypographyProps = {
+  const ChampPointProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: String(championPoints),
+    text: String(championPoints),
   };
-  const PlayTimeTypographyProps: TypographyProps = {
+  const PlayTimeProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: convertedLastPlayTime,
+    text: convertedLastPlayTime,
   };
 
   const ChampionIconProps: ChampionIconProps = {
@@ -61,19 +61,19 @@ const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
   return (
     <div className=' w-[800px] h-[60px] pt-3 flex shrink-0 grow-0 justify-center '>
       <div className='basis-36'>
-        <Typography {...ChampNameTypographyProps} />
+        <Typography {...ChampNameProps} />
       </div>
       <div className='basis-36'>
         <ChampionIcon {...ChampionIconProps} />
       </div>
       <div className='basis-36'>
-        <Typography {...ChampLevelTypographyProps} />
+        <Typography {...ChampLevelProps} />
       </div>
       <div className='basis-36'>
-        <Typography {...ChampPointTypographyProps} />
+        <Typography {...ChampPointProps} />
       </div>
       <div className='basis-36'>
-        <Typography {...PlayTimeTypographyProps} />
+        <Typography {...PlayTimeProps} />
       </div>
     </div>
   );

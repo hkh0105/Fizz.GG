@@ -18,11 +18,11 @@ const InGameUserRow: FC<InGameUserRowProps> = ({
   spell,
   profileIconId,
 }) => {
-  const NicknameTypographyProps: TypographyProps = {
+  const NicknameProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: nickname,
+    text: nickname,
   };
 
   const SpellIconProps: SpellIconProps = {
@@ -55,7 +55,7 @@ const InGameUserRow: FC<InGameUserRowProps> = ({
         <RuneIcon {...RuneIconProps} />
       </div>
       <div className='ml-5 w-[100]px'>
-        <Typography {...NicknameTypographyProps} />
+        <Typography {...NicknameProps} />
       </div>
     </div>
   );

@@ -34,9 +34,9 @@ const RankContents: FC<RankContentsProps> = ({
     RANKED_FLEX_SR: '자유랭크',
   };
 
-  const TypographyProps: TypographyProps = {
+  const LpProps: TypographyProps = {
     type: 'default',
-    string:
+    text:
       rankTitleMapper[queueType] +
       ' : ' +
       tier +
@@ -61,7 +61,7 @@ const RankContents: FC<RankContentsProps> = ({
 
   return (
     <div className='flex-col mx-3 my-3 divide-y'>
-      <Typography {...TypographyProps} />
+      <Typography {...LpProps} />
       <div className='flex items-center'>
         <Image {...ImageProps} />
         <div className='flex items-center w-[240px] h-[100px] my-5'>

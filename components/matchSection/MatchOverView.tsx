@@ -10,42 +10,43 @@ const MatchOverView: FC<MatchOverViewProps> = ({
   isWin,
   gameTime,
 }) => {
-  const MatchTypeTypographyProps: TypographyProps = {
+  const MatchTypeProps: TypographyProps = {
     type: 'semibold',
     size: 'small',
     color: isWin ? 'blue' : 'red',
-    string: matchType,
+    text: matchType,
     isTitle: false,
   };
-  const DayDiffTypographyProps: TypographyProps = {
+
+  const DayDiffProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: dayDiff,
+    text: dayDiff,
     isTitle: false,
   };
-  const MatchResultTypographyProps: TypographyProps = {
+  const MatchResultProps: TypographyProps = {
     type: 'semibold',
     size: 'small',
     color: 'gray',
-    string: isWin ? '승리' : '패배',
+    text: isWin ? '승리' : '패배',
     isTitle: false,
   };
-  const GameTimeTypographyProps: TypographyProps = {
+  const GameTimeProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: gameTime,
+    text: gameTime,
     isTitle: false,
   };
 
   return (
     <div className='flex flex-col py-5 ml-5 gap-y-[1px] w-[80px]'>
-      <Typography {...MatchTypeTypographyProps} />
-      <Typography {...DayDiffTypographyProps} />
+      <Typography {...MatchTypeProps} />
+      <Typography {...DayDiffProps} />
       <Divider />
-      <Typography {...MatchResultTypographyProps} />
-      <Typography {...GameTimeTypographyProps} />
+      <Typography {...MatchResultProps} />
+      <Typography {...GameTimeProps} />
     </div>
   );
 };

@@ -67,32 +67,32 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
     summonerItems: summonerItems,
   };
 
-  const KillTypographyProps: TypographyProps = {
+  const KillProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'red',
-    string: '킬관여율 :' + String(killInvolvedRate.toFixed(1)) + '%',
+    text: '킬관여율 :' + String(killInvolvedRate.toFixed(1)) + '%',
   };
 
-  const CsTypographyProps: TypographyProps = {
+  const CsProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'red',
-    string: 'CS :' + String(totalMinionsKilled),
+    text: 'CS :' + String(totalMinionsKilled),
   };
 
-  const VisionScoreTypographyProps: TypographyProps = {
+  const VisionScoreProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: '시야점수 : ' + String(visionScore),
+    text: '시야점수 : ' + String(visionScore),
   };
 
-  const GoldTypographyProps: TypographyProps = {
+  const GoldProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: 'Gold :' + String(goldEarned),
+    text: 'Gold :' + String(goldEarned),
   };
 
   const SummonerTeamChampionProps: TeamChampionProps = {
@@ -121,10 +121,10 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
         <ItemIcon {...ItemIconProps} />
       </div>
       <div className='flex w-[150px] flex-col justify-center ml-5 border-l-2-slate-300'>
-        <Typography {...KillTypographyProps} />
-        <Typography {...CsTypographyProps} />
-        <Typography {...VisionScoreTypographyProps} />
-        <Typography {...GoldTypographyProps} />
+        <Typography {...KillProps} />
+        <Typography {...CsProps} />
+        <Typography {...VisionScoreProps} />
+        <Typography {...GoldProps} />
       </div>
       <div className='flex w-[280px]'>
         <TeamChampion {...SummonerTeamChampionProps} />

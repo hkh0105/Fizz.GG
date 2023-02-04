@@ -16,10 +16,10 @@ const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
   const { id } = useGetSummoner(nickname);
   const { masteryInfo } = useGetMastery(id);
 
-  const GameModeTypoProps: TypographyProps = {
-    color: 'gray',
-    string: `${nickname} 의 챔피언 통계`,
+  const GameModeProps: TypographyProps = {
     type: 'title',
+    color: 'gray',
+    text: `${nickname} 의 챔피언 통계`,
   };
 
   const BoxProps: BoxProps = {
@@ -29,7 +29,7 @@ const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
 
   return (
     <section className='flex flex-col items-center my-32 mt-10 gap-y-10'>
-      <Typography {...GameModeTypoProps} />
+      <Typography {...GameModeProps} />
       <Box {...BoxProps}>
         <MasteryHeader />
         {masteryInfo.map((mastery) => {

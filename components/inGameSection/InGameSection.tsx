@@ -27,9 +27,9 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
     450: '칼바람나락',
   };
 
-  const GameModeTypoProps: TypographyProps = {
+  const GameModeProps: TypographyProps = {
     color: 'gray',
-    string: queueTypeMapper[queueType],
+    text: queueTypeMapper[queueType],
     type: 'title',
   };
 
@@ -48,19 +48,19 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
     team: enemyTeam,
   };
 
-  const VersusTypoProps: TypographyProps = {
-    string: 'VS',
+  const VersusProps: TypographyProps = {
+    text: 'VS',
     type: 'title',
     color: 'gray',
   };
 
   return (
     <section className='flex flex-col items-center my-3 gap-y-3'>
-      <Typography {...GameModeTypoProps} />
+      <Typography {...GameModeProps} />
       <Box {...BoxProps}>
         <div className='flex items-center justify-evenly'>
           <InGameTeamColumn {...SummonerColumnProps} />
-          <Typography {...VersusTypoProps} />
+          <Typography {...VersusProps} />
           <InGameTeamColumn {...EnemyColumnProps} />
         </div>
       </Box>

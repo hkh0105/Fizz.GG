@@ -106,25 +106,25 @@ const UserStatRow: FC<UserStatRowProps> = ({
     kda,
   };
 
-  const NicknameTypographyProps: TypographyProps = {
+  const NicknameProps: TypographyProps = {
     type: 'default',
     size: 'xSmall',
     color: 'gray',
-    string: summonerName,
+    text: summonerName,
   };
 
-  const CsTypographyProps: TypographyProps = {
+  const CsProps: TypographyProps = {
     type: 'default',
     size: 'xSmall',
     color: 'gray',
-    string: 'CS :' + String(totalMinionsKilled),
+    text: 'CS :' + String(totalMinionsKilled),
   };
 
-  const VisionScoreTypographyProps: TypographyProps = {
+  const VisionScoreProps: TypographyProps = {
     type: 'default',
     size: 'xSmall',
     color: 'gray',
-    string: '시야점수 : ' + String(visionScore),
+    text: '시야점수 : ' + String(visionScore),
   };
 
   const DamageChartProps: SingleBarChartProps = {
@@ -177,12 +177,12 @@ const UserStatRow: FC<UserStatRowProps> = ({
           }}
           className='hover:underline'
         >
-          <Typography {...NicknameTypographyProps} />
+          <Typography {...NicknameProps} />
         </Link>
       </div>
       <div className='flex-col w-[80px] pt-4'>
-        <Typography {...CsTypographyProps} />
-        <Typography {...VisionScoreTypographyProps} />
+        <Typography {...CsProps} />
+        <Typography {...VisionScoreProps} />
       </div>
       <div className='flex w-[250px] gap-x-3 pt-2'>
         <SingleBarChart {...DamageChartProps} />

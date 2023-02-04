@@ -40,22 +40,22 @@ const SingleBarChart: FC<SingleBarChartProps> = ({
   const endBarColorClassName = colorMapper[endColor];
   const endBarClassName = endBarColorClassName;
 
-  const TitleTypographyProps: TypographyProps = {
-    string: title ?? '',
+  const TitleProps: TypographyProps = {
+    text: title ?? '',
     size: titleSize,
     color: titleColor,
     type: 'default',
   };
 
-  const StartValueTypographyProps: TypographyProps = {
-    string: String(startValue) ?? '',
+  const StartValueProps: TypographyProps = {
+    text: String(startValue) ?? '',
     size: valueSize,
     color: valueColor,
     type: 'default',
   };
 
-  const EndValueTypographyProps: TypographyProps = {
-    string: String(endValue) ?? '',
+  const EndValueProps: TypographyProps = {
+    text: String(endValue) ?? '',
     size: valueSize,
     color: valueColor,
     type: 'default',
@@ -63,7 +63,7 @@ const SingleBarChart: FC<SingleBarChartProps> = ({
 
   return (
     <div className={className}>
-      {title && <Typography {...TitleTypographyProps} />}
+      {title && <Typography {...TitleProps} />}
       <div
         className='flex items-center'
         style={{ width: width, height: height }}
@@ -72,13 +72,13 @@ const SingleBarChart: FC<SingleBarChartProps> = ({
           className={startBarClassName}
           style={{ width: startWidth, height: height }}
         >
-          {isValueShow && <Typography {...StartValueTypographyProps} />}
+          {isValueShow && <Typography {...StartValueProps} />}
         </div>
         <div
           className={endBarClassName}
           style={{ width: width - startWidth, height: height }}
         >
-          {isValueShow && <Typography {...EndValueTypographyProps} />}
+          {isValueShow && <Typography {...EndValueProps} />}
         </div>
       </div>
     </div>

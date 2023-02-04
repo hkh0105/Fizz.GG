@@ -61,9 +61,9 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     ],
   };
 
-  const TypographyProps: TypographyProps = {
-    string: name,
+  const SummonerNameProps: TypographyProps = {
     type: 'title',
+    text: name,
   };
 
   return (
@@ -71,7 +71,7 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
       <div className='flex'>
         <ProfileIcon {...ProfileIconProps} />
         <div className='flex flex-col items-start justify-center gap-y-10'>
-          <Typography {...TypographyProps} />
+          <Typography {...SummonerNameProps} />
           <ButtonGroup {...ButtonGroupProps} />
         </div>
       </div>

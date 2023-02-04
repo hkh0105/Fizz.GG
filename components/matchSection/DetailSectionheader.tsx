@@ -12,76 +12,76 @@ const DetailSectionHeader: FC<DetailSectionHeaderProps> = ({ color }) => {
     red: 'flex w-full h-[35px] border-b-2 border-red-200 pl-5 gap-x-1',
     blue: 'flex w-full h-[35px] border-b-2 border-blue-200 pl-5 gap-x-1',
   };
-  const ChampTypoProps: TypographyProps = {
+  const ChampKeyProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: '챔피언',
+    text: '챔피언',
   };
 
-  const KdaTypoProps: TypographyProps = {
+  const KdaKeyProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: 'KDA',
+    text: 'KDA',
   };
 
-  const NicknameTypoProps: TypographyProps = {
+  const NicknameKeyProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: '닉네임',
+    text: '닉네임',
   };
 
-  const StatTypoProps: TypographyProps = {
+  const StatKeyProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: 'Stat',
+    text: 'Stat',
   };
 
-  const DamageBarChartTypoProps: TypographyProps = {
+  const DamageBarChartKeyProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: '가한 피해량',
+    text: '가한 피해량',
   };
 
-  const DamagedBarChartTypoProps: TypographyProps = {
+  const DamagedBarChartKeyProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: '받은 피해량',
+    text: '받은 피해량',
   };
 
-  const ItemsTypoProps: TypographyProps = {
+  const ItemsKeyProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: '아이템',
+    text: '아이템',
   };
   return (
     <div className={ColorMapper[color]}>
       <div className='w-[75px] pt-2'>
-        <Typography {...ChampTypoProps} />
+        <Typography {...ChampKeyProps} />
       </div>
       <div className='w-[75px] pt-2'>
-        <Typography {...KdaTypoProps} />
+        <Typography {...KdaKeyProps} />
       </div>
       <div className='w-[100px] pt-2'>
-        <Typography {...NicknameTypoProps} />
+        <Typography {...NicknameKeyProps} />
       </div>
       <div className='w-[80px] pt-2'>
-        <Typography {...StatTypoProps} />
+        <Typography {...StatKeyProps} />
       </div>
       <div className='w-[105px] pt-2'>
-        <Typography {...DamageBarChartTypoProps} />
+        <Typography {...DamageBarChartKeyProps} />
       </div>
       <div className='w-[140px] pt-2'>
-        <Typography {...DamagedBarChartTypoProps} />
+        <Typography {...DamagedBarChartKeyProps} />
       </div>
       <div className='pt-2'>
-        <Typography {...ItemsTypoProps} />
+        <Typography {...ItemsKeyProps} />
       </div>
     </div>
   );
