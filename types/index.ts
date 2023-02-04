@@ -1,3 +1,4 @@
+import Error from 'next/error';
 import { ChangeEvent, MouseEventHandler, ReactNode } from 'react';
 
 export interface SearchWindowProps {
@@ -66,11 +67,6 @@ export type SummonerInfo = {
   profileIconId: number;
   revisionDate: number;
   summonerLevel: number;
-};
-
-export type Error = {
-  status: number;
-  message: string;
 };
 
 export type Response<T> = {
@@ -600,7 +596,9 @@ export type ChampDetails = {
     id: string;
     partype: string;
     title: string;
+    // eslint-disable-next-line @typescript-eslint/ban-types
     stats: {};
+    // eslint-disable-next-line @typescript-eslint/ban-types
     info: {};
   };
 };
@@ -608,3 +606,9 @@ export type ChampDetails = {
 export interface MasteryRowProps {
   masteryInfo: MasteryInfo;
 }
+
+export type CustomError = {
+  message: string;
+  status: number;
+  name: string;
+};
