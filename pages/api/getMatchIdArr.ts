@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { API } from 'api';
-import { Error, Response } from 'types';
+import { CustomError, Response } from 'types';
 
 async function getMatchIdArr(puuid: string, count: string) {
   const response = await API.getMatchArrByPUUID(puuid, count);
@@ -12,21 +12,26 @@ async function getMatchIdArr(puuid: string, count: string) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response<string[]> | Error>
+  res: NextApiResponse<Response<string[]> | CustomError>
 ) {
   const { puuid, count } = req.query;
 
   try {
     const matchIdArr = await getMatchIdArr(String(puuid), String(count));
     res.status(200).json({ items: matchIdArr, message: 'MatchArr' });
-  } catch (error) {
-    const message = 'Unknown Error';
-    const status = 500;
+  } catch (error: any) {
+    let { message, status }: CustomError = error;
+    if (message && status) {
+      return res
+        .status(status)
+        .json({ message: message, name: 'Handle Error', status: status });
+    }
 
-    // if (error instanceof Error) {
-    //   message = error.message;
-    //   status = 500;
-    // }
-    res.status(500).json({ message: message, status: status });
+    message = 'Unhandled Error';
+    status = 500;
+
+    return res
+      .status(status)
+      .json({ message: message, name: 'Unhandled Error', status: 500 });
   }
 }

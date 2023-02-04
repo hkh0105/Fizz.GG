@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { API } from 'api';
-import { Error, InGameInfo, Response } from 'types';
+import { CustomError, InGameInfo, Response } from 'types';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 async function getInGameByPuuid(puuid: string) {
@@ -17,7 +17,7 @@ async function getInGameByPuuid(puuid: string) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response<InGameInfo | { status: 404 }> | Error>
+  res: NextApiResponse<Response<InGameInfo | { status: 404 }> | CustomError>
 ) {
   const { puuid } = req.query;
   try {
@@ -30,10 +30,19 @@ export default async function handler(
     const gameInfo = response.data;
 
     res.status(200).json({ items: gameInfo, message: 'InGameInfo' });
-  } catch (error) {
-    const message = 'Unknown Error';
-    const status = 500;
+  } catch (error: any) {
+    let { message, status }: CustomError = error;
+    if (message && status) {
+      return res
+        .status(status)
+        .json({ message: message, name: 'Handle Error', status: status });
+    }
 
-    res.status(500).json({ message: message, status: status });
+    message = 'Unhandled Error';
+    status = 500;
+
+    return res
+      .status(status)
+      .json({ message: message, name: 'Unhandled Error', status: 500 });
   }
 }
