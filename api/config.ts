@@ -43,23 +43,26 @@ instance.interceptors.response.use(
     return res;
   },
   (err) => {
-    console.log('INSTANCE ERROR', err.response.data);
     if (err.response.data.status.status_code === 404) {
       const message = '찾을 수 있는 데이터가 없습니다';
 
-      throw { status: 404, message: message };
+      throw { status: 404, message: message, name: '404Error' };
     } else if (
       err.response.data.status.status_code === 403 ||
       err.response.data.status.status_code === 401
     ) {
       const message = '서버 접근 권한 확인이 필요합니다';
-      throw { status: 404, message: message };
+      throw { status: 403, message: message, name: '403Error' };
     } else if (err.response.data.status.status_code === 429) {
       const message = '허용 검색량을 초과하였습니다. 3분 후 다시 시도해 주세요';
-      throw { status: 404, message: message };
+      throw { status: 404, message: message, name: 'LimitError' };
     }
 
-    return { status: 500, message: '서버에 장애가 있어 잠시 후 시도해주세요' };
+    throw {
+      status: 500,
+      message: '서버에 장애가 있어 잠시 후 시도해주세요',
+      name: 'UnhandledError',
+    };
   }
 );
 
@@ -85,19 +88,23 @@ regionInstance.interceptors.response.use(
     if (err.response.data.status.status_code === 404) {
       const message = '찾을 수 있는 데이터가 없습니다';
 
-      throw { status: 404, message: message };
+      throw { status: 404, message: message, name: '404Error' };
     } else if (
       err.response.data.status.status_code === 403 ||
       err.response.data.status.status_code === 401
     ) {
       const message = '서버 접근 권한 확인이 필요합니다';
-      throw { status: 404, message: message };
+      throw { status: 403, message: message, name: '403Error' };
     } else if (err.response.data.status.status_code === 429) {
       const message = '허용 검색량을 초과하였습니다. 3분 후 다시 시도해 주세요';
-      throw { status: 404, message: message };
+      throw { status: 404, message: message, name: 'LimitError' };
     }
 
-    return { status: 500, message: '서버에 장애가 있어 잠시 후 시도해주세요' };
+    throw {
+      status: 500,
+      message: '서버에 장애가 있어 잠시 후 시도해주세요',
+      name: 'UnhandledError',
+    };
   }
 );
 
@@ -122,20 +129,17 @@ browser.interceptors.response.use(
     const { message, name, status }: CustomError = err.response.data;
 
     if (status === 404) {
-      throw new Error(message);
-    } else if (status === 500) {
-      throw new Error(message);
-    } else if (status === 401 || status === 403) {
-      throw new Error(message);
+      throw { status: 404, message: message, name: name };
+    } else if (status === 403 || status === 401) {
+      throw { status: 403, message: message, name: name };
     } else if (status === 429) {
-      throw new Error(message);
-    } else if (
-      status === 500 &&
-      message === '서버에 장애가 있어 잠시 후 시도해주세요'
-    ) {
-      throw new Error(message);
+      throw { status: 404, message: message, name: name };
     }
 
-    throw new Error('예상치 못한 장애입니다');
+    throw {
+      status: 500,
+      message: '서버에 장애가 있어 잠시 후 시도해주세요',
+      name: 'UnhandledError',
+    };
   }
 );
