@@ -14,7 +14,9 @@ export const useGetSpellJson = (options?: QueryOptions<RiotSpellData>) => {
   const spellData = riotSpellData?.data;
 
   if (!spellData) {
-    throw new Error('No Data Found');
+    const message = '찾을 수 있는 데이터가 없습니다';
+
+    throw { status: 404, message: message, name: '404Error' };
   }
 
   return {
@@ -30,7 +32,9 @@ export const useGetRuneJson = (options?: QueryOptions<RuneData>) => {
   );
 
   if (!runeData) {
-    throw new Error('No Data Found');
+    const message = '찾을 수 있는 데이터가 없습니다';
+
+    throw { status: 404, message: message, name: '404Error' };
   }
 
   return {
@@ -48,7 +52,9 @@ export const useGetChampJson = (options?: QueryOptions<RiotChampInfo>) => {
   const champData = riotChampData?.data;
 
   if (!champData) {
-    throw new Error('No Data Found');
+    const message = '찾을 수 있는 데이터가 없습니다';
+
+    throw { status: 404, message: message, name: '404Error' };
   }
 
   return {

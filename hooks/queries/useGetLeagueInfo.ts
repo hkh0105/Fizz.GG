@@ -18,8 +18,10 @@ export const useGetLeagueInfo = (
 
   const leagueInfos = data?.items;
 
-  if (!leagueInfos) {
-    throw new Error('No Data Found');
+  if (!leagueInfos?.length) {
+    const message = '찾을 수 있는 데이터가 없습니다';
+
+    throw { status: 404, message: message, name: '404Error' };
   }
 
   return { leagueInfos };
