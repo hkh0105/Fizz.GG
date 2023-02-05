@@ -5,7 +5,7 @@ import MatchCard from './MatchCard';
 import useIntersectionObserver from 'hooks/useInterSectionObserver';
 import ErrorBoundary from 'pages/ErrorBoundary';
 import { recentInfo } from 'store';
-import { useGetMatchIds, useGetSummoner } from 'hooks/queries';
+import { useGetMatchIds } from 'hooks/queries';
 import {
   MatchCardProps,
   MatchSection,
@@ -20,6 +20,13 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
   const [recentMatches, setRecentMatches] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
+  const onSuccess = (response: Response<MatchIds>) => {
+    const items = response.items;
+    setCache((prev) => prev.concat(items));
+  };
+
+  const { refetchMatches } = useGetMatchIds(nickname, count, { onSuccess });
+
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
   ]) => {
@@ -32,14 +39,6 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
   };
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
-  const { puuid } = useGetSummoner(nickname);
-
-  const onSuccess = (response: Response<MatchIds>) => {
-    const items = response.items;
-    setCache((prev) => prev.concat(items));
-  };
-
-  const { refetchMatches } = useGetMatchIds(puuid, count, { onSuccess });
 
   const useEffectOnce = (effect: React.EffectCallback) => {
     useEffect(effect, []);

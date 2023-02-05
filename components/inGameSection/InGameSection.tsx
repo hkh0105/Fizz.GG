@@ -3,7 +3,7 @@ import { FC, Suspense } from 'react';
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import InGameTeamColumn from './InGameTeamColumn';
-import { useGetInGame, useGetSummoner } from 'hooks/queries';
+import { useGetInGame } from 'hooks/queries';
 import {
   BoxProps,
   IngameSectionProps,
@@ -14,8 +14,7 @@ import {
 import ErrorBoundary from 'pages/ErrorBoundary';
 
 const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
-  const { id } = useGetSummoner(nickname);
-  const { summonerTeam, enemyTeam, queueType } = useGetInGame(id);
+  const { summonerTeam, enemyTeam, queueType } = useGetInGame(nickname);
 
   const queueTypeMapper: QueueTypeMapper = {
     0: '커스텀 게임',

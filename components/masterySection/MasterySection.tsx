@@ -4,7 +4,7 @@ import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import MasteryRow from './MasteryRow';
 import MasteryHeader from './MasteryHeader';
-import { useGetSummoner, useGetMastery } from 'hooks/queries';
+import { useGetMastery } from 'hooks/queries';
 import {
   BoxProps,
   IngameSectionProps,
@@ -14,8 +14,7 @@ import {
 import ErrorBoundary from 'pages/ErrorBoundary';
 
 const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
-  const { id } = useGetSummoner(nickname);
-  const { masteryInfo } = useGetMastery(id);
+  const { masteryInfo } = useGetMastery(nickname);
 
   const GameModeProps: TypographyProps = {
     type: 'title',

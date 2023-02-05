@@ -2,16 +2,18 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
+import { useGetSummoner } from './useGetSummoner';
 import { Response, QueryOptions, InGameInfo, InGameUser } from 'types';
 
 export const useGetInGame = (
-  id: string,
+  nickname: string,
   options?: QueryOptions<Response<InGameInfo>>
 ) => {
+  const { id } = useGetSummoner(nickname);
   const { data, refetch }: UseQueryResult<Response<InGameInfo>> = useQuery(
     [QUERY_KEYS.getInGameByPuuid, { id }],
     () => CLIENT_API.getInGameByPuuid(id),
-    options
+    { ...options, enabled: !!id }
   );
 
   const inGameInfo = data?.items;

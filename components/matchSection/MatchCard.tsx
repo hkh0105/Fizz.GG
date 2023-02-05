@@ -27,11 +27,10 @@ import {
   SpellInfos,
   BoxProps,
   RecentMatchUserInfo,
-  MatchInfoByUser,
 } from 'types';
 
 const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
-  const [isShowDetail, setShowDetail] = useState(false); // isShown
+  const [isShownDetail, setShownDetail] = useState(false);
   const [recentMatches, setRecentMatches] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
@@ -166,14 +165,14 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     height: 'h-32',
     width: 'w-full',
     color: isWin ? 'blue' : 'red',
-    marginClass: isShowDetail ? '' : 'mb-2',
+    marginClass: isShownDetail ? '' : 'mb-2',
   };
 
   const ShowDetailButtonProps = {
     className: isWin
       ? 'bg-blue-200 text-blue-500 hover:bg-blue-500 hover:text-blue-700'
       : 'bg-red-200 text-red-500 hover:bg-red-500 hover:text-red-700',
-    onClick: () => setShowDetail(!isShowDetail),
+    onClick: () => setShownDetail(!isShownDetail),
   };
 
   const DetailSectionProps = {
@@ -198,7 +197,7 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
           <button {...ShowDetailButtonProps}>&darr;</button>
         </div>
       </Box>
-      {isShowDetail && <DetailSection {...DetailSectionProps} />}
+      {isShownDetail && <DetailSection {...DetailSectionProps} />}
     </>
   );
 };
