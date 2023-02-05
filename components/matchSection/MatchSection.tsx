@@ -16,7 +16,7 @@ import {
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
   const [count, setCount] = useState(0);
-  const [cache, setCache] = useState<string[]>([]); //맞춤법  ㅠ
+  const [cache, setCache] = useState<string[]>([]);
   const [recentMatches, setRecentMatches] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
@@ -49,23 +49,9 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
     setRecentMatches([]);
   });
 
-  // const useUpdateEffect = (effect: React.EffectCallback, deps: any[]) => {
-  //   const [isRender, setIsRender] = useState(false);
-
-  //   useEffect(() => {
-  //     if (isRender) {
-  //       effect();
-  //     } else {
-  //       setIsRender(true);
-  //     }
-  //   }, deps);
-  // };
-
-  // const useIsoMorphicEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
-
   return (
     <>
-      {cache.map((matchId: string, index) => {
+      {cache.map((matchId: string) => {
         const MatchCardProps: MatchCardProps = {
           matchId,
           nickname,
