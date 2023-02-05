@@ -12,9 +12,11 @@ import {
   RankContentsProps,
   RankTitleMapper,
   TypographyProps,
+  BoxProps,
 } from 'types';
+import Box from 'userInterface/box/Box';
 
-const RankContents: FC<RankContentsProps> = ({
+const RankCard: FC<RankContentsProps> = ({
   wins,
   losses,
   queueType,
@@ -32,6 +34,11 @@ const RankContents: FC<RankContentsProps> = ({
   const rankTitleMapper: RankTitleMapper = {
     RANKED_SOLO_5x5: '솔로랭크',
     RANKED_FLEX_SR: '자유랭크',
+  };
+
+  const BoxProps: BoxProps = {
+    size: 'custom',
+    width: 'w-[300px] max-sm:hidden',
   };
 
   const LpProps: TypographyProps = {
@@ -60,17 +67,19 @@ const RankContents: FC<RankContentsProps> = ({
   };
 
   return (
-    <div className='flex-col mx-3 my-3 divide-y'>
-      <Typography {...LpProps} />
-      <div className='flex items-center'>
-        <Image {...ImageProps} />
-        <div className='flex items-center w-[240px] h-[100px] my-5'>
-          <PieChart {...PieChartProps} />
-          <p className='translate-x-[-127px]'>{winRate}</p>
+    <Box {...BoxProps}>
+      <div className='flex-col mx-3 my-3 divide-y'>
+        <Typography {...LpProps} />
+        <div className='flex items-center'>
+          <Image {...ImageProps} />
+          <div className='flex items-center w-[240px] h-[100px] my-5'>
+            <PieChart {...PieChartProps} />
+            <p className='translate-x-[-127px]'>{winRate}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 
-export default RankContents;
+export default RankCard;
