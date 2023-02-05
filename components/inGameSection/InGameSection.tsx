@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
@@ -11,6 +11,7 @@ import {
   QueueTypeMapper,
   TypographyProps,
 } from 'types';
+import ErrorBoundary from 'pages/ErrorBoundary';
 
 const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
   const { id } = useGetSummoner(nickname);
@@ -55,16 +56,20 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
   };
 
   return (
-    <section className='flex flex-col items-center my-3 gap-y-3'>
-      <Typography {...GameModeProps} />
-      <Box {...BoxProps}>
-        <div className='flex items-center justify-evenly'>
-          <InGameTeamColumn {...SummonerColumnProps} />
-          <Typography {...VersusProps} />
-          <InGameTeamColumn {...EnemyColumnProps} />
-        </div>
-      </Box>
-    </section>
+    <Suspense fallback={<div>LOADING</div>}>
+      <ErrorBoundary>
+        <section className='flex flex-col items-center my-3 gap-y-3'>
+          <Typography {...GameModeProps} />
+          <Box {...BoxProps}>
+            <div className='flex items-center justify-evenly'>
+              <InGameTeamColumn {...SummonerColumnProps} />
+              <Typography {...VersusProps} />
+              <InGameTeamColumn {...EnemyColumnProps} />
+            </div>
+          </Box>
+        </section>
+      </ErrorBoundary>
+    </Suspense>
   );
 };
 export default IngameSection;

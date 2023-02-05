@@ -3,6 +3,7 @@ import { FC, Suspense } from 'react';
 
 import IngameSection from 'components/inGameSection/InGameSection';
 import Profile from 'components/profile/Profile';
+import ErrorBoundary from 'pages/ErrorBoundary';
 
 const Ingame: FC = () => {
   const router = useRouter();
@@ -10,8 +11,10 @@ const Ingame: FC = () => {
 
   return (
     <Suspense fallback={<div>LOADING</div>}>
-      <Profile nickname={nickname} />
-      <IngameSection nickname={nickname} />
+      <ErrorBoundary>
+        <Profile nickname={nickname} />
+        <IngameSection nickname={nickname} />
+      </ErrorBoundary>
     </Suspense>
   );
 };

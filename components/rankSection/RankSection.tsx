@@ -1,14 +1,14 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import Box from 'userInterface/box/Box';
 import RankContents from './RankContents';
-import { useGetLeagueInfo, useGetSummoner } from 'hooks/queries';
+import { useGetLeagueInfo } from 'hooks/queries';
 import { BoxProps, LeagueInfo, RankProps } from 'types';
+import ErrorBoundary from 'pages/ErrorBoundary';
 
 const RankSection: FC<RankProps> = ({ nickname }) => {
-  const { id } = useGetSummoner(nickname);
-  const { leagueInfoArr } = useGetLeagueInfo(id);
+  const { leagueInfos } = useGetLeagueInfo(nickname);
 
   const BoxProps: BoxProps = {
     size: 'custom',
@@ -17,7 +17,7 @@ const RankSection: FC<RankProps> = ({ nickname }) => {
 
   return (
     <>
-      {leagueInfoArr.map((leagueInfo: LeagueInfo) => {
+      {leagueInfos.map((leagueInfo: LeagueInfo) => {
         const { wins, losses, queueType, tier, rank, leaguePoints } =
           leagueInfo;
         const RankContentsProps = {
@@ -30,9 +30,13 @@ const RankSection: FC<RankProps> = ({ nickname }) => {
         };
 
         return (
-          <Box {...BoxProps} key={uuidv4()}>
-            <RankContents {...RankContentsProps} />
-          </Box>
+          <Suspense fallback={<div>LOADING</div>} key={uuidv4()}>
+            <ErrorBoundary>
+              <Box {...BoxProps}>
+                <RankContents {...RankContentsProps} />
+              </Box>
+            </ErrorBoundary>
+          </Suspense>
         );
       })}
     </>

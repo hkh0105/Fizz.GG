@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import PieChart from 'components/pieChart/PieChart';
+import ErrorBoundary from 'pages/ErrorBoundary';
 import ChampStatRow from './ChampStatRow';
 import { recentChampInfo, recentWinStats } from 'store';
 import { BoxProps, ChartData, PieChartProps, TypographyProps } from 'types';
@@ -38,20 +39,24 @@ const RecentStatSection: FC = () => {
   };
 
   return (
-    <Box {...BoxProps}>
-      <div className='items-center mx-2 my-3 divide-y'>
-        <Typography {...RecentMatchTextProps} />
-        <div className='w-[300px] h-[150px] mb-10'>
-          <PieChart {...PieChartProps} />
-          <div className='translate-x-[109px] translate-y-[-68px]'>
-            <Typography {...WinRateProps} />
+    <Suspense fallback={<div>LOADING</div>}>
+      <ErrorBoundary>
+        <Box {...BoxProps}>
+          <div className='items-center mx-2 my-3 divide-y'>
+            <Typography {...RecentMatchTextProps} />
+            <div className='w-[300px] h-[150px] mb-10'>
+              <PieChart {...PieChartProps} />
+              <div className='translate-x-[109px] translate-y-[-68px]'>
+                <Typography {...WinRateProps} />
+              </div>
+            </div>
+            {championArr.map((champInfo) => (
+              <ChampStatRow champInfo={champInfo} key={champInfo[0]} />
+            ))}
           </div>
-        </div>
-        {championArr.map((champInfo) => (
-          <ChampStatRow champInfo={champInfo} key={champInfo[0]} />
-        ))}
-      </div>
-    </Box>
+        </Box>
+      </ErrorBoundary>
+    </Suspense>
   );
 };
 
