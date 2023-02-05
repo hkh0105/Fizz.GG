@@ -15,8 +15,7 @@ import ErrorBoundary from 'pages/ErrorBoundary';
 
 const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
   const { id } = useGetSummoner(nickname);
-
-  const { summonerTeam, enemyTeam, queueType } = useGetInGame(nickname);
+  const { summonerTeam, enemyTeam, queueType } = useGetInGame(id);
 
   const queueTypeMapper: QueueTypeMapper = {
     0: '커스텀 게임',
@@ -42,11 +41,11 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
   };
 
   const SummonerColumnProps: InGameTeamColumnProps = {
-    team: summonerTeam,
+    users: summonerTeam,
   };
 
   const EnemyColumnProps: InGameTeamColumnProps = {
-    team: enemyTeam,
+    users: enemyTeam,
   };
 
   const VersusProps: TypographyProps = {

@@ -2,49 +2,26 @@ import { FC } from 'react';
 
 import InGameUserRow from './InGameUserRow';
 import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
-import {
-  InGameTeamColumnProps,
-  InGameUser,
-  InGameUserRowProps,
-  RuneInfo,
-  SpellInfoArr,
-} from 'types';
+import { getInGameRunes, getInGameSpells } from 'utils';
+import { InGameTeamColumnProps, InGameUser, InGameUserRowProps } from 'types';
 
-const InGameTeamColumn: FC<InGameTeamColumnProps> = ({ team }) => {
+const InGameTeamColumn: FC<InGameTeamColumnProps> = ({ users }) => {
   const { spellData } = useGetSpellJson();
   const { runeData } = useGetRuneJson();
 
-  //Spell
-  const spellEntries = Object?.entries(spellData);
-
   return (
     <div className='flex-col'>
-      {team.map((user: InGameUser) => {
+      {users.map((user: InGameUser) => {
         // Spell
-        const spellD = spellEntries.find(
-          (spell) => Number(spell[1]?.key) === user.spell1Id
-        );
-        const spellF = spellEntries.find(
-          (spell) => Number(spell[1]?.key) === user.spell2Id
-        );
-        const spell = [spellD, spellF] as SpellInfoArr;
+        const spells = getInGameSpells(spellData, user.spell1Id, user.spell2Id);
         //Rune
-        const mainRuneTheme = runeData?.find(
-          (rune) => rune.id === user.perks.perkStyle
-        );
-        const mainRune = mainRuneTheme?.slots[0].runes.find(
-          (rune) => rune.id === user.perks.perkIds?.[0]
-        );
-        const subRuneTheme = runeData?.find(
-          (rune) => rune.id === user.perks.perkSubStyle
-        );
-        const rune = [mainRune, subRuneTheme] as RuneInfo[];
+        const runes = getInGameRunes(runeData, user.perks);
 
         const InGameUserRowProps: InGameUserRowProps = {
           nickname: user.summonerName,
-          rune,
-          spell,
           profileIconId: user.profileIconId,
+          runes,
+          spells,
         };
 
         return <InGameUserRow {...InGameUserRowProps} key={user.summonerId} />;

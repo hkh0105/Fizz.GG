@@ -14,8 +14,8 @@ import {
 
 const InGameUserRow: FC<InGameUserRowProps> = ({
   nickname,
-  rune,
-  spell,
+  runes,
+  spells,
   profileIconId,
 }) => {
   const NicknameProps: TypographyProps = {
@@ -27,14 +27,14 @@ const InGameUserRow: FC<InGameUserRowProps> = ({
 
   const SpellIconProps: SpellIconProps = {
     width: 25,
-    spell: spell,
+    spells: spells,
     marginClass: 'pt-1',
   };
 
   const RuneIconProps: RuneIconProps = {
     width: 25,
     marginClass: 'pt-1',
-    rune,
+    runes,
   };
 
   const ProfileIconProps: ProfileIconProps = {
