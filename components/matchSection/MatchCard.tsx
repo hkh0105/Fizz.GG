@@ -5,18 +5,29 @@ import Box from 'userInterface/box/Box';
 import MatchOverView from './MatchOverView';
 import MatchSummonerOverView from './MatchSummonerOverView';
 import DetailSection from './DetailSection';
-import { getDateDiff } from 'utils';
+import {
+  getDateDiff,
+  getEnemyTeam,
+  getKda,
+  getKillInvolvedRate,
+  getMainRune,
+  getMaxDamage,
+  getMaxTakenDamage,
+  getSpells,
+  getSubRune,
+  getSummonerTeam,
+} from 'utils';
 import { recentInfo } from 'store';
 import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
 import {
   MatchCardProps,
-  MatchInfoByUser,
   MatchOverViewProps,
   QueueTypeMapper,
   RuneInfo,
   SpellInfos,
   BoxProps,
   RecentMatchUserInfo,
+  MatchInfoByUser,
 } from 'types';
 
 const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
@@ -66,23 +77,12 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   const gameTime = String(Math.floor(gameDuration / 60)) + '분';
 
   //Spell
-  const spellD = Object?.entries(spellData).find(
-    (spell) => Number(spell[1]?.key) === summoner1Id
-  );
-  const spellF = Object?.entries(spellData).find(
-    (spell) => Number(spell[1]?.key) === summoner2Id
-  );
+  const spellD = getSpells(spellData, summoner1Id);
+  const spellF = getSpells(spellData, summoner2Id);
 
   //Rune
-  const mainRuneTheme = runeData.find(
-    (rune) => rune.id === perks.styles[0].style
-  );
-  const mainRune = mainRuneTheme?.slots[0].runes.find(
-    (rune) => rune.id === perks.styles[0].selections[0].perk
-  );
-  const subRuneTheme = runeData.find(
-    (rune) => rune.id === perks.styles[1].style
-  );
+  const mainRune = getMainRune(runeData, perks);
+  const subRune = getSubRune(runeData, perks);
 
   //Items
   const items = [item0, item1, item2, item3, item4, item5, item6];
@@ -97,22 +97,24 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   };
 
   //킬관여
-  const killInvolvedRate =
-    ((kills + assists) / summonerTeamInfo.objectives.champion.kills) * 100;
+  const totalKills = summonerTeamInfo.objectives.champion.kills;
+  const killInvolvedRate = getKillInvolvedRate(kills, assists, totalKills);
+  // ((kills + assists) / summonerTeamInfo.objectives.champion.kills) * 100;
 
   //KDA
-  const kda = (kills + assists) / deaths;
+  const kda = getKda(kills, assists, deaths);
 
   //칭호
   const designation = { tripleKills, doubleKills, quadraKills, pentaKills };
 
   // 팀
-  const summonerTeam = participants.filter(
-    (user: MatchInfoByUser) => user.teamId === searchedUser.teamId
-  );
-  const enemyTeam = participants.filter(
-    (user: MatchInfoByUser) => user.teamId !== searchedUser.teamId
-  );
+  const summonerTeamId = searchedUser.teamId;
+  const summonerTeam = getSummonerTeam(participants, summonerTeamId);
+  const enemyTeam = getEnemyTeam(participants, summonerTeamId);
+
+  //Total Damage
+  const maxDamage = getMaxDamage(participants);
+  const maxTakenDamage = getMaxTakenDamage(participants);
 
   const setMatchInfo = () => {
     const isPrevData = recentMatches.some(
@@ -144,8 +146,8 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     champion: championName,
     championLevel: champLevel,
     summonerItems: items,
-    spell: [spellD, spellF] as SpellInfos,
-    rune: [mainRune, subRuneTheme] as RuneInfo[],
+    spells: [spellD, spellF] as SpellInfos,
+    runes: [mainRune, subRune] as RuneInfo[],
     summonerTeam: summonerTeam,
     enemyTeam: enemyTeam,
     kills,
@@ -173,6 +175,13 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     onClick: () => setShowDetail(!isShowDetail),
   };
 
+  const DetailSectionProps = {
+    summonerTeam,
+    enemyTeam,
+    maxDamage,
+    maxTakenDamage,
+  };
+
   useEffect(() => {
     if (gameInfo) {
       setMatchInfo();
@@ -188,9 +197,7 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
           <button {...ShowDetailButtonProps}>&darr;</button>
         </div>
       </Box>
-      {isShowDetail && (
-        <DetailSection summonerTeam={summonerTeam} enemyTeam={enemyTeam} />
-      )}
+      {isShowDetail && <DetailSection {...DetailSectionProps} />}
     </>
   );
 };

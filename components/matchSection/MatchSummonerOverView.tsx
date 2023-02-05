@@ -22,8 +22,8 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
   champion,
   championLevel,
   summonerItems,
-  spell,
-  rune,
+  spells,
+  runes,
   kills,
   deaths,
   assists,
@@ -44,13 +44,13 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
   const SpellIconProps: SpellIconProps = {
     width: 25,
     marginClass: 'ml-2',
-    spell,
+    spells,
   };
 
   const RuneIconProps: RuneIconProps = {
     width: 25,
     marginClass: 'ml-1',
-    rune,
+    runes,
   };
 
   const KdaProps: KdaProps = {

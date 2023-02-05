@@ -4,12 +4,12 @@ import { FC } from 'react';
 import { IMAGES } from 'constant';
 import { SpellIconProps } from 'types';
 
-const SpellIcon: FC<SpellIconProps> = ({ width, spell, marginClass }) => {
+const SpellIcon: FC<SpellIconProps> = ({ width, spells, marginClass }) => {
   const wrapperClassName = 'flex-col gap-y-1' + ' ' + marginClass;
 
   return (
     <div className={wrapperClassName}>
-      {spell?.map((spellName) => {
+      {spells?.map((spellName) => {
         const spellSource = IMAGES.SPELL.replace('{spell}', spellName[0]);
         const imageProps = {
           className: 'rounded-xl',
