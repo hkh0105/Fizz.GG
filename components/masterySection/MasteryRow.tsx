@@ -1,10 +1,10 @@
-import moment from 'moment';
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import { useGetChampJson } from 'hooks/queries';
 import { ChampionIconProps, MasteryRowProps, TypographyProps } from 'types';
+import { convertLastPlayTime, getChampName } from 'utils';
 
 const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
   const { champData } = useGetChampJson();
@@ -12,19 +12,10 @@ const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
     masteryInfo;
 
   // LastPlayTime
-  const convertedLastPlayTime =
-    String(moment(lastPlayTime).diff(moment(), 'days')).replace('-', '') +
-    '일전';
+  const convertedLastPlayTime = convertLastPlayTime(lastPlayTime);
 
   //Champ Name
-  let champName = '';
-  const champDetail = Object.entries(champData).find(
-    (champ) => champ[1]?.key === String(championId)
-  );
-
-  if (champDetail) {
-    champName = champDetail[0];
-  }
+  const champName = getChampName(champData, championId);
 
   const ChampNameProps: TypographyProps = {
     type: 'default',
@@ -46,6 +37,7 @@ const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
     color: 'gray',
     text: String(championPoints),
   };
+
   const PlayTimeProps: TypographyProps = {
     type: 'default',
     size: 'small',
