@@ -50,9 +50,13 @@ const RecentStatSection: FC = () => {
                 <Typography {...WinRateProps} />
               </div>
             </div>
-            {champions.map((champInfo) => (
-              <ChampStatRow champInfo={champInfo} key={champInfo[0]} />
-            ))}
+            {champions.map((champInfo) => {
+              const ChampStatRowProps = {
+                champInfo,
+              };
+
+              return <ChampStatRow {...ChampStatRowProps} key={champInfo[0]} />;
+            })}
           </div>
         </Box>
       </ErrorBoundary>

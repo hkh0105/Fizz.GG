@@ -223,6 +223,22 @@ export type GameInfo = {
   metadata: Metadata;
 };
 
+export type Perks = {
+  styles: [
+    {
+      selections: [
+        {
+          perk: number;
+        }
+      ];
+      style: number;
+    },
+    {
+      style: number;
+    }
+  ];
+};
+
 export type Game = {
   Creation: number;
   Duration: number;
@@ -389,8 +405,8 @@ export interface MatchSummonerOverViewProps {
   champion: string;
   championLevel: number;
   summonerItems: number[];
-  spell: SpellInfos;
-  rune: RuneInfo[];
+  spells: SpellInfos;
+  runes: RuneInfo[];
   kills: number;
   deaths: number;
   assists: number;
@@ -417,11 +433,11 @@ export interface IconProps {
 }
 
 export interface SpellIconProps extends IconProps {
-  spell: SpellInfos;
+  spells: SpellInfos;
 }
 
 export interface RuneIconProps extends IconProps {
-  rune: RuneInfo[];
+  runes: RuneInfo[];
 }
 
 export interface KdaProps {
@@ -447,8 +463,8 @@ export interface TeamChampionProps {
 
 export interface UserStatRowProps {
   summoner: MatchInfoByUser;
-  maxTotalDamage: number;
-  maxTotalTakenDamage: number;
+  maxDamage: number;
+  maxTakenDamage: number;
 }
 
 export interface DetailSectionHeaderProps {
@@ -486,6 +502,8 @@ export interface SingleBarChartProps {
 export interface DetailSectionProps {
   summonerTeam: MatchInfoByUser[];
   enemyTeam: MatchInfoByUser[];
+  maxDamage: number;
+  maxTakenDamage: number;
 }
 
 export interface ChampStatRowProps {
@@ -555,13 +573,13 @@ export type InGameUser = {
 };
 
 export interface InGameTeamColumnProps {
-  team: InGameUser[];
+  users: InGameUser[];
 }
 
 export interface InGameUserRowProps {
   nickname: string;
-  rune: RuneInfo[];
-  spell: SpellInfos;
+  runes: RuneInfo[];
+  spells: SpellInfos;
   profileIconId: number;
 }
 
@@ -608,4 +626,10 @@ export type CustomError = {
   message: string;
   status: number;
   name: string;
+};
+
+export type InGamePerks = {
+  perkIds: number[];
+  perkStyle: number;
+  perkSubStyle: number;
 };

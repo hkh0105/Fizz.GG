@@ -9,6 +9,7 @@ import Kda from 'components/kda/Kda';
 import Typography from 'userInterface/typography/Typography';
 import SingleBarChart from 'components/singleBarChart/SingleBarChart';
 import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
+import { getKda, getMainRune, getSpells, getSubRune } from 'utils';
 import {
   SingleBarChartProps,
   ChampionIconProps,
@@ -24,8 +25,8 @@ import {
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
-  maxTotalDamage,
-  maxTotalTakenDamage,
+  maxDamage,
+  maxTakenDamage,
 }) => {
   const { spellData } = useGetSpellJson();
   const { runeData } = useGetRuneJson();
@@ -55,28 +56,18 @@ const UserStatRow: FC<UserStatRowProps> = ({
   } = summoner;
 
   //Spell
-  const spellD = Object?.entries(spellData).find(
-    (spell) => Number(spell[1]?.key) === summoner1Id
-  );
-  const spellF = Object?.entries(spellData).find(
-    (spell) => Number(spell[1]?.key) === summoner2Id
-  );
+  const spellD = getSpells(spellData, summoner1Id);
+  const spellF = getSpells(spellData, summoner2Id);
   const spell = [spellD, spellF] as SpellInfos;
 
   //Rune
-  const mainRuneTheme = runeData.find(
-    (rune) => rune.id === perks.styles[0].style
-  );
-  const mainRune = mainRuneTheme?.slots[0].runes.find(
-    (rune) => rune.id === perks.styles[0].selections[0].perk
-  );
-  const subRuneTheme = runeData.find(
-    (rune) => rune.id === perks.styles[1].style
-  );
-  const rune = [mainRune, subRuneTheme] as RuneInfo[];
+
+  const mainRune = getMainRune(runeData, perks);
+  const subRune = getSubRune(runeData, perks);
+  const runes = [mainRune, subRune] as RuneInfo[];
 
   //KDA
-  const kda = (kills + assists) / deaths;
+  const kda = getKda(kills, assists, deaths);
 
   const ChampionIconProps: ChampionIconProps = {
     championName: championName,
@@ -86,14 +77,14 @@ const UserStatRow: FC<UserStatRowProps> = ({
 
   const SpellIconProps: SpellIconProps = {
     width: 15,
-    spell: spell,
+    spells: spell,
     marginClass: 'pt-1',
   };
 
   const RuneIconProps: RuneIconProps = {
     width: 15,
     marginClass: 'pt-1',
-    rune,
+    runes,
   };
 
   const KdaProps: KdaProps = {
@@ -132,8 +123,8 @@ const UserStatRow: FC<UserStatRowProps> = ({
     height: 15,
     title: String(totalDamageDealtToChampions),
     startValue: totalDamageDealtToChampions,
-    totalValue: maxTotalDamage,
-    endValue: maxTotalDamage - totalDamageDealtToChampions,
+    totalValue: maxDamage,
+    endValue: maxDamage - totalDamageDealtToChampions,
     startColor: 'red',
     endColor: 'white',
     isValueShow: false,
@@ -146,8 +137,8 @@ const UserStatRow: FC<UserStatRowProps> = ({
     height: 15,
     title: String(totalDamageTaken),
     startValue: totalDamageTaken,
-    totalValue: maxTotalTakenDamage,
-    endValue: maxTotalTakenDamage - totalDamageTaken,
+    totalValue: maxTakenDamage,
+    endValue: maxTakenDamage - totalDamageTaken,
     startColor: 'blue',
     endColor: 'white',
     isValueShow: false,
