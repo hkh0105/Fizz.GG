@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import UserStatRow from 'components/userStatRow/UserStatRow';
+import UserStatRow from 'components/matchSection/UserStatRow';
 import Box from 'userInterface/box/Box';
 import DetailSectionHeader from './DetailSectionheader';
 import {

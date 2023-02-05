@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 import Box from 'userInterface/box/Box';
 import MatchOverView from './MatchOverView';
 import MatchSummonerOverView from './MatchSummonerOverView';
-import DetailSection from './DetailSection';
+import DetailSection from '../detailSection/DetailSection';
 import {
   getDateDiff,
   getEnemyTeam,
@@ -86,6 +86,7 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
 
   //Items
   const items = [item0, item1, item2, item3, item4, item5, item6];
+
   const queueTypeMapper: QueueTypeMapper = {
     0: '커스텀 게임',
     400: '노말',
