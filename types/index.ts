@@ -74,7 +74,7 @@ export type Response<T> = {
   items: T;
 };
 
-export type LeagueInfoArr = LeagueInfo[];
+export type LeagueInfos = LeagueInfo[];
 
 export type LeagueInfo = {
   leagueId: string;
@@ -210,7 +210,7 @@ export interface MatchSection {
   nickname: string;
 }
 
-export type MatchIdArr = string[];
+export type MatchIds = string[];
 
 export type BoxColorMapper = {
   default: 'bg-white';
@@ -389,7 +389,7 @@ export interface MatchSummonerOverViewProps {
   champion: string;
   championLevel: number;
   summonerItems: number[];
-  spell: SpellInfoArr;
+  spell: SpellInfos;
   rune: RuneInfo[];
   kills: number;
   deaths: number;
@@ -409,10 +409,7 @@ export type RuneInfo = {
   name: string;
 };
 
-export type SpellInfoArr = [
-  [string, { key: number }],
-  [string, { key: number }]
-];
+export type SpellInfos = [[string, { key: number }], [string, { key: number }]];
 
 export interface IconProps {
   width: number;
@@ -420,7 +417,7 @@ export interface IconProps {
 }
 
 export interface SpellIconProps extends IconProps {
-  spell: SpellInfoArr;
+  spell: SpellInfos;
 }
 
 export interface RuneIconProps extends IconProps {
@@ -564,7 +561,7 @@ export interface InGameTeamColumnProps {
 export interface InGameUserRowProps {
   nickname: string;
   rune: RuneInfo[];
-  spell: SpellInfoArr;
+  spell: SpellInfos;
   profileIconId: number;
 }
 

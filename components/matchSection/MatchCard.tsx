@@ -14,14 +14,14 @@ import {
   MatchOverViewProps,
   QueueTypeMapper,
   RuneInfo,
-  SpellInfoArr,
+  SpellInfos,
   BoxProps,
   RecentMatchUserInfo,
 } from 'types';
 
 const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   const [isShowDetail, setShowDetail] = useState(false); // isShown
-  const [recentMatchArr, setRecentMatchArr] =
+  const [recentMatches, setRecentMatches] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
   const { spellData } = useGetSpellJson();
@@ -115,7 +115,7 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   );
 
   const setMatchInfo = () => {
-    const isPrevData = recentMatchArr.some(
+    const isPrevData = recentMatches.some(
       (info: RecentMatchUserInfo) => info.id === matchId
     );
 
@@ -130,7 +130,7 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
       win: isWin ? true : false,
     };
 
-    setRecentMatchArr((prev) => [...prev, recentMatchUserInfo]);
+    setRecentMatches((prev) => [...prev, recentMatchUserInfo]);
   };
 
   const MatchOverViewProps: MatchOverViewProps = {
@@ -144,7 +144,7 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     champion: championName,
     championLevel: champLevel,
     summonerItems: items,
-    spell: [spellD, spellF] as SpellInfoArr,
+    spell: [spellD, spellF] as SpellInfos,
     rune: [mainRune, subRuneTheme] as RuneInfo[],
     summonerTeam: summonerTeam,
     enemyTeam: enemyTeam,

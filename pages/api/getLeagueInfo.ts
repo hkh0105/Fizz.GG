@@ -2,21 +2,19 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { AxiosResponse } from 'axios';
 
 import { API } from 'api';
-import { CustomError, LeagueInfoArr, Response } from 'types';
+import { CustomError, LeagueInfos, Response } from 'types';
 
 async function getLeagueInfoById(id: string) {
-  const response: AxiosResponse<LeagueInfoArr> = await API.getLeagueInfoById(
-    id
-  );
+  const response: AxiosResponse<LeagueInfos> = await API.getLeagueInfoById(id);
 
-  const leagueInfo: LeagueInfoArr = response.data;
+  const leagueInfo: LeagueInfos = response.data;
 
   return leagueInfo;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response<LeagueInfoArr> | CustomError>
+  res: NextApiResponse<Response<LeagueInfos> | CustomError>
 ) {
   const { id } = req.query;
 

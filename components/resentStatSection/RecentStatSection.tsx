@@ -10,7 +10,7 @@ import { recentChampInfo, recentWinStats } from 'store';
 import { BoxProps, ChartData, PieChartProps, TypographyProps } from 'types';
 
 const RecentStatSection: FC = () => {
-  const championArr = useRecoilValue(recentChampInfo);
+  const champions = useRecoilValue(recentChampInfo);
   const winStats = useRecoilValue(recentWinStats);
 
   const chartData: ChartData<number>[] = [
@@ -50,7 +50,7 @@ const RecentStatSection: FC = () => {
                 <Typography {...WinRateProps} />
               </div>
             </div>
-            {championArr.map((champInfo) => (
+            {champions.map((champInfo) => (
               <ChampStatRow champInfo={champInfo} key={champInfo[0]} />
             ))}
           </div>

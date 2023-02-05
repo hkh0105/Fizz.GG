@@ -3,11 +3,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { API } from 'api';
 import { CustomError, Response } from 'types';
 
-async function getMatchIdArr(puuid: string, count: string) {
-  const response = await API.getMatchArrByPUUID(puuid, count);
-  const matchIdArr: string[] = response.data;
+async function getMatchIds(puuid: string, count: string) {
+  const response = await API.getMatchesByPUUID(puuid, count);
+  const matchIds: string[] = response.data;
 
-  return matchIdArr;
+  return matchIds;
 }
 
 export default async function handler(
@@ -17,8 +17,8 @@ export default async function handler(
   const { puuid, count } = req.query;
 
   try {
-    const matchIdArr = await getMatchIdArr(String(puuid), String(count));
-    res.status(200).json({ items: matchIdArr, message: 'MatchArr' });
+    const matchIds = await getMatchIds(String(puuid), String(count));
+    res.status(200).json({ items: matchIds, message: 'Matches' });
   } catch (error: any) {
     let { message, status }: CustomError = error;
     if (message && status) {

@@ -1,7 +1,7 @@
 export const QUERY_KEYS = {
   getSummonerByNickname: 'SummonerInfo',
   getLeagueInfoById: 'LeagueInfo',
-  getMatchIdArrByPuuid: 'MatchIdArr',
+  getMatchIdsByPuuid: 'MatchIds',
   getGameByMatchId: 'GameInfo',
   getSpell: 'RiotSummonerData',
   getRune: 'RiotRuneData',

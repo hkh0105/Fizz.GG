@@ -1,6 +1,6 @@
 export { useGetSummoner } from './useGetSummoner';
 export { useGetMastery } from './useGetMastery';
-export { useGetMatchIdArr } from './useGetMatchArr';
+export { useGetMatchIds } from './useGetMatches';
 export { useGetLeagueInfo } from './useGetLeagueInfo';
 export { useGetGameInfo } from './useGetGameInfo';
 export { useGetInGame } from './useGetInGame';

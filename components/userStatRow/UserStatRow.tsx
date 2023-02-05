@@ -14,7 +14,7 @@ import {
   ChampionIconProps,
   SpellIconProps,
   UserStatRowProps,
-  SpellInfoArr,
+  SpellInfos,
   RuneInfo,
   RuneIconProps,
   KdaProps,
@@ -61,7 +61,7 @@ const UserStatRow: FC<UserStatRowProps> = ({
   const spellF = Object?.entries(spellData).find(
     (spell) => Number(spell[1]?.key) === summoner2Id
   );
-  const spell = [spellD, spellF] as SpellInfoArr;
+  const spell = [spellD, spellF] as SpellInfos;
 
   //Rune
   const mainRuneTheme = runeData.find(

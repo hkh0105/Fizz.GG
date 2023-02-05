@@ -3,14 +3,14 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
 import { useGetSummoner } from './useGetSummoner';
-import { LeagueInfoArr, QueryOptions, Response } from 'types';
+import { LeagueInfos, QueryOptions, Response } from 'types';
 
 export const useGetLeagueInfo = (
   nickname: string,
-  options?: QueryOptions<Response<LeagueInfoArr>>
+  options?: QueryOptions<Response<LeagueInfos>>
 ) => {
   const { id } = useGetSummoner(nickname);
-  const { data }: UseQueryResult<Response<LeagueInfoArr>> = useQuery(
+  const { data }: UseQueryResult<Response<LeagueInfos>> = useQuery(
     [QUERY_KEYS.getLeagueInfoById, { id }],
     () => CLIENT_API.getLeagueInfoById(id),
     options
