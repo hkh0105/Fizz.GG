@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { AxiosResponse } from 'axios';
 
 import { API } from 'api';
-import { Error, LeagueInfoArr, MasteryInfo, Response } from 'types';
+import { CustomError, MasteryInfo, Response } from 'types';
 
 async function getMasteryById(id: string) {
   const response: AxiosResponse<MasteryInfo[]> = await API.getMasteryById(id);
@@ -13,20 +13,25 @@ async function getMasteryById(id: string) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response<MasteryInfo[]> | Error>
+  res: NextApiResponse<Response<MasteryInfo[]> | CustomError>
 ) {
   const { id } = req.query;
   try {
     const masteryInfo = await getMasteryById(String(id));
     res.status(200).json({ items: masteryInfo, message: 'MasteryInfo' });
-  } catch (error) {
-    const message = 'Unknown Error';
-    const status = 500;
+  } catch (error: any) {
+    let { message, status }: CustomError = error;
+    if (message && status) {
+      return res
+        .status(status)
+        .json({ message: message, name: 'Handle Error', status: status });
+    }
 
-    // if (error instanceof Error) {
-    //   message = error.message;
-    //   status = 500;
-    // }
-    res.status(500).json({ message: message, status: status });
+    message = 'Unhandled Error';
+    status = 500;
+
+    return res
+      .status(status)
+      .json({ message: message, name: 'Unhandled Error', status: 500 });
   }
 }

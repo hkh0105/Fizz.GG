@@ -22,11 +22,11 @@ const TeamChampion: FC<TeamChampionProps> = ({
           user.summonerName.length > 6
             ? user.summonerName.slice(0, 5) + '...'
             : user.summonerName;
-        const TypographyProps: TypographyProps = {
+        const SummonerNameProps: TypographyProps = {
           type: 'default',
           size: typoSize,
           color: 'gray',
-          string: userName,
+          text: userName,
         };
 
         return (
@@ -39,7 +39,7 @@ const TeamChampion: FC<TeamChampionProps> = ({
               }}
               className='hover:underline'
             >
-              <Typography {...TypographyProps} />
+              <Typography {...SummonerNameProps} />
             </Link>
           </div>
         );

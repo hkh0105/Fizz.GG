@@ -2,23 +2,27 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
-import { LeagueInfoArr, QueryOptions, Response } from 'types';
+import { useGetSummoner } from './useGetSummoner';
+import { LeagueInfos, QueryOptions, Response } from 'types';
 
 export const useGetLeagueInfo = (
-  id: string,
-  options?: QueryOptions<Response<LeagueInfoArr>>
+  nickname: string,
+  options?: QueryOptions<Response<LeagueInfos>>
 ) => {
-  const { data }: UseQueryResult<Response<LeagueInfoArr>> = useQuery(
+  const { id } = useGetSummoner(nickname);
+  const { data }: UseQueryResult<Response<LeagueInfos>> = useQuery(
     [QUERY_KEYS.getLeagueInfoById, { id }],
     () => CLIENT_API.getLeagueInfoById(id),
     options
   );
 
-  const leagueInfoArr = data?.items;
+  const leagueInfos = data?.items;
 
-  if (!leagueInfoArr) {
-    throw new Error('No Data Found');
+  if (!leagueInfos?.length) {
+    const message = '찾을 수 있는 데이터가 없습니다';
+
+    throw { status: 404, message: message, name: '404Error' };
   }
 
-  return { leagueInfoArr };
+  return { leagueInfos };
 };

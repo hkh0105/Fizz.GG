@@ -3,6 +3,7 @@ import { FC, Suspense } from 'react';
 
 import Profile from 'components/profile/Profile';
 import MasterySection from 'components/masterySection/MasterySection';
+import ErrorBoundary from 'pages/ErrorBoundary';
 
 const Summoner: FC = () => {
   const router = useRouter();
@@ -10,8 +11,10 @@ const Summoner: FC = () => {
 
   return (
     <Suspense fallback={<div>LOADING</div>}>
-      <Profile nickname={nickname} />
-      <MasterySection nickname={nickname} />
+      <ErrorBoundary>
+        <Profile nickname={nickname} />
+        <MasterySection nickname={nickname} />
+      </ErrorBoundary>
     </Suspense>
   );
 };

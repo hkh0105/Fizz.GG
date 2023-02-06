@@ -12,18 +12,15 @@ import {
   ProfileProps,
   TypographyProps,
 } from 'types';
-
+import { useQueryClient } from '@tanstack/react-query';
 const Profile: FC<ProfileProps> = ({ nickname }) => {
   const router = useRouter();
+  const isInGame = router.pathname === '/search/[nickname/ingame';
+  const isSummoner = router.pathname === '/search/[nickname]/summoner';
+  const queryClient = useQueryClient();
+  const { name, summonerLevel, profileIconId } = useGetSummoner(nickname);
 
-  const {
-    name,
-    summonerLevel,
-    profileIconId,
-    refetch: refetchUserInfo,
-  } = useGetSummoner(nickname);
-
-  const onClickIngameButton = async () => {
+  const onClickInGameButton = async () => {
     await router.push({
       pathname: `/search/[nickname]/ingame`,
       query: { nickname },
@@ -31,12 +28,19 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
   };
 
   const onClickUpdateButton = async () => {
-    await refetchUserInfo();
+    await queryClient.invalidateQueries();
   };
 
   const onClickSummonerButton = async () => {
     await router.push({
       pathname: `/search/[nickname]/summoner`,
+      query: { nickname },
+    });
+  };
+
+  const onClickMatchesButton = async () => {
+    await router.push({
+      pathname: `/search/[nickname]`,
       query: { nickname },
     });
   };
@@ -48,22 +52,39 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     height: 100,
   };
 
+  const InGameButtonProps = {
+    onClick: onClickInGameButton,
+    label: '인게임 정보',
+  };
+
+  const MatchesButtonProps = {
+    onClick: onClickMatchesButton,
+    label: '매치 정보',
+  };
+
+  const MasteryButtonProps = {
+    onClick: onClickSummonerButton,
+    label: '소환사 정보',
+  };
+
+  const UpdateButtonProps = {
+    borderColor: 'transparent',
+    onClick: onClickUpdateButton,
+    label: '업데이트',
+  };
+
   const ButtonGroupProps: ButtonGroupProps = {
     containerClassName: 'flex gap-3',
     ButtonPropsArray: [
-      { onClick: onClickIngameButton, label: '인게임 정보' },
-      { onClick: onClickSummonerButton, label: '소환사 정보' },
-      {
-        borderColor: 'transparent',
-        onClick: onClickUpdateButton,
-        label: '업데이트',
-      },
+      isInGame ? MatchesButtonProps : InGameButtonProps,
+      isSummoner ? MatchesButtonProps : MasteryButtonProps,
+      UpdateButtonProps,
     ],
   };
 
-  const TypographyProps: TypographyProps = {
-    string: name,
+  const SummonerNameProps: TypographyProps = {
     type: 'title',
+    text: name,
   };
 
   return (
@@ -71,7 +92,7 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
       <div className='flex'>
         <ProfileIcon {...ProfileIconProps} />
         <div className='flex flex-col items-start justify-center gap-y-10'>
-          <Typography {...TypographyProps} />
+          <Typography {...SummonerNameProps} />
           <ButtonGroup {...ButtonGroupProps} />
         </div>
       </div>

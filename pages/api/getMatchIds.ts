@@ -1,26 +1,24 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { AxiosResponse } from 'axios';
 
 import { API } from 'api';
-import { CustomError, LeagueInfos, Response } from 'types';
+import { CustomError, Response } from 'types';
 
-async function getLeagueInfoById(id: string) {
-  const response: AxiosResponse<LeagueInfos> = await API.getLeagueInfoById(id);
+async function getMatchIds(puuid: string, count: string) {
+  const response = await API.getMatchesByPUUID(puuid, count);
+  const matchIds: string[] = response.data;
 
-  const leagueInfo: LeagueInfos = response.data;
-
-  return leagueInfo;
+  return matchIds;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response<LeagueInfos> | CustomError>
+  res: NextApiResponse<Response<string[]> | CustomError>
 ) {
-  const { id } = req.query;
+  const { puuid, count } = req.query;
 
   try {
-    const leagueInfo = await getLeagueInfoById(String(id));
-    res.status(200).json({ items: leagueInfo, message: 'LeagueInfo' });
+    const matchIds = await getMatchIds(String(puuid), String(count));
+    res.status(200).json({ items: matchIds, message: 'Matches' });
   } catch (error: any) {
     let { message, status }: CustomError = error;
     if (message && status) {

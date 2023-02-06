@@ -5,20 +5,29 @@ import MatchCard from './MatchCard';
 import useIntersectionObserver from 'hooks/useInterSectionObserver';
 import ErrorBoundary from 'pages/ErrorBoundary';
 import { recentInfo } from 'store';
-import { useGetMatchIdArr, useGetSummoner } from 'hooks/queries';
+import { useGetMatchIds } from 'hooks/queries';
 import {
   MatchCardProps,
-  MatchIdArr,
   MatchSection,
   RecentMatchUserInfo,
   Response,
+  MatchIds,
 } from 'types';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
   const [count, setCount] = useState(0);
-  const [cash, setCash] = useState<string[]>([]);
-  const [recentMatchArr, setRecentMatchArr] =
+  const [cache, setCache] = useState<string[]>([]);
+  const [recentMatches, setRecentMatches] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
+
+  const onSuccess = (response: Response<MatchIds>) => {
+    const items = response.items;
+    setCache((prev) => prev.concat(items));
+  };
+
+  const { refetchMatches, matchIds } = useGetMatchIds(nickname, count, {
+    onSuccess,
+  });
 
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
@@ -26,27 +35,24 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
     if (isIntersecting) {
       if (count < 70) {
         setCount((prev) => prev + 10);
-        await refetchMatchArr();
+        await refetchMatches();
       }
     }
   };
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
-  const { puuid } = useGetSummoner(nickname);
 
-  const onSuccess = (response: Response<MatchIdArr>) => {
-    setCash((prev) => prev.concat(response.items));
+  const useEffectOnce = (effect: React.EffectCallback) => {
+    useEffect(effect, []);
   };
 
-  const { refetchMatchArr } = useGetMatchIdArr(puuid, count, { onSuccess });
-
-  useEffect(() => {
-    setRecentMatchArr([]);
-  }, []);
+  useEffectOnce(() => {
+    setRecentMatches([]);
+  });
 
   return (
     <>
-      {cash.map((matchId: string, index) => {
+      {matchIds.map((matchId: string) => {
         const MatchCardProps: MatchCardProps = {
           matchId,
           nickname,
@@ -60,7 +66,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
           </Suspense>
         );
       })}
-      <div ref={setTarget} />
+      {count && <div ref={setTarget} />}
     </>
   );
 };

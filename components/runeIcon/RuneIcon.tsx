@@ -4,12 +4,12 @@ import { FC } from 'react';
 import { IMAGES } from 'constant';
 import { RuneIconProps, RuneInfo } from 'types';
 
-const RuneIcon: FC<RuneIconProps> = ({ width, rune, marginClass }) => {
-  const wrapperClassName = 'flex-col gap-y-1' + ' ' + marginClass;
+const RuneIcon: FC<RuneIconProps> = ({ width, runes, marginClass }) => {
+  const wrapperClassName = 'flex-col gap-y-1' + ' ' + String(marginClass);
 
   return (
     <div className={wrapperClassName}>
-      {rune.map((runeInfo: RuneInfo) => {
+      {runes.map((runeInfo: RuneInfo) => {
         const runeSource = IMAGES.RUNE.replace('{rune}', runeInfo.icon);
         const imageProps = {
           src: runeSource,

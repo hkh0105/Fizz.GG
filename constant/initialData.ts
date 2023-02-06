@@ -1,8 +1,8 @@
-import { LeagueInfo, LeagueInfoArr, SummonerInfo } from 'types';
+import { LeagueInfos, SummonerInfo } from 'types';
 
 export type INITIAL_DATA_TYPE = {
   summonerInfo: SummonerInfo;
-  leagueInfoArr: LeagueInfoArr;
+  leagueInfoArr: LeagueInfos;
 };
 
 export const INITIAL_DATA: INITIAL_DATA_TYPE = {

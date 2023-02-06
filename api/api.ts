@@ -1,9 +1,9 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import { browser, instance, regionInstance } from './config';
 import { PATH } from '../constant';
 import { BFF_PATH } from 'constant/path';
-import { LeagueInfoArr, SummonerInfo } from 'types';
+import { LeagueInfos, SummonerInfo } from 'types';
 
 export const API = {
   getSummonerByNickname: async (
@@ -14,14 +14,12 @@ export const API = {
     ),
   getSummonerByPUUID: async (puuid: string) =>
     await instance.get(PATH.getSummonerByPUUID.replace('{puuid}', puuid)),
-  getMatchArrByPUUID: async (puuid: string, count: string) =>
+  getMatchesByPUUID: async (puuid: string, count: string) =>
     await regionInstance.get<string[]>(
-      PATH.getMatchArrByPUUID
-        .replace('{puuid}', puuid)
-        .replace('{count}', count)
+      PATH.getMatchesByPUUID.replace('{puuid}', puuid).replace('{count}', count)
     ),
   getLeagueInfoById: async (id: string) =>
-    await instance.get<LeagueInfoArr>(
+    await instance.get<LeagueInfos>(
       PATH.getLeagueById.replace('{encryptedSummonerId}', id)
     ),
   getGameByMatchId: async (matchId: string) =>
@@ -39,9 +37,9 @@ export const CLIENT_API = {
     browser.get(BFF_PATH.getSummonerByNickname.replace('{nickname}', nickname)),
   getLeagueInfoById: (id: string) =>
     browser.get(BFF_PATH.getLeagueInfoById.replace('{id}', id)),
-  getMatchArrByPuuid: (puuid: string, count: number) =>
+  getMatchesByPuuid: (puuid: string, count: number) =>
     browser.get(
-      BFF_PATH.getMatchArrByPuuid
+      BFF_PATH.getMatchesByPUUID
         .replace('{puuid}', puuid)
         .replace('{count}', String(count))
     ),

@@ -1,15 +1,16 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import PieChart from 'components/pieChart/PieChart';
+import ErrorBoundary from 'pages/ErrorBoundary';
 import ChampStatRow from './ChampStatRow';
 import { recentChampInfo, recentWinStats } from 'store';
 import { BoxProps, ChartData, PieChartProps, TypographyProps } from 'types';
 
 const RecentStatSection: FC = () => {
-  const championArr = useRecoilValue(recentChampInfo);
+  const champions = useRecoilValue(recentChampInfo);
   const winStats = useRecoilValue(recentWinStats);
 
   const chartData: ChartData<number>[] = [
@@ -27,31 +28,39 @@ const RecentStatSection: FC = () => {
     margin: { top: 40, right: 50 },
   };
 
-  const TypographyProps: TypographyProps = {
+  const RecentMatchTextProps: TypographyProps = {
     type: 'default',
-    string: `최근 ${winStats.total} 경기 데이터`,
+    text: `최근 ${winStats.total} 경기 데이터`,
   };
 
-  const WinRateTypographyProps: TypographyProps = {
+  const WinRateProps: TypographyProps = {
     type: 'default',
-    string: `${(winStats.winRate * 100).toFixed(0)}%`,
+    text: `${(winStats.winRate * 100).toFixed(0)}%`,
   };
 
   return (
-    <Box {...BoxProps}>
-      <div className='items-center mx-2 my-3 divide-y'>
-        <Typography {...TypographyProps} />
-        <div className='w-[300px] h-[150px] mb-10'>
-          <PieChart {...PieChartProps} />
-          <div className='translate-x-[109px] translate-y-[-68px]'>
-            <Typography {...WinRateTypographyProps} />
+    <Suspense fallback={<div>LOADING</div>}>
+      <ErrorBoundary>
+        <Box {...BoxProps}>
+          <div className='items-center mx-2 my-3 divide-y'>
+            <Typography {...RecentMatchTextProps} />
+            <div className='w-[300px] h-[150px] mb-10'>
+              <PieChart {...PieChartProps} />
+              <div className='translate-x-[109px] translate-y-[-68px]'>
+                <Typography {...WinRateProps} />
+              </div>
+            </div>
+            {champions.map((champInfo) => {
+              const ChampStatRowProps = {
+                champInfo,
+              };
+
+              return <ChampStatRow {...ChampStatRowProps} key={champInfo[0]} />;
+            })}
           </div>
-        </div>
-        {championArr.map((champInfo) => (
-          <ChampStatRow champInfo={champInfo} key={champInfo[0]} />
-        ))}
-      </div>
-    </Box>
+        </Box>
+      </ErrorBoundary>
+    </Suspense>
   );
 };
 

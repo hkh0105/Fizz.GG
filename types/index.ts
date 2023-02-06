@@ -1,5 +1,5 @@
-import { QueryKey, UseQueryOptions } from '@tanstack/react-query';
-import { ChangeEvent, MouseEvent, ReactNode } from 'react';
+import Error from 'next/error';
+import { ChangeEvent, MouseEventHandler, ReactNode } from 'react';
 
 export interface SearchWindowProps {
   onSubmit: (value: string) => void;
@@ -15,9 +15,11 @@ export type QueryOptions<T> = {
   onSuccess?: (response: T) => void;
 };
 
+export type OptionalQueryOptions<T> = Partial<QueryOptions<T>>;
+
 export interface ButtonProps {
   label: string;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   size?: keyof ButtonSize;
   borderColor?: keyof ButtonColor;
   type?: 'button' | 'submit' | 'reset' | undefined;
@@ -67,17 +69,12 @@ export type SummonerInfo = {
   summonerLevel: number;
 };
 
-export type Error = {
-  status: number;
-  message: string;
-};
-
 export type Response<T> = {
   message: string;
   items: T;
 };
 
-export type LeagueInfoArr = LeagueInfo[];
+export type LeagueInfos = LeagueInfo[];
 
 export type LeagueInfo = {
   leagueId: string;
@@ -101,7 +98,7 @@ export type RankTitleMapper = {
 };
 
 export type Rank = 'III' | 'I' | 'II' | 'IIII' | '';
-
+//나만의 것으로 Parsing
 export type RankTier =
   | 'IRON'
   | 'BRONZE'
@@ -156,7 +153,7 @@ export interface ButtonGroupProps {
 }
 
 export interface TypographyProps {
-  string: string;
+  text: string;
   type: keyof TypographyTypeMapper;
   isTitle?: boolean;
   color?: keyof TypoGraphyColorMapper;
@@ -213,7 +210,7 @@ export interface MatchSection {
   nickname: string;
 }
 
-export type MatchIdArr = string[];
+export type MatchIds = string[];
 
 export type BoxColorMapper = {
   default: 'bg-white';
@@ -226,9 +223,32 @@ export type GameInfo = {
   metadata: Metadata;
 };
 
+export type Perks = {
+  styles: [
+    {
+      selections: [
+        {
+          perk: number;
+        }
+      ];
+      style: number;
+    },
+    {
+      style: number;
+    }
+  ];
+};
+
+export type Game = {
+  Creation: number;
+  Duration: number;
+};
+
+type GameDuration = number;
+
 export type GameDetailInfo = {
-  gameCreation: number;
-  gameDuration: number;
+  gameCreation: Game['Creation'];
+  gameDuration: GameDuration;
   gameEndTimestamp: number;
   gameId: number;
   gameStartTimestamp: number;
@@ -241,7 +261,7 @@ export type GameDetailInfo = {
   platformId: string;
   tournamentCode: string;
   participants: MatchInfoByUser[];
-  teams: teams;
+  teams: Teams;
 };
 
 export type Objectives = {
@@ -253,15 +273,17 @@ export type Metadata = {
   participants: Participants;
 };
 
-export type teams = [MatchTeam, MatchTeam];
+export type Teams = [MatchTeam, MatchTeam];
 export type MatchTeam = {
-  bans: ban[];
+  bans: Ban[];
   objectives: Objectives;
   teamId: number;
   win: boolean;
 };
 
-export type ban = {
+export type Bans = Ban[];
+
+export type Ban = {
   championId: string;
   pickTurn: number;
 };
@@ -383,8 +405,8 @@ export interface MatchSummonerOverViewProps {
   champion: string;
   championLevel: number;
   summonerItems: number[];
-  spell: SpellInfoArr;
-  rune: RuneInfo[];
+  spells: SpellInfos;
+  runes: RuneInfo[];
   kills: number;
   deaths: number;
   assists: number;
@@ -403,10 +425,7 @@ export type RuneInfo = {
   name: string;
 };
 
-export type SpellInfoArr = [
-  [string, { key: number }],
-  [string, { key: number }]
-];
+export type SpellInfos = [[string, { key: number }], [string, { key: number }]];
 
 export interface IconProps {
   width: number;
@@ -414,11 +433,11 @@ export interface IconProps {
 }
 
 export interface SpellIconProps extends IconProps {
-  spell: SpellInfoArr;
+  spells: SpellInfos;
 }
 
 export interface RuneIconProps extends IconProps {
-  rune: RuneInfo[];
+  runes: RuneInfo[];
 }
 
 export interface KdaProps {
@@ -444,8 +463,8 @@ export interface TeamChampionProps {
 
 export interface UserStatRowProps {
   summoner: MatchInfoByUser;
-  maxTotalDamage: number;
-  maxTotalTakenDamage: number;
+  maxDamage: number;
+  maxTakenDamage: number;
 }
 
 export interface DetailSectionHeaderProps {
@@ -483,6 +502,8 @@ export interface SingleBarChartProps {
 export interface DetailSectionProps {
   summonerTeam: MatchInfoByUser[];
   enemyTeam: MatchInfoByUser[];
+  maxDamage: number;
+  maxTakenDamage: number;
 }
 
 export interface ChampStatRowProps {
@@ -552,13 +573,13 @@ export type InGameUser = {
 };
 
 export interface InGameTeamColumnProps {
-  team: InGameUser[];
+  users: InGameUser[];
 }
 
 export interface InGameUserRowProps {
   nickname: string;
-  rune: RuneInfo[];
-  spell: SpellInfoArr;
+  runes: RuneInfo[];
+  spells: SpellInfos;
   profileIconId: number;
 }
 
@@ -590,7 +611,9 @@ export type ChampDetails = {
     id: string;
     partype: string;
     title: string;
+    // eslint-disable-next-line @typescript-eslint/ban-types
     stats: {};
+    // eslint-disable-next-line @typescript-eslint/ban-types
     info: {};
   };
 };
@@ -598,3 +621,15 @@ export type ChampDetails = {
 export interface MasteryRowProps {
   masteryInfo: MasteryInfo;
 }
+
+export type CustomError = {
+  message: string;
+  status: number;
+  name: string;
+};
+
+export type InGamePerks = {
+  perkIds: number[];
+  perkStyle: number;
+  perkSubStyle: number;
+};

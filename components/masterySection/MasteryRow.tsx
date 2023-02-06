@@ -1,10 +1,10 @@
-import moment from 'moment';
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import { useGetChampJson } from 'hooks/queries';
 import { ChampionIconProps, MasteryRowProps, TypographyProps } from 'types';
+import { convertLastPlayTime, getChampName } from 'utils';
 
 const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
   const { champData } = useGetChampJson();
@@ -12,45 +12,37 @@ const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
     masteryInfo;
 
   // LastPlayTime
-  const convertedLastPlayTime =
-    String(moment(lastPlayTime).diff(moment(), 'days')).replace('-', '') +
-    '일전';
+  const convertedLastPlayTime = convertLastPlayTime(lastPlayTime);
 
   //Champ Name
-  let champName = '';
-  const champDetail = Object.entries(champData).find(
-    (champ) => champ[1]?.key === String(championId)
-  );
+  const champName = getChampName(champData, championId);
 
-  if (champDetail) {
-    champName = champDetail[0];
-  }
-
-  const ChampNameTypographyProps: TypographyProps = {
+  const ChampNameProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: champName,
+    text: champName,
   };
 
-  const ChampLevelTypographyProps: TypographyProps = {
+  const ChampLevelProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: String(championLevel),
+    text: String(championLevel),
   };
 
-  const ChampPointTypographyProps: TypographyProps = {
+  const ChampPointProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: String(championPoints),
+    text: String(championPoints),
   };
-  const PlayTimeTypographyProps: TypographyProps = {
+
+  const PlayTimeProps: TypographyProps = {
     type: 'default',
     size: 'small',
     color: 'gray',
-    string: convertedLastPlayTime,
+    text: convertedLastPlayTime,
   };
 
   const ChampionIconProps: ChampionIconProps = {
@@ -61,19 +53,19 @@ const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
   return (
     <div className=' w-[800px] h-[60px] pt-3 flex shrink-0 grow-0 justify-center '>
       <div className='basis-36'>
-        <Typography {...ChampNameTypographyProps} />
+        <Typography {...ChampNameProps} />
       </div>
       <div className='basis-36'>
         <ChampionIcon {...ChampionIconProps} />
       </div>
       <div className='basis-36'>
-        <Typography {...ChampLevelTypographyProps} />
+        <Typography {...ChampLevelProps} />
       </div>
       <div className='basis-36'>
-        <Typography {...ChampPointTypographyProps} />
+        <Typography {...ChampPointProps} />
       </div>
       <div className='basis-36'>
-        <Typography {...PlayTimeTypographyProps} />
+        <Typography {...PlayTimeProps} />
       </div>
     </div>
   );

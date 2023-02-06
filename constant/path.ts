@@ -1,7 +1,7 @@
 export const PATH = {
   getSummonerByNickname: 'summoner/v4/summoners/by-name/{nickname}',
   getSummonerByPUUID: 'summoner/v4/summoners/by-puuid/{puuid}',
-  getMatchArrByPUUID:
+  getMatchesByPUUID:
     'match/v5/matches/by-puuid/{puuid}/ids?start={count}&count=10',
   getLeagueById: 'league/v4/entries/by-summoner/{encryptedSummonerId}',
   getGameByMatchId: 'match/v5/matches/{matchId}',
@@ -16,7 +16,7 @@ export const PATH = {
 export const BFF_PATH = {
   getSummonerByNickname: '/api/getSummonerByNickname?nickname={nickname}',
   getLeagueInfoById: '/api/getLeagueInfo?id={id}',
-  getMatchArrByPuuid: '/api/getMatchIdArr?puuid={puuid}&count={count}',
+  getMatchesByPUUID: '/api/getMatchIds?puuid={puuid}&count={count}',
   getGameByMatchId: '/api/getGame?matchId={matchId}',
   getInGameByPuuid: '/api/getInGame?puuid={puuid}',
   getMasteryById: '/api/getMastery?id={id}',

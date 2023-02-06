@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import UserStatRow from 'components/userStatRow/UserStatRow';
+import UserStatRow from 'components/matchSection/UserStatRow';
 import Box from 'userInterface/box/Box';
 import DetailSectionHeader from './DetailSectionheader';
 import {
@@ -12,27 +12,12 @@ import {
   UserStatRowProps,
 } from 'types';
 
-const DetailSection: FC<DetailSectionProps> = ({ summonerTeam, enemyTeam }) => {
-  let maxTotalDamage = 0;
-  let maxTotalTakenDamage = 0;
-
-  summonerTeam.map((user: MatchInfoByUser) => {
-    if (user.totalDamageDealtToChampions > maxTotalDamage) {
-      maxTotalDamage = user.totalDamageDealtToChampions;
-    }
-    if (user.totalDamageTaken > maxTotalTakenDamage) {
-      maxTotalTakenDamage = user.totalDamageTaken;
-    }
-  });
-  enemyTeam.map((user: MatchInfoByUser) => {
-    if (user.totalDamageDealtToChampions > maxTotalDamage) {
-      maxTotalDamage = user.totalDamageDealtToChampions;
-    }
-    if (user.totalDamageTaken > maxTotalTakenDamage) {
-      maxTotalTakenDamage = user.totalDamageTaken;
-    }
-  });
-
+const DetailSection: FC<DetailSectionProps> = ({
+  summonerTeam,
+  enemyTeam,
+  maxDamage,
+  maxTakenDamage,
+}) => {
   const SummonerTeamDetailBoxProps: BoxProps = {
     size: 'custom',
     height: 'h-[350px]',
@@ -62,8 +47,8 @@ const DetailSection: FC<DetailSectionProps> = ({ summonerTeam, enemyTeam }) => {
         {summonerTeam.map((user: MatchInfoByUser) => {
           const UserStatRowProps: UserStatRowProps = {
             summoner: user,
-            maxTotalDamage,
-            maxTotalTakenDamage,
+            maxDamage,
+            maxTakenDamage,
           };
 
           return <UserStatRow {...UserStatRowProps} key={user.puuid} />;
@@ -74,8 +59,8 @@ const DetailSection: FC<DetailSectionProps> = ({ summonerTeam, enemyTeam }) => {
         {enemyTeam.map((user: MatchInfoByUser) => {
           const UserStatRowProps: UserStatRowProps = {
             summoner: user,
-            maxTotalDamage,
-            maxTotalTakenDamage,
+            maxDamage,
+            maxTakenDamage,
           };
 
           return <UserStatRow {...UserStatRowProps} key={user.puuid} />;

@@ -14,42 +14,42 @@ const Kda: FC<KdaProps> = ({
 }) => {
   const wrapperClassName = 'flex-col' + ' ' + marginClass;
 
-  const KillsTypoProps: TypographyProps = {
+  const KillsProps: TypographyProps = {
     type: 'semibold',
     color: 'gray',
-    string: String(kills) + '  /',
+    text: String(kills) + '  /',
     size,
   };
 
-  const DeathsTypoProps: TypographyProps = {
+  const DeathsProps: TypographyProps = {
     type: 'semibold',
     color: 'red',
-    string: String(deaths),
+    text: String(deaths),
     size,
   };
 
-  const AssistsTypoProps: TypographyProps = {
+  const AssistsProps: TypographyProps = {
     type: 'semibold',
     color: 'gray',
-    string: '/ ' + String(assists),
+    text: '/ ' + String(assists),
     size,
   };
 
-  const KdaTypoProps: TypographyProps = {
+  const KdaProps: TypographyProps = {
     type: 'default',
     color: 'gray',
-    string: String(kda?.toFixed(2)) + ' : 1',
+    text: String(kda?.toFixed(2)) + ' : 1',
     size: kdaSize,
   };
 
   return (
     <div className={wrapperClassName}>
       <div className='flex gap-x-1'>
-        <Typography {...KillsTypoProps} />
-        <Typography {...DeathsTypoProps} />
-        <Typography {...AssistsTypoProps} />
+        <Typography {...KillsProps} />
+        <Typography {...DeathsProps} />
+        <Typography {...AssistsProps} />
       </div>
-      {kda && <Typography {...KdaTypoProps} />}
+      {kda && <Typography {...KdaProps} />}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import InGameTeamColumn from './InGameTeamColumn';
-import { useGetInGame, useGetSummoner } from 'hooks/queries';
+import { useGetInGame } from 'hooks/queries';
 import {
   BoxProps,
   IngameSectionProps,
@@ -13,8 +13,6 @@ import {
 } from 'types';
 
 const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
-  const { id } = useGetSummoner(nickname);
-
   const { summonerTeam, enemyTeam, queueType } = useGetInGame(nickname);
 
   const queueTypeMapper: QueueTypeMapper = {
@@ -27,9 +25,9 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
     450: '칼바람나락',
   };
 
-  const GameModeTypoProps: TypographyProps = {
+  const GameModeProps: TypographyProps = {
     color: 'gray',
-    string: queueTypeMapper[queueType],
+    text: queueTypeMapper[queueType],
     type: 'title',
   };
 
@@ -41,30 +39,31 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
   };
 
   const SummonerColumnProps: InGameTeamColumnProps = {
-    team: summonerTeam,
+    users: summonerTeam,
   };
 
   const EnemyColumnProps: InGameTeamColumnProps = {
-    team: enemyTeam,
+    users: enemyTeam,
   };
 
-  const VersusTypoProps: TypographyProps = {
-    string: 'VS',
+  const VersusProps: TypographyProps = {
+    text: 'VS',
     type: 'title',
     color: 'gray',
   };
 
   return (
     <section className='flex flex-col items-center my-3 gap-y-3'>
-      <Typography {...GameModeTypoProps} />
+      <Typography {...GameModeProps} />
       <Box {...BoxProps}>
         <div className='flex items-center justify-evenly'>
           <InGameTeamColumn {...SummonerColumnProps} />
-          <Typography {...VersusTypoProps} />
+          <Typography {...VersusProps} />
           <InGameTeamColumn {...EnemyColumnProps} />
         </div>
       </Box>
     </section>
   );
 };
+
 export default IngameSection;

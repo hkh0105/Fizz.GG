@@ -5,8 +5,8 @@ import SearchLayout from 'components/layout/SearchLayout';
 import Profile from 'components/profile/Profile';
 import RankSection from 'components/rankSection/RankSection';
 import MatchSection from 'components/matchSection/MatchSection';
-import ErrorBoundary from './ErrorBoundary';
 import RecentStatSection from 'components/resentStatSection/RecentStatSection';
+import ErrorBoundary from 'pages/ErrorBoundary';
 
 const Search: FC = () => {
   const router = useRouter();
