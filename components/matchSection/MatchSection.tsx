@@ -25,7 +25,9 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
     setCache((prev) => prev.concat(items));
   };
 
-  const { refetchMatches } = useGetMatchIds(nickname, count, { onSuccess });
+  const { refetchMatches, matchIds } = useGetMatchIds(nickname, count, {
+    onSuccess,
+  });
 
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
@@ -50,7 +52,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
 
   return (
     <>
-      {cache.map((matchId: string) => {
+      {matchIds.map((matchId: string) => {
         const MatchCardProps: MatchCardProps = {
           matchId,
           nickname,
@@ -64,7 +66,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
           </Suspense>
         );
       })}
-      <div ref={setTarget} />
+      {count && <div ref={setTarget} />}
     </>
   );
 };
