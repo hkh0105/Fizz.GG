@@ -10,12 +10,14 @@ const Ingame: FC = () => {
   const { nickname } = (router.query as { nickname: string }) || '';
 
   return (
-    <Suspense fallback={<div>LOADING</div>}>
-      <ErrorBoundary>
-        <Profile nickname={nickname} />
-        <IngameSection nickname={nickname} />
-      </ErrorBoundary>
-    </Suspense>
+    <>
+      <Profile nickname={nickname} />
+      <Suspense fallback={<div>LOADING</div>}>
+        <ErrorBoundary>
+          <IngameSection nickname={nickname} />
+        </ErrorBoundary>
+      </Suspense>
+    </>
   );
 };
 
