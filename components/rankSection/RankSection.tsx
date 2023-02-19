@@ -1,10 +1,10 @@
-import { FC, Suspense } from 'react';
+import { FC } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import RankContents from './RankCard';
+import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import { useGetLeagueInfo } from 'hooks/queries';
 import { LeagueInfo, RankProps } from 'types';
-import ErrorBoundary from 'pages/ErrorBoundary';
 
 const RankSection: FC<RankProps> = ({ nickname }) => {
   const { leagueInfos } = useGetLeagueInfo(nickname);
@@ -25,11 +25,9 @@ const RankSection: FC<RankProps> = ({ nickname }) => {
         };
 
         return (
-          <Suspense fallback={<div>LOADING</div>} key={uuidv4()}>
-            <ErrorBoundary>
-              <RankContents {...RankContentsProps} />
-            </ErrorBoundary>
-          </Suspense>
+          <AsyncBoundary key={uuidv4()}>
+            <RankContents {...RankContentsProps} />
+          </AsyncBoundary>
         );
       })}
     </>

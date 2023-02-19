@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import { FC, Suspense } from 'react';
+import { FC } from 'react';
 
 import IngameSection from 'components/inGameSection/InGameSection';
 import Profile from 'components/profile/Profile';
-import ErrorBoundary from 'pages/ErrorBoundary';
+import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 
 const Ingame: FC = () => {
   const router = useRouter();
@@ -12,11 +12,9 @@ const Ingame: FC = () => {
   return (
     <>
       <Profile nickname={nickname} />
-      <Suspense fallback={<div>LOADING</div>}>
-        <ErrorBoundary>
-          <IngameSection nickname={nickname} />
-        </ErrorBoundary>
-      </Suspense>
+      <AsyncBoundary key={nickname}>
+        <IngameSection nickname={nickname} />
+      </AsyncBoundary>
     </>
   );
 };

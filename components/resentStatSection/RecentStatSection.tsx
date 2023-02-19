@@ -1,10 +1,10 @@
-import { FC, Suspense } from 'react';
+import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
+import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import PieChart from 'components/pieChart/PieChart';
-import ErrorBoundary from 'pages/ErrorBoundary';
 import ChampStatRow from './ChampStatRow';
 import { recentChampInfo, recentWinStats } from 'store';
 import { BoxProps, ChartData, PieChartProps, TypographyProps } from 'types';
@@ -39,28 +39,26 @@ const RecentStatSection: FC = () => {
   };
 
   return (
-    <Suspense fallback={<div>LOADING</div>}>
-      <ErrorBoundary>
-        <Box {...BoxProps}>
-          <div className='items-center mx-2 my-3 divide-y'>
-            <Typography {...RecentMatchTextProps} />
-            <div className='w-[300px] h-[150px] mb-10'>
-              <PieChart {...PieChartProps} />
-              <div className='translate-x-[109px] translate-y-[-68px]'>
-                <Typography {...WinRateProps} />
-              </div>
+    <AsyncBoundary>
+      <Box {...BoxProps}>
+        <div className='items-center mx-2 my-3 divide-y'>
+          <Typography {...RecentMatchTextProps} />
+          <div className='w-[300px] h-[150px] mb-10'>
+            <PieChart {...PieChartProps} />
+            <div className='translate-x-[109px] translate-y-[-68px]'>
+              <Typography {...WinRateProps} />
             </div>
-            {champions.map((champInfo) => {
-              const ChampStatRowProps = {
-                champInfo,
-              };
-
-              return <ChampStatRow {...ChampStatRowProps} key={champInfo[0]} />;
-            })}
           </div>
-        </Box>
-      </ErrorBoundary>
-    </Suspense>
+          {champions.map((champInfo) => {
+            const ChampStatRowProps = {
+              champInfo,
+            };
+
+            return <ChampStatRow {...ChampStatRowProps} key={champInfo[0]} />;
+          })}
+        </div>
+      </Box>
+    </AsyncBoundary>
   );
 };
 
