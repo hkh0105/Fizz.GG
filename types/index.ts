@@ -1,14 +1,8 @@
-import Error from 'next/error';
 import { ChangeEvent, MouseEventHandler, ReactNode } from 'react';
 
 export interface SearchWindowProps {
-  onSubmit: (value: string) => void;
+  mini?: boolean;
 }
-
-// export type QueryOptions = Omit<
-//   UseQueryOptions<unknown, unknown, unknown, QueryKey>,
-//   'queryKey' | 'queryFn'
-// >;
 
 export type QueryOptions<T> = {
   enabled?: boolean;
@@ -21,7 +15,7 @@ export interface ButtonProps {
   label: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   size?: keyof ButtonSize;
-  borderColor?: keyof ButtonColor;
+  color?: keyof ButtonColor;
   type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
@@ -34,7 +28,7 @@ export type ButtonColor = {
 export type ButtonSize = {
   small: string;
   medium: string;
-  big: string;
+  large: string;
 };
 
 export interface InputProps {
@@ -149,7 +143,7 @@ export interface ProfileIconProps {
 
 export interface ButtonGroupProps {
   containerClassName: string;
-  ButtonPropsArray: ButtonProps[];
+  buttons: ButtonProps[];
 }
 
 export interface TypographyProps {
@@ -633,3 +627,8 @@ export type InGamePerks = {
   perkStyle: number;
   perkSubStyle: number;
 };
+
+export interface AsyncBoundaryProps {
+  children: ReactNode;
+  key?: string;
+}

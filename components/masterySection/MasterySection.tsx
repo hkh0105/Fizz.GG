@@ -1,5 +1,6 @@
-import { FC, Suspense } from 'react';
+import { FC } from 'react';
 
+import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import MasteryRow from './MasteryRow';
@@ -11,7 +12,6 @@ import {
   MasteryRowProps,
   TypographyProps,
 } from 'types';
-import ErrorBoundary from 'pages/ErrorBoundary';
 
 const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
   const { masteryInfo } = useGetMastery(nickname);
@@ -27,33 +27,30 @@ const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
     width: 'w-[800px]',
   };
 
-  return (
-    <Suspense fallback={<div>LOADING</div>}>
-      <ErrorBoundary>
-        <section className='flex flex-col items-center my-32 mt-10 gap-y-10'>
-          <Typography {...GameModeProps} />
-          <Box {...BoxProps}>
-            <MasteryHeader />
-            {masteryInfo.map((mastery) => {
-              const MasteryRowProps: MasteryRowProps = {
-                masteryInfo: mastery,
-              };
+  const AsyncBoundaryProps = {
+    key: nickname,
+  };
 
-              return (
-                <Suspense
-                  fallback={<div>LOADING</div>}
-                  key={mastery.championId}
-                >
-                  <ErrorBoundary>
-                    <MasteryRow {...MasteryRowProps} />
-                  </ErrorBoundary>
-                </Suspense>
-              );
-            })}
-          </Box>
-        </section>
-      </ErrorBoundary>
-    </Suspense>
+  return (
+    <AsyncBoundary {...AsyncBoundaryProps}>
+      <section className='flex flex-col items-center my-32 mt-10 gap-y-10'>
+        <Typography {...GameModeProps} />
+        <Box {...BoxProps}>
+          <MasteryHeader />
+          {masteryInfo.map((mastery) => {
+            const MasteryRowProps: MasteryRowProps = {
+              masteryInfo: mastery,
+            };
+
+            return (
+              <AsyncBoundary key={mastery.championId}>
+                <MasteryRow {...MasteryRowProps} />
+              </AsyncBoundary>
+            );
+          })}
+        </Box>
+      </section>
+    </AsyncBoundary>
   );
 };
 export default MasterySection;

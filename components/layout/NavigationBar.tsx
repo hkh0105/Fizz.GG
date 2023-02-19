@@ -2,9 +2,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 
+import SearchWindow from 'components/searchWindow/SearchWindow';
 import { IMAGES } from 'constant';
+import { SearchWindowProps } from 'types';
+import { useRouter } from 'next/router';
 
 const NavigationBar: FC = () => {
+  const path = useRouter().pathname;
+  const SearchWindowProps: SearchWindowProps = {
+    mini: true,
+  };
+
   return (
     <nav className='flex items-center h-24 mx-3'>
       <Link href='/' className='flex items-center'>
@@ -25,6 +33,7 @@ const NavigationBar: FC = () => {
       <Link href='/' className='mx-3 hover:underline'>
         <p>Contact</p>
       </Link>
+      {path !== '/' && <SearchWindow {...SearchWindowProps} />}
     </nav>
   );
 };

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
+import { useQueryClient } from '@tanstack/react-query';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
@@ -8,11 +9,11 @@ import ButtonGroup from 'components/buttonGroup/ButtonGroup';
 import { useGetSummoner } from 'hooks/queries';
 import {
   ButtonGroupProps,
+  ButtonProps,
   ProfileIconProps,
   ProfileProps,
   TypographyProps,
 } from 'types';
-import { useQueryClient } from '@tanstack/react-query';
 const Profile: FC<ProfileProps> = ({ nickname }) => {
   const router = useRouter();
   const isInGame = router.pathname === '/search/[nickname/ingame';
@@ -52,30 +53,30 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     height: 100,
   };
 
-  const InGameButtonProps = {
+  const InGameButtonProps: ButtonProps = {
     onClick: onClickInGameButton,
     label: '인게임 정보',
   };
 
-  const MatchesButtonProps = {
+  const MatchesButtonProps: ButtonProps = {
     onClick: onClickMatchesButton,
     label: '매치 정보',
   };
 
-  const MasteryButtonProps = {
+  const MasteryButtonProps: ButtonProps = {
     onClick: onClickSummonerButton,
     label: '소환사 정보',
   };
 
-  const UpdateButtonProps = {
-    borderColor: 'transparent',
+  const UpdateButtonProps: ButtonProps = {
+    color: 'transparent',
     onClick: onClickUpdateButton,
     label: '업데이트',
   };
 
   const ButtonGroupProps: ButtonGroupProps = {
     containerClassName: 'flex gap-3',
-    ButtonPropsArray: [
+    buttons: [
       isInGame ? MatchesButtonProps : InGameButtonProps,
       isSummoner ? MatchesButtonProps : MasteryButtonProps,
       UpdateButtonProps,

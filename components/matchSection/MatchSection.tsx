@@ -1,9 +1,9 @@
-import { FC, Suspense, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import MatchCard from './MatchCard';
 import useIntersectionObserver from 'hooks/useInterSectionObserver';
-import ErrorBoundary from 'pages/ErrorBoundary';
+import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import { recentInfo } from 'store';
 import { useGetMatchIds } from 'hooks/queries';
 import {
@@ -59,11 +59,9 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
         };
 
         return (
-          <Suspense fallback={<div>LOADING</div>} key={matchId}>
-            <ErrorBoundary>
-              <MatchCard {...MatchCardProps} />
-            </ErrorBoundary>
-          </Suspense>
+          <AsyncBoundary key={matchId}>
+            <MatchCard {...MatchCardProps} />
+          </AsyncBoundary>
         );
       })}
       {count && <div ref={setTarget} />}

@@ -1,36 +1,33 @@
 import { useRouter } from 'next/router';
-import { FC, Suspense } from 'react';
+import { FC } from 'react';
 
 import SearchLayout from 'components/layout/SearchLayout';
 import Profile from 'components/profile/Profile';
 import RankSection from 'components/rankSection/RankSection';
 import MatchSection from 'components/matchSection/MatchSection';
 import RecentStatSection from 'components/resentStatSection/RecentStatSection';
-import ErrorBoundary from 'pages/ErrorBoundary';
+import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 
 const Search: FC = () => {
-  const router = useRouter();
-  const { nickname } = (router.query as { nickname: string }) || '';
+  const nickname = useRouter().query.nickname as string;
 
   return (
-    <Suspense fallback={<div>LOADING</div>}>
-      <ErrorBoundary>
-        <SearchLayout>
-          <div className='w-[1110px] max-lg:w-[800px]'>
-            <Profile nickname={nickname} />
+    <AsyncBoundary key={nickname}>
+      <SearchLayout>
+        <div className='w-[1110px] max-lg:w-[800px]'>
+          <Profile nickname={nickname} />
+        </div>
+        <div className='flex'>
+          <div className='w-[300px] max-lg:hidden mr-3'>
+            <RankSection nickname={nickname} />
+            <RecentStatSection />
           </div>
-          <div className='flex'>
-            <div className='w-[300px] max-lg:hidden mr-3'>
-              <RankSection nickname={nickname} />
-              <RecentStatSection />
-            </div>
-            <div className='w-[800px]'>
-              <MatchSection nickname={nickname} />
-            </div>
+          <div className='w-[800px]'>
+            <MatchSection nickname={nickname} />
           </div>
-        </SearchLayout>
-      </ErrorBoundary>
-    </Suspense>
+        </div>
+      </SearchLayout>
+    </AsyncBoundary>
   );
 };
 
