@@ -8,6 +8,7 @@ const Input: FC<InputProps> = ({
   onChange,
   disabled,
   value,
+  labelStyle,
   size = 'medium',
   color = 'gray',
   required,
@@ -23,16 +24,18 @@ const Input: FC<InputProps> = ({
   };
   return (
     <>
-      <label htmlFor={labelFor} />
       <input
         placeholder={placeholder}
         onChange={onChange}
         disabled={disabled}
         value={value}
         id={labelFor}
-        className={`${sizeVariants[size]} ${colorVariants[color]}`}
+        className={`${sizeVariants[size]} ${colorVariants[color]} peer`}
         required={required}
       />
+      <label className={labelStyle} htmlFor={labelFor}>
+        {labelFor}
+      </label>
     </>
   );
 };
