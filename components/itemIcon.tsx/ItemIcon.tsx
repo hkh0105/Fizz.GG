@@ -1,35 +1,26 @@
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 import { FC } from 'react';
 
 import { IMAGES } from 'constant';
-import { ItemIconProps } from 'types';
+import { CustomImageProps, ItemIconProps } from 'types';
+import CustomImage from 'userInterface/customImage/CustomImage';
 
 const ItemIcon: FC<ItemIconProps> = ({ width, summonerItems, marginClass }) => {
-  const wrapperClassName = 'flex' + ' ' + marginClass;
+  const wrapper = 'flex' + ' ' + marginClass;
 
   return (
-    <div className={wrapperClassName}>
+    <div className={wrapper}>
       {summonerItems?.map((item) => {
-        if (item === 0) {
-          return (
-            <div
-              className='bg-gray-300 border-r-2'
-              style={{ width: width, height: width }}
-              key={uuidv4()}
-            />
-          );
-        }
-
         const itemSource = IMAGES.ITEM.replace('{item}', String(item));
-        const imageProps = {
-          src: itemSource,
+        
+        const CustomImageProps: CustomImageProps = {
+          source: itemSource,
           alt: '소환사 아이템 이미지',
-          width: width,
-          height: width,
+          size: width,
         };
 
-        return <Image {...imageProps} key={uuidv4()} />;
+        return <CustomImage {...CustomImageProps} key={uuidv4()} />;
       })}
     </div>
   );
