@@ -18,4 +18,6 @@ export const IMAGES: Images = {
   ITEM: 'https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item/{item}.png',
   SPELL: 'https://ddragon.leagueoflegends.com/cdn/13.1.1/img/spell/{spell}.png',
   RUNE: 'https://ddragon.leagueoflegends.com/cdn/img/{rune}',
+  BLUR: '/Blur.png',
+  DEFAULT: '/Gray_Default.png',
 };
