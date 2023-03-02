@@ -1,24 +1,23 @@
-import Image from 'next/image';
 import { FC } from 'react';
 
+import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { RuneIconProps, RuneInfo } from 'types';
+import { CustomImageProps, RuneIconProps, RuneInfo } from 'types';
 
 const RuneIcon: FC<RuneIconProps> = ({ width, runes, marginClass }) => {
-  const wrapperClassName = 'flex-col gap-y-1' + ' ' + String(marginClass);
+  const wrapper = 'flex-col gap-y-1' + ' ' + String(marginClass);
 
   return (
-    <div className={wrapperClassName}>
+    <div className={wrapper}>
       {runes.map((runeInfo: RuneInfo) => {
         const runeSource = IMAGES.RUNE.replace('{rune}', runeInfo.icon);
-        const imageProps = {
-          src: runeSource,
+        const CustomImageProps: CustomImageProps = {
+          source: runeSource,
           alt: '소환사 룬 이미지',
-          width: width,
-          height: width,
+          size: width,
         };
 
-        return <Image {...imageProps} key={runeInfo.icon} />;
+        return <CustomImage {...CustomImageProps} key={runeInfo.icon} />;
       })}
     </div>
   );

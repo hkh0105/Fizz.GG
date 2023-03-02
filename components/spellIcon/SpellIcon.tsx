@@ -1,25 +1,25 @@
-import Image from 'next/image';
 import { FC } from 'react';
 
+import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { SpellIconProps } from 'types';
+import { CustomImageProps, SpellIconProps } from 'types';
 
 const SpellIcon: FC<SpellIconProps> = ({ width, spells, marginClass }) => {
-  const wrapperClassName = 'flex-col gap-y-1' + ' ' + marginClass;
+  const wrapper = 'flex-col gap-y-1' + ' ' + marginClass;
 
   return (
-    <div className={wrapperClassName}>
+    <div className={wrapper}>
       {spells?.map((spellName) => {
         const spellSource = IMAGES.SPELL.replace('{spell}', spellName[0]);
-        const imageProps = {
+
+        const CustomImageProps: CustomImageProps = {
           className: 'rounded-xl',
-          src: spellSource,
+          source: spellSource,
           alt: '소환사 스펠 이미지',
-          width: width,
-          height: width,
+          size: width,
         };
 
-        return <Image {...imageProps} key={spellName[0]} />;
+        return <CustomImage {...CustomImageProps} key={spellName[0]} />;
       })}
     </div>
   );

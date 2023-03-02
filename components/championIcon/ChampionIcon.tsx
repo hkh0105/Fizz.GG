@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { FC } from 'react';
 
+import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { ChampionIconProps } from 'types';
+import { ChampionIconProps, CustomImageProps } from 'types';
 
 const ChampionIcon: FC<ChampionIconProps> = ({
   width,
@@ -11,19 +11,20 @@ const ChampionIcon: FC<ChampionIconProps> = ({
   marginClass,
 }) => {
   const championSource = IMAGES.CHAMPION.replace('{champion}', championName);
-  const wrapperClassName =
+
+  const wrapper =
     `w-[${width}px] flex-col text-white text-start` + ' ' + marginClass;
-  const imageProps = {
+
+  const CustomImageProps: CustomImageProps = {
     className: 'rounded-full',
-    src: championSource,
+    source: championSource,
     alt: '소환사 챔피언 이미지',
-    width: width,
-    height: width,
+    size: width,
   };
 
   return (
-    <div className={wrapperClassName}>
-      <Image {...imageProps} />
+    <div className={wrapper}>
+      <CustomImage {...CustomImageProps} />
       <span className='absolute translate-y-[-15px] bg-black rounded-full text-sm'>
         {championLevel}
       </span>

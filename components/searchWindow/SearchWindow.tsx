@@ -21,35 +21,45 @@ const SearchWindow: FC<SearchWindowProps> = ({ mini = false }) => {
   };
 
   return (
-    <form className='w-2/5' onSubmit={handleSubmit}>
+    <>
       {mini ? (
-        <div className='flex flex-row justify-center w-full justify-items-center'>
-          <AiOutlineSearch size='30' className='translate-x-10 translate-y-3' />
-          <Input
-            onChange={onChange}
-            value={nickname}
-            placeholder='Search summoner nickname'
-            required={true}
-            labelFor='Search'
-          />
-          <div className='translate-x-[-55px] translate-y-[7px]'>
-            <Button label='GG' color='transparent' type='submit' />
+        <form className='w-96' onSubmit={handleSubmit}>
+          <div className='flex flex-row justify-center w-full justify-items-center'>
+            <AiOutlineSearch
+              size='30'
+              className='translate-x-10 translate-y-3'
+            />
+            <Input
+              onChange={onChange}
+              value={nickname}
+              labelFor='Search'
+              labelStyle='peer-focus:-translate-y-[1px] peer-focus:-translate-x-20 peer-focus:text-[3px] peer-focus:text-blue-600 peer-focus:text-blue-600 peer-focus:text-blue-500 absolute -translate-x-14 translate-y-4 italic focus-visible:translate-x-[-30px] focus-within:translate-y-[-30px],translate-y-10 text-gray-400 text-sm'
+              required={true}
+            />
+            <div className='translate-x-[-55px] translate-y-[7px]'>
+              <Button label='GG' color='transparent' type='submit' />
+            </div>
           </div>
-        </div>
+        </form>
       ) : (
-        <div className='flex flex-row justify-center w-full justify-items-center'>
-          <AiOutlineSearch size='40' className='translate-x-10 translate-y-2' />
-          <Input
-            onChange={onChange}
-            value={nickname}
-            placeholder='Search summoner nickname'
-            required={true}
-            labelFor='Search'
-          />
-          <Button label='Search' type='submit' />
-        </div>
+        <form className='w-[800px]' onSubmit={handleSubmit}>
+          <div className='flex flex-row justify-center w-full justify-items-center'>
+            <AiOutlineSearch
+              size='40'
+              className='translate-x-10 translate-y-2'
+            />
+            <Input
+              onChange={onChange}
+              value={nickname}
+              labelFor='Search summoner nickname'
+              labelStyle='peer-focus:-translate-y-[1px] peer-focus:translate-x-[365px] peer-focus:text-[3px] peer-focus:text-blue-600 peer-focus:text-blue-600 peer-focus:text-blue-500 absolute left-1 translate-x-[380px] translate-y-4 italic focus-visible:translate-x-[-30px] focus-within:translate-y-[-30px],translate-y-10 text-gray-400 text-sm'
+              required={true}
+            />
+            <Button label='Search' type='submit' />
+          </div>
+        </form>
       )}
-    </form>
+    </>
   );
 };
 

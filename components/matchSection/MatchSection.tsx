@@ -6,53 +6,33 @@ import useIntersectionObserver from 'hooks/useInterSectionObserver';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import { recentInfo } from 'store';
 import { useGetMatchIds } from 'hooks/queries';
-import {
-  MatchCardProps,
-  MatchSection,
-  RecentMatchUserInfo,
-  Response,
-  MatchIds,
-} from 'types';
+import { MatchCardProps, MatchSection, RecentMatchUserInfo } from 'types';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
-  const [count, setCount] = useState(0);
-  const [cache, setCache] = useState<string[]>([]);
+  const [count, setCount] = useState(10);
   const [recentMatches, setRecentMatches] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
 
-  const onSuccess = (response: Response<MatchIds>) => {
-    const items = response.items;
-    setCache((prev) => prev.concat(items));
-  };
+  useEffect(() => {
+    setRecentMatches([]);
+  }, []);
 
-  const { refetchMatches, matchIds } = useGetMatchIds(nickname, count, {
-    onSuccess,
-  });
+  const { fetchNextPage, matchIds } = useGetMatchIds(nickname, count);
 
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
   ]) => {
-    if (isIntersecting) {
-      if (count < 70) {
-        setCount((prev) => prev + 10);
-        await refetchMatches();
-      }
+    if (isIntersecting && count < 80) {
+      setCount(count + 10);
+      await fetchNextPage();
     }
   };
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
-  const useEffectOnce = (effect: React.EffectCallback) => {
-    useEffect(effect, []);
-  };
-
-  useEffectOnce(() => {
-    setRecentMatches([]);
-  });
-
   return (
     <>
-      {matchIds.map((matchId: string) => {
+      {matchIds?.map((matchId: string) => {
         const MatchCardProps: MatchCardProps = {
           matchId,
           nickname,
@@ -64,7 +44,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
           </AsyncBoundary>
         );
       })}
-      {count && <div ref={setTarget} />}
+      <div ref={setTarget} />
     </>
   );
 };

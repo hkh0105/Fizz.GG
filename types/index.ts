@@ -40,6 +40,7 @@ export interface InputProps {
   size?: keyof InputSize;
   color?: keyof InputBorderColor;
   required?: boolean;
+  labelStyle?: string;
 }
 
 export type InputBorderColor = {
@@ -52,6 +53,10 @@ export type InputSize = {
   medium: string;
   big: string;
 };
+
+export interface RecentStatSectionProps {
+  nickname: string;
+}
 
 export type SummonerInfo = {
   accountId: string;
@@ -193,6 +198,8 @@ export type Images = TierImages & {
   ITEM: string;
   SPELL: string;
   RUNE: string;
+  BLUR: string;
+  DEFAULT: string;
 };
 
 export interface PieChartProps<T> {
@@ -631,4 +638,11 @@ export type InGamePerks = {
 export interface AsyncBoundaryProps {
   children: ReactNode;
   key?: string;
+}
+
+export interface CustomImageProps {
+  className?: string;
+  source: string;
+  alt: string;
+  size: number;
 }
