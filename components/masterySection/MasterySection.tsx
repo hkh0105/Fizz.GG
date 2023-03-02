@@ -43,7 +43,7 @@ const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
             };
 
             return (
-              <AsyncBoundary key={mastery.championId}>
+              <AsyncBoundary key={String(mastery.championId)}>
                 <MasteryRow {...MasteryRowProps} />
               </AsyncBoundary>
             );
