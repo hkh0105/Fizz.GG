@@ -1,4 +1,7 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import {
+  useInfiniteQuery,
+  UseInfiniteQueryResult,
+} from '@tanstack/react-query';
 
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
@@ -11,23 +14,38 @@ export const useGetMatchIds = (
   options?: QueryOptions<Response<MatchIds>>
 ) => {
   const { puuid } = useGetSummoner(nickname);
-  const { refetch: refetchMatches, data }: UseQueryResult<Response<MatchIds>> =
-    useQuery(
+  const { data, fetchNextPage }: UseInfiniteQueryResult<Response<MatchIds>> =
+    useInfiniteQuery(
       [QUERY_KEYS.getMatchIdsByPuuid, { puuid }],
-      () => CLIENT_API.getMatchesByPuuid(puuid, count),
-      { ...options, enabled: !!puuid }
+      async ({ pageParam = 10 }) =>
+        CLIENT_API.getMatchesByPuuid(puuid, Number(pageParam)),
+      {
+        getNextPageParam: (lastPage, allPages) => {
+          if (!lastPage) {
+            const message = '찾을 수 있는 매치 데이터가 없습니다';
+
+            throw { status: 404, message: message, name: '404Error' };
+          }
+
+          return count + 10;
+        },
+      }
     );
 
-  const matchIds = data?.items;
-
-  if (!matchIds?.length) {
-    const message = '찾을 수 있는 데이터가 없습니다';
+  if (!data || !data.pages) {
+    const message = '찾을 수 있는 매치 데이터가 없습니다';
 
     throw { status: 404, message: message, name: '404Error' };
   }
 
+  const matchIds: string[] = [];
+  data.pages.map((page) => {
+    matchIds.push(...page.items);
+  });
+
   return {
     matchIds,
-    refetchMatches,
+    data,
+    fetchNextPage,
   };
 };
