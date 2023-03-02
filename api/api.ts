@@ -16,7 +16,10 @@ export const API = {
     await instance.get(PATH.getSummonerByPUUID.replace('{puuid}', puuid)),
   getMatchesByPUUID: async (puuid: string, count: string) =>
     await regionInstance.get<string[]>(
-      PATH.getMatchesByPUUID.replace('{puuid}', puuid).replace('{count}', count)
+      PATH.getMatchesByPUUID
+        .replace('{puuid}', puuid)
+        .replace('{count}', '10')
+        .replace('{start}', String(Number(count) - 10))
     ),
   getLeagueInfoById: async (id: string) =>
     await instance.get<LeagueInfos>(
