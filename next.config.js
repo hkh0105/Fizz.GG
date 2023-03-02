@@ -30,14 +30,6 @@ const nextConfig = {
       },
     ],
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/:path*',
-  //       destination: `${process.env.NEXT_PUBLIC_RIOT_URL_PLATFORM}:path*`,
-  //     },
-  //   ];
-  // },
 };
 
 module.exports = nextConfig;
