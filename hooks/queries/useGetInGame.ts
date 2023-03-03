@@ -13,7 +13,7 @@ export const useGetInGame = (
   const { data, refetch }: UseQueryResult<Response<InGameInfo>> = useQuery(
     [QUERY_KEYS.getInGameByPuuid, { id }],
     () => CLIENT_API.getInGameByPuuid(id),
-    { ...options, enabled: !!id }
+    { ...options, enabled: !!id, retry: false }
   );
 
   const inGameInfo = data?.items;
