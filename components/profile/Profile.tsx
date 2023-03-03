@@ -16,7 +16,7 @@ import {
 } from 'types';
 const Profile: FC<ProfileProps> = ({ nickname }) => {
   const router = useRouter();
-  const isInGame = router.pathname === '/search/[nickname/ingame';
+  const isInGame = router.pathname === '/search/[nickname]/ingame';
   const isSummoner = router.pathname === '/search/[nickname]/summoner';
   const queryClient = useQueryClient();
   const { name, summonerLevel, profileIconId } = useGetSummoner(nickname);
@@ -30,6 +30,7 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
 
   const onClickUpdateButton = async () => {
     await queryClient.invalidateQueries();
+    window.location.reload();
   };
 
   const onClickSummonerButton = async () => {
