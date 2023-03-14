@@ -19,9 +19,11 @@ import {
   RuneIconProps,
   KdaProps,
   TypographyProps,
-  ItemIconProps,
 } from 'types';
-import { ChampionIconPropsMapper } from 'utils/propsMapper';
+import {
+  ChampionIconPropsMapper,
+  ItemIconPropsMapper,
+} from 'utils/propsMapper';
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
@@ -146,11 +148,11 @@ const UserStatRow: FC<UserStatRowProps> = ({
     titleColor: 'gray',
   };
 
-  const ItemIconProps: ItemIconProps = {
-    width: 25,
-    summonerItems: [item0, item1, item2, item3, item4, item5, item6],
-    marginClass: 'pt-7',
-  };
+  const ItemIconProps = ItemIconPropsMapper(
+    [item0, item1, item2, item3, item4, item5, item6],
+    25,
+    'pt-7'
+  );
 
   return (
     <div className='w-[800px] h-[60px] justify-center flex items-center gap-x-1 '>

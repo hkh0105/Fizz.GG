@@ -22,4 +22,5 @@ export {
   DefaultSectionPropsMapper,
   InGameTeamColumnPropsMapper,
   InGamerUserRowPropsMapper,
+  ItemIconPropsMapper,
 } from './propsMapper';

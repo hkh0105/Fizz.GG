@@ -11,6 +11,7 @@ import {
   InGameTeamColumnProps,
   InGameUser,
   InGameUserRowProps,
+  ItemIconProps,
   MatchInfoByUser,
   RuneInfo,
   SpellInfos,
@@ -93,3 +94,13 @@ export const InGamerUserRowPropsMapper = (
   spells: SpellInfos,
   profileIconId: number
 ): InGameUserRowProps => ({ nickname, runes, spells, profileIconId });
+
+export const ItemIconPropsMapper = (
+  summonerItems: number[],
+  width: number,
+  marginClass?: string
+): ItemIconProps => ({
+  summonerItems,
+  width,
+  marginClass,
+});
