@@ -3,6 +3,7 @@ import { FC } from 'react';
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import Typography from 'userInterface/typography/Typography';
 import { ChampStatRowProps, TypographyProps } from 'types';
+import { ChampionIconPropsMapper } from 'utils/propsMapper';
 
 const ChampStatRow: FC<ChampStatRowProps> = ({ champInfo }) => {
   const winRate = ((champInfo[1].win * 100) / champInfo[1].total).toFixed(0);
@@ -28,9 +29,16 @@ const ChampStatRow: FC<ChampStatRowProps> = ({ champInfo }) => {
     text: String(winRate) + '%',
   };
 
+  const ChampionIconProps = ChampionIconPropsMapper(
+    30,
+    champInfo[0],
+    undefined,
+    'mt-2'
+  );
+
   return (
     <div className='flex items-center gap-3 my-2'>
-      <ChampionIcon width={30} championName={champInfo[0]} marginClass='mt-2' />
+      <ChampionIcon {...ChampionIconProps} />
       <div className='w-[80px]'>
         <Typography {...ChampKdaProps} />
       </div>

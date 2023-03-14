@@ -1,5 +1,10 @@
 import { ReactNode, SuspenseProps } from 'react';
-import { ButtonGroupProps, ButtonProps, CustomImageProps } from 'types';
+import {
+  ButtonGroupProps,
+  ButtonProps,
+  ChampionIconProps,
+  CustomImageProps,
+} from 'types';
 
 export const AsyncBoundaryPropsMapper = (key: string) => ({
   key,
@@ -28,4 +33,16 @@ export const CustomImagePropsMapper = (
   source,
   alt,
   size,
+});
+
+export const ChampionIconPropsMapper = (
+  width: number,
+  championName: string,
+  championLevel?: number,
+  marginClass?: string
+): ChampionIconProps => ({
+  width,
+  championName,
+  championLevel,
+  marginClass,
 });

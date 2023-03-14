@@ -12,7 +12,6 @@ import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
 import { getKda, getMainRune, getSpells, getSubRune } from 'utils';
 import {
   SingleBarChartProps,
-  ChampionIconProps,
   SpellIconProps,
   UserStatRowProps,
   SpellInfos,
@@ -22,6 +21,7 @@ import {
   TypographyProps,
   ItemIconProps,
 } from 'types';
+import { ChampionIconPropsMapper } from 'utils/propsMapper';
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
@@ -69,11 +69,11 @@ const UserStatRow: FC<UserStatRowProps> = ({
   //KDA
   const kda = getKda(kills, assists, deaths);
 
-  const ChampionIconProps: ChampionIconProps = {
-    championName: championName,
-    championLevel: champLevel,
-    width: 30,
-  };
+  const ChampionIconProps = ChampionIconPropsMapper(
+    30,
+    championName,
+    champLevel
+  );
 
   const SpellIconProps: SpellIconProps = {
     width: 15,

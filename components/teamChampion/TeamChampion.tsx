@@ -1,11 +1,10 @@
 import { FC } from 'react';
 
-import { useRouter } from 'next/router';
-
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import Typography from 'userInterface/typography/Typography';
-import { TeamChampionProps, TypographyProps } from 'types';
 import Link from 'next/link';
+import { TeamChampionProps, TypographyProps } from 'types';
+import { ChampionIconPropsMapper } from 'utils/propsMapper';
 
 const TeamChampion: FC<TeamChampionProps> = ({
   team,
@@ -28,10 +27,14 @@ const TeamChampion: FC<TeamChampionProps> = ({
           color: 'gray',
           text: userName,
         };
+        const ChampionIconProps = ChampionIconPropsMapper(
+          imageSize,
+          user.championName
+        );
 
         return (
           <div className={wrapperClassName} key={user.puuid}>
-            <ChampionIcon width={imageSize} championName={user.championName} />
+            <ChampionIcon {...ChampionIconProps} />
             <Link
               href={{
                 pathname: '/search/[nickname]',
