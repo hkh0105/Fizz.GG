@@ -19,4 +19,5 @@ export {
   CustomImagePropsMapper,
   DetailSectionPropsMapper,
   DetailSectionHeaderPropsMapper,
+  DefaultSectionPropsMapper,
 } from './propsMapper';

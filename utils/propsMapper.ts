@@ -7,6 +7,7 @@ import {
   DetailHeaderColorMapper,
   DetailSectionHeaderProps,
   DetailSectionProps,
+  IngameSectionProps,
   MatchInfoByUser,
 } from 'types';
 
@@ -67,4 +68,10 @@ export const DetailSectionHeaderPropsMapper = (
   color: keyof DetailHeaderColorMapper
 ): DetailSectionHeaderProps => ({
   color,
+});
+
+export const DefaultSectionPropsMapper = (
+  nickname: string
+): IngameSectionProps => ({
+  nickname,
 });
