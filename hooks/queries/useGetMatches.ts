@@ -32,14 +32,8 @@ export const useGetMatchIds = (
       }
     );
 
-  if (!data || !data.pages) {
-    const message = '찾을 수 있는 매치 데이터가 없습니다';
-
-    throw { status: 404, message: message, name: '404Error' };
-  }
-
   const matchIds: string[] = [];
-  data.pages.map((page) => {
+  data?.pages.map((page) => {
     matchIds.push(...page.items);
   });
 

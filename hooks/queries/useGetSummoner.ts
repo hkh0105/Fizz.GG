@@ -13,13 +13,7 @@ export const useGetSummoner = (
     () => CLIENT_API.getSummonerByNickname(nickname),
     options
   );
-  const summonerInfo = data?.items;
-
-  if (!summonerInfo) {
-    const message = '찾을 수 있는 데이터가 없습니다';
-
-    throw { status: 404, message: message, name: '404Error' };
-  }
+  const summonerInfo = data?.items as SummonerInfo;
 
   const { id, puuid, name, summonerLevel, profileIconId } = summonerInfo;
 

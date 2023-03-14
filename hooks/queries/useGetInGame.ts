@@ -16,13 +16,7 @@ export const useGetInGame = (
     { ...options, enabled: !!id, retry: false }
   );
 
-  const inGameInfo = data?.items;
-
-  if (!inGameInfo) {
-    const message = '현제 게임중이지 않습니다.';
-
-    throw { status: 404, message: message, name: '404Error' };
-  }
+  const inGameInfo = data?.items as InGameInfo;
 
   const { gameQueueConfigId: queueType, participants } = inGameInfo;
 
