@@ -17,4 +17,6 @@ export {
   AsyncBoundaryPropsMapper,
   ButtonGroupPropsMapper,
   CustomImagePropsMapper,
+  DetailSectionPropsMapper,
+  DetailSectionHeaderPropsMapper,
 } from './propsMapper';

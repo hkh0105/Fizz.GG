@@ -6,11 +6,11 @@ import DetailSectionHeader from './DetailSectionheader';
 import {
   BoxProps,
   DetailHeaderColorMapper,
-  DetailSectionHeaderProps,
   DetailSectionProps,
   MatchInfoByUser,
   UserStatRowProps,
 } from 'types';
+import { DetailSectionHeaderPropsMapper } from 'utils';
 
 const DetailSection: FC<DetailSectionProps> = ({
   summonerTeam,
@@ -32,13 +32,13 @@ const DetailSection: FC<DetailSectionProps> = ({
     color: enemyTeam[0]?.win ? 'blue' : 'red',
   };
 
-  const SummonerTeamHeader: DetailSectionHeaderProps = {
-    color: SummonerTeamDetailBoxProps.color as keyof DetailHeaderColorMapper,
-  };
+  const SummonerTeamHeader = DetailSectionHeaderPropsMapper(
+    SummonerTeamDetailBoxProps.color as keyof DetailHeaderColorMapper
+  );
 
-  const EnemyTeamHeader: DetailSectionHeaderProps = {
-    color: EnemyTeamDetailBoxProps.color as keyof DetailHeaderColorMapper,
-  };
+  const EnemyTeamHeader = DetailSectionHeaderPropsMapper(
+    EnemyTeamDetailBoxProps.color as keyof DetailHeaderColorMapper
+  );
 
   return (
     <>

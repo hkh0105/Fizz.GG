@@ -4,6 +4,10 @@ import {
   ButtonProps,
   ChampionIconProps,
   CustomImageProps,
+  DetailHeaderColorMapper,
+  DetailSectionHeaderProps,
+  DetailSectionProps,
+  MatchInfoByUser,
 } from 'types';
 
 export const AsyncBoundaryPropsMapper = (key: string) => ({
@@ -45,4 +49,22 @@ export const ChampionIconPropsMapper = (
   championName,
   championLevel,
   marginClass,
+});
+
+export const DetailSectionPropsMapper = (
+  summonerTeam: MatchInfoByUser[],
+  enemyTeam: MatchInfoByUser[],
+  maxDamage: number,
+  maxTakenDamage: number
+): DetailSectionProps => ({
+  summonerTeam,
+  enemyTeam,
+  maxDamage,
+  maxTakenDamage,
+});
+
+export const DetailSectionHeaderPropsMapper = (
+  color: keyof DetailHeaderColorMapper
+): DetailSectionHeaderProps => ({
+  color,
 });

@@ -6,6 +6,7 @@ import MatchOverView from './MatchOverView';
 import MatchSummonerOverView from './MatchSummonerOverView';
 import DetailSection from '../detailSection/DetailSection';
 import {
+  DetailSectionPropsMapper,
   getDateDiff,
   getEnemyTeam,
   getKda,
@@ -175,12 +176,12 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     onClick: () => setShownDetail(!isShownDetail),
   };
 
-  const DetailSectionProps = {
+  const DetailSectionProps = DetailSectionPropsMapper(
     summonerTeam,
     enemyTeam,
     maxDamage,
-    maxTakenDamage,
-  };
+    maxTakenDamage
+  );
 
   useEffect(() => {
     if (gameInfo) {
