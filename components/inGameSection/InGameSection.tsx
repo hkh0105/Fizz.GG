@@ -4,10 +4,10 @@ import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import InGameTeamColumn from './InGameTeamColumn';
 import { useGetInGame } from 'hooks/queries';
+import { InGameTeamColumnPropsMapper } from 'utils';
 import {
   BoxProps,
   IngameSectionProps,
-  InGameTeamColumnProps,
   QueueTypeMapper,
   TypographyProps,
 } from 'types';
@@ -38,13 +38,8 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
     color: 'blue',
   };
 
-  const SummonerColumnProps: InGameTeamColumnProps = {
-    users: summonerTeam,
-  };
-
-  const EnemyColumnProps: InGameTeamColumnProps = {
-    users: enemyTeam,
-  };
+  const SummonerColumnProps = InGameTeamColumnPropsMapper(summonerTeam);
+  const EnemyColumnProps = InGameTeamColumnPropsMapper(enemyTeam);
 
   const VersusProps: TypographyProps = {
     text: 'VS',

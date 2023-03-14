@@ -8,7 +8,12 @@ import {
   DetailSectionHeaderProps,
   DetailSectionProps,
   IngameSectionProps,
+  InGameTeamColumnProps,
+  InGameUser,
+  InGameUserRowProps,
   MatchInfoByUser,
+  RuneInfo,
+  SpellInfos,
 } from 'types';
 
 export const AsyncBoundaryPropsMapper = (key: string) => ({
@@ -75,3 +80,16 @@ export const DefaultSectionPropsMapper = (
 ): IngameSectionProps => ({
   nickname,
 });
+
+export const InGameTeamColumnPropsMapper = (
+  users: InGameUser[]
+): InGameTeamColumnProps => ({
+  users,
+});
+
+export const InGamerUserRowPropsMapper = (
+  nickname: string,
+  runes: RuneInfo[],
+  spells: SpellInfos,
+  profileIconId: number
+): InGameUserRowProps => ({ nickname, runes, spells, profileIconId });

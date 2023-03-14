@@ -20,4 +20,6 @@ export {
   DetailSectionPropsMapper,
   DetailSectionHeaderPropsMapper,
   DefaultSectionPropsMapper,
+  InGameTeamColumnPropsMapper,
+  InGamerUserRowPropsMapper,
 } from './propsMapper';
