@@ -7,8 +7,8 @@ import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
 import { useGetSummoner } from 'hooks/queries';
+import { ButtonGroupPropsMapper } from 'utils/propsMapper';
 import {
-  ButtonGroupProps,
   ButtonProps,
   ProfileIconProps,
   ProfileProps,
@@ -75,14 +75,11 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     label: '업데이트',
   };
 
-  const ButtonGroupProps: ButtonGroupProps = {
-    containerClassName: 'flex gap-3',
-    buttons: [
-      isInGame ? MatchesButtonProps : InGameButtonProps,
-      isSummoner ? MatchesButtonProps : MasteryButtonProps,
-      UpdateButtonProps,
-    ],
-  };
+  const ButtonGroupProps = ButtonGroupPropsMapper('flex gap-3', [
+    isInGame ? MatchesButtonProps : InGameButtonProps,
+    isSummoner ? MatchesButtonProps : MasteryButtonProps,
+    UpdateButtonProps,
+  ]);
 
   const SummonerNameProps: TypographyProps = {
     type: 'title',
