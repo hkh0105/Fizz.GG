@@ -12,6 +12,7 @@ import {
   MasteryRowProps,
   TypographyProps,
 } from 'types';
+import { AsyncBoundaryPropsMapper } from 'utils';
 
 const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
   const { masteryInfo } = useGetMastery(nickname);
@@ -27,9 +28,7 @@ const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
     width: 'w-[800px]',
   };
 
-  const AsyncBoundaryProps = {
-    key: nickname,
-  };
+  const AsyncBoundaryProps = AsyncBoundaryPropsMapper(nickname);
 
   return (
     <AsyncBoundary {...AsyncBoundaryProps}>

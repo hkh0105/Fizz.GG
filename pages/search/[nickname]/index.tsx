@@ -7,12 +7,14 @@ import RankSection from 'components/rankSection/RankSection';
 import MatchSection from 'components/matchSection/MatchSection';
 import RecentStatSection from 'components/resentStatSection/RecentStatSection';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
+import { AsyncBoundaryPropsMapper } from 'utils';
 
 const Search: FC = () => {
   const nickname = useRouter().query.nickname as string;
+  const AsyncBoundaryProps = AsyncBoundaryPropsMapper(nickname);
 
   return (
-    <AsyncBoundary key={nickname}>
+    <AsyncBoundary {...AsyncBoundaryProps}>
       <SearchLayout>
         <div className='w-[1110px] max-lg:w-[800px]'>
           <Profile nickname={nickname} />

@@ -12,3 +12,4 @@ export {
 } from './match';
 export { getInGameSpells, getInGameRunes } from './inGame';
 export { getChampName, convertLastPlayTime } from './mastery';
+export { SuspensePropsMapper, AsyncBoundaryPropsMapper } from './propsMapper';
