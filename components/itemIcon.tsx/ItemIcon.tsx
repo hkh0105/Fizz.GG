@@ -1,10 +1,10 @@
-import Image, { ImageProps } from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 import { FC } from 'react';
 
-import { IMAGES } from 'constant';
-import { CustomImageProps, ItemIconProps } from 'types';
 import CustomImage from 'userInterface/customImage/CustomImage';
+import { IMAGES } from 'constant';
+import { ItemIconProps } from 'types';
+import { CustomImagePropsMapper } from 'utils';
 
 const ItemIcon: FC<ItemIconProps> = ({ width, summonerItems, marginClass }) => {
   const wrapper = 'flex' + ' ' + marginClass;
@@ -13,12 +13,11 @@ const ItemIcon: FC<ItemIconProps> = ({ width, summonerItems, marginClass }) => {
     <div className={wrapper}>
       {summonerItems?.map((item) => {
         const itemSource = IMAGES.ITEM.replace('{item}', String(item));
-        
-        const CustomImageProps: CustomImageProps = {
-          source: itemSource,
-          alt: '소환사 아이템 이미지',
-          size: width,
-        };
+        const CustomImageProps = CustomImagePropsMapper(
+          itemSource,
+          '소환사 아이템 이미지',
+          width
+        );
 
         return <CustomImage {...CustomImageProps} key={uuidv4()} />;
       })}

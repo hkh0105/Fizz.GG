@@ -16,4 +16,5 @@ export {
   SuspensePropsMapper,
   AsyncBoundaryPropsMapper,
   ButtonGroupPropsMapper,
+  CustomImagePropsMapper,
 } from './propsMapper';
