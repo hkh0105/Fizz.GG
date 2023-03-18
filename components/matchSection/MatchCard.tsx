@@ -20,7 +20,10 @@ import {
 } from 'utils';
 import { recentInfo } from 'store';
 import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
-import { MatchOverViewPropsMapper } from 'utils/propsMapper';
+import {
+  MatchOverViewPropsMapper,
+  MatchSummonerOverViewPropsMapper,
+} from 'utils/propsMapper';
 import {
   MatchCardProps,
   QueueTypeMapper,
@@ -143,14 +146,12 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     isWin
   );
 
-  const SummonerOverViewProps = {
-    champion: championName,
-    championLevel: champLevel,
-    summonerItems: items,
-    spells: [spellD, spellF] as SpellInfos,
-    runes: [mainRune, subRune] as RuneInfo[],
-    summonerTeam: summonerTeam,
-    enemyTeam: enemyTeam,
+  const SummonerOverViewProps = MatchSummonerOverViewPropsMapper(
+    championName,
+    champLevel,
+    items,
+    [spellD, spellF] as SpellInfos,
+    [mainRune, subRune] as RuneInfo[],
     kills,
     deaths,
     assists,
@@ -159,7 +160,9 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     totalMinionsKilled,
     visionScore,
     goldEarned,
-  };
+    summonerTeam,
+    enemyTeam
+  );
 
   const BoxProps: BoxProps = {
     size: 'custom',

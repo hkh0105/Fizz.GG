@@ -147,3 +147,37 @@ export const MatchOverViewPropsMapper = (
   gameTime: gameTime,
   isWin: isWin,
 });
+
+export const MatchSummonerOverViewPropsMapper = (
+  champion: string,
+  championLevel: number,
+  summonerItems: number[],
+  spells: SpellInfos,
+  runes: RuneInfo[],
+  kills: number,
+  deaths: number,
+  assists: number,
+  kda: number,
+  killInvolvedRate: number,
+  totalMinionsKilled: number,
+  visionScore: number,
+  goldEarned: number,
+  summonerTeam: MatchInfoByUser[],
+  enemyTeam: MatchInfoByUser[]
+) => ({
+  champion: champion,
+  championLevel: championLevel,
+  summonerItems: summonerItems,
+  spells: spells,
+  runes: runes,
+  kills: kills,
+  deaths: deaths,
+  assists: assists,
+  kda: kda,
+  killInvolvedRate: killInvolvedRate,
+  totalMinionsKilled: totalMinionsKilled,
+  visionScore: visionScore,
+  goldEarned: goldEarned,
+  summonerTeam: summonerTeam,
+  enemyTeam: enemyTeam,
+});
