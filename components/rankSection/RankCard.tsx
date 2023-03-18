@@ -3,18 +3,18 @@ import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
 import PieChart from 'components/pieChart/PieChart';
+import Box from 'userInterface/box/Box';
 import { IMAGES } from 'constant';
+import { PieChartPropsMapper } from 'utils/propsMapper';
 import {
   ChartData,
   Margin,
   Images,
-  PieChartProps,
   RankContentsProps,
   RankTitleMapper,
   TypographyProps,
   BoxProps,
 } from 'types';
-import Box from 'userInterface/box/Box';
 
 const RankCard: FC<RankContentsProps> = ({
   wins,
@@ -61,10 +61,7 @@ const RankCard: FC<RankContentsProps> = ({
     alt: '소환사 랭크 티어 이미지',
   };
 
-  const PieChartProps: PieChartProps<ChartData<number>> = {
-    data: chartData,
-    margin,
-  };
+  const PieChartProps = PieChartPropsMapper(chartData, margin);
 
   return (
     <Box {...BoxProps}>

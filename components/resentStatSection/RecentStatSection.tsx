@@ -7,7 +7,8 @@ import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import PieChart from 'components/pieChart/PieChart';
 import ChampStatRow from './ChampStatRow';
 import { recentChampInfo, recentWinStats } from 'store';
-import { BoxProps, ChartData, PieChartProps, TypographyProps } from 'types';
+import { PieChartPropsMapper } from 'utils/propsMapper';
+import { BoxProps, ChartData, TypographyProps } from 'types';
 
 const RecentStatSection: FC = () => {
   const champions = useRecoilValue(recentChampInfo);
@@ -23,10 +24,7 @@ const RecentStatSection: FC = () => {
     width: 'w-[300px] max-sm:hidden',
   };
 
-  const PieChartProps: PieChartProps<ChartData<number>> = {
-    data: chartData,
-    margin: { top: 40, right: 50 },
-  };
+  const PieChartProps = PieChartPropsMapper(chartData, { top: 40, right: 50 });
 
   const RecentMatchTextProps: TypographyProps = {
     type: 'default',

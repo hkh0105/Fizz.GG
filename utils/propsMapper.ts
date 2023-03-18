@@ -3,6 +3,7 @@ import {
   ButtonGroupProps,
   ButtonProps,
   ChampionIconProps,
+  ChartData,
   CustomImageProps,
   DetailHeaderColorMapper,
   DetailSectionHeaderProps,
@@ -12,12 +13,20 @@ import {
   InGameUser,
   InGameUserRowProps,
   ItemIconProps,
+  KdaProps,
+  Margin,
   MasteryInfo,
+  MasteryRowProps,
+  MatchCardProps,
   MatchInfoByUser,
+  MatchOverViewProps,
+  MatchSummonerOverViewProps,
+  PieChartProps,
   QueueTypeMapper,
   RuneInfo,
   SpellInfos,
   TypoGraphySizeMapper,
+  UserStatRowProps,
   ValueOf,
 } from 'types';
 
@@ -117,7 +126,7 @@ export const KdaPropsMapper = (
   marginClass?: string,
   size?: keyof TypoGraphySizeMapper,
   kdaSize?: keyof TypoGraphySizeMapper
-) => ({
+): KdaProps => ({
   kills: kills,
   deaths: deaths,
   assists: assists,
@@ -127,11 +136,16 @@ export const KdaPropsMapper = (
   kdaSize: kdaSize,
 });
 
-export const MasteryRowPropsMapper = (masteryInfo: MasteryInfo) => ({
+export const MasteryRowPropsMapper = (
+  masteryInfo: MasteryInfo
+): MasteryRowProps => ({
   masteryInfo: masteryInfo,
 });
 
-export const MatchCardPropsMapper = (matchId: string, nickname: string) => ({
+export const MatchCardPropsMapper = (
+  matchId: string,
+  nickname: string
+): MatchCardProps => ({
   matchId: matchId,
   nickname: nickname,
 });
@@ -141,7 +155,7 @@ export const MatchOverViewPropsMapper = (
   dayDiff: string,
   gameTime: string,
   isWin: boolean
-) => ({
+): MatchOverViewProps => ({
   matchType: matchType,
   dayDiff: dayDiff,
   gameTime: gameTime,
@@ -164,7 +178,7 @@ export const MatchSummonerOverViewPropsMapper = (
   goldEarned: number,
   summonerTeam: MatchInfoByUser[],
   enemyTeam: MatchInfoByUser[]
-) => ({
+): MatchSummonerOverViewProps => ({
   champion: champion,
   championLevel: championLevel,
   summonerItems: summonerItems,
@@ -186,8 +200,16 @@ export const UserStatRowPropsMapper = (
   summoner: MatchInfoByUser,
   maxDamage: number,
   maxTakenDamage: number
-) => ({
+): UserStatRowProps => ({
   summoner: summoner,
   maxDamage: maxDamage,
   maxTakenDamage: maxTakenDamage,
+});
+
+export const PieChartPropsMapper = (
+  data: ChartData<number>[],
+  margin: Margin
+) => ({
+  data: data,
+  margin: margin,
 });
