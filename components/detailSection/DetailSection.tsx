@@ -3,7 +3,7 @@ import { FC } from 'react';
 import UserStatRow from 'components/matchSection/UserStatRow';
 import Box from 'userInterface/box/Box';
 import DetailSectionHeader from './DetailSectionheader';
-import { DetailSectionHeaderPropsMapper } from 'utils';
+import { DetailSectionHeaderPropsMapper, UserStatRowPropsMapper } from 'utils';
 import {
   BoxProps,
   DetailHeaderColorMapper,
@@ -11,7 +11,6 @@ import {
   MatchInfoByUser,
   UserStatRowProps,
 } from 'types';
-import { UserStatRowPropsMapper } from 'utils/propsMapper';
 
 const DetailSection: FC<DetailSectionProps> = ({
   summonerTeam,

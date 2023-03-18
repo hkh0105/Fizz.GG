@@ -9,14 +9,17 @@ import Kda from 'components/kda/Kda';
 import Typography from 'userInterface/typography/Typography';
 import SingleBarChart from 'components/singleBarChart/SingleBarChart';
 import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
-import { getKda, getMainRune, getSpells, getSubRune } from 'utils';
 import {
+  getKda,
+  getMainRune,
+  getSpells,
+  getSubRune,
   ChampionIconPropsMapper,
   ItemIconPropsMapper,
   KdaPropsMapper,
   RuneIconPropsMapper,
   SpellIconPropsMapper,
-} from 'utils/propsMapper';
+} from 'utils';
 import {
   SingleBarChartProps,
   UserStatRowProps,

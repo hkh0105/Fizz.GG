@@ -6,9 +6,8 @@ import Typography from 'userInterface/typography/Typography';
 import MasteryRow from './MasteryRow';
 import MasteryHeader from './MasteryHeader';
 import { useGetMastery } from 'hooks/queries';
+import { AsyncBoundaryPropsMapper, MasteryRowPropsMapper } from 'utils';
 import { BoxProps, IngameSectionProps, TypographyProps } from 'types';
-import { AsyncBoundaryPropsMapper } from 'utils';
-import { MasteryRowPropsMapper } from 'utils/propsMapper';
 
 const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
   const { masteryInfo } = useGetMastery(nickname);

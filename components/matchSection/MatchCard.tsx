@@ -5,6 +5,8 @@ import Box from 'userInterface/box/Box';
 import MatchOverView from './MatchOverView';
 import MatchSummonerOverView from './MatchSummonerOverView';
 import DetailSection from '../detailSection/DetailSection';
+import { recentInfo } from 'store';
+import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
 import {
   DetailSectionPropsMapper,
   getDateDiff,
@@ -17,13 +19,9 @@ import {
   getSpells,
   getSubRune,
   getSummonerTeam,
-} from 'utils';
-import { recentInfo } from 'store';
-import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
-import {
   MatchOverViewPropsMapper,
   MatchSummonerOverViewPropsMapper,
-} from 'utils/propsMapper';
+} from 'utils';
 import {
   MatchCardProps,
   QueueTypeMapper,

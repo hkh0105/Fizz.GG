@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
+import { useRouter } from 'next/router';
 
 import SearchWindow from 'components/searchWindow/SearchWindow';
 import { IMAGES } from 'constant';
 import { SearchWindowProps } from 'types';
-import { useRouter } from 'next/router';
 
 const NavigationBar: FC = () => {
   const path = useRouter().pathname;

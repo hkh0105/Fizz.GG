@@ -1,10 +1,10 @@
 import { FC } from 'react';
+import Link from 'next/link';
 
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import Typography from 'userInterface/typography/Typography';
-import Link from 'next/link';
 import { TeamChampionProps, TypographyProps } from 'types';
-import { ChampionIconPropsMapper } from 'utils/propsMapper';
+import { ChampionIconPropsMapper } from 'utils';
 
 const TeamChampion: FC<TeamChampionProps> = ({
   team,

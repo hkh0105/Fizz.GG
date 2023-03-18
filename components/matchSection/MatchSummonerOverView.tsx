@@ -12,7 +12,7 @@ import {
   ItemIconPropsMapper,
   RuneIconPropsMapper,
   SpellIconPropsMapper,
-} from 'utils/propsMapper';
+} from 'utils';
 import {
   KdaProps,
   MatchSummonerOverViewProps,

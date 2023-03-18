@@ -7,7 +7,7 @@ import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import PieChart from 'components/pieChart/PieChart';
 import ChampStatRow from './ChampStatRow';
 import { recentChampInfo, recentWinStats } from 'store';
-import { PieChartPropsMapper } from 'utils/propsMapper';
+import { PieChartPropsMapper } from 'utils';
 import { BoxProps, ChartData, TypographyProps } from 'types';
 
 const RecentStatSection: FC = () => {

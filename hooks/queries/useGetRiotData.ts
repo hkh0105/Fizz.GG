@@ -2,7 +2,13 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
-import { QueryOptions, RiotChampInfo, RiotSpellData, RuneData } from 'types';
+import {
+  ChampDetails,
+  QueryOptions,
+  RiotChampInfo,
+  RiotSpellData,
+  RuneData,
+} from 'types';
 
 export const useGetSpellJson = (options?: QueryOptions<RiotSpellData>) => {
   const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(
@@ -25,11 +31,13 @@ export const useGetSpellJson = (options?: QueryOptions<RiotSpellData>) => {
 };
 
 export const useGetRuneJson = (options?: QueryOptions<RuneData>) => {
-  const { data: runeData }: UseQueryResult<RuneData> = useQuery(
+  const { data }: UseQueryResult<RuneData> = useQuery(
     [QUERY_KEYS.getRune],
     CLIENT_API.getRune,
     options
   );
+
+  const runeData = data as RuneData;
 
   return {
     runeData,
@@ -43,7 +51,7 @@ export const useGetChampJson = (options?: QueryOptions<RiotChampInfo>) => {
     options
   );
 
-  const champData = riotChampData?.data;
+  const champData = riotChampData?.data as ChampDetails;
 
   return {
     champData,

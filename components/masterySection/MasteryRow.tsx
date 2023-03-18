@@ -4,8 +4,11 @@ import Typography from 'userInterface/typography/Typography';
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import { useGetChampJson } from 'hooks/queries';
 import { MasteryRowProps, TypographyProps } from 'types';
-import { convertLastPlayTime, getChampName } from 'utils';
-import { ChampionIconPropsMapper } from 'utils/propsMapper';
+import {
+  convertLastPlayTime,
+  getChampName,
+  ChampionIconPropsMapper,
+} from 'utils';
 
 const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
   const { champData } = useGetChampJson();

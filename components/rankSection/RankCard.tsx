@@ -5,7 +5,7 @@ import Typography from 'userInterface/typography/Typography';
 import PieChart from 'components/pieChart/PieChart';
 import Box from 'userInterface/box/Box';
 import { IMAGES } from 'constant';
-import { PieChartPropsMapper } from 'utils/propsMapper';
+import { PieChartPropsMapper } from 'utils';
 import {
   ChartData,
   Margin,

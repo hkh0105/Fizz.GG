@@ -3,7 +3,7 @@ import { FC } from 'react';
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import Typography from 'userInterface/typography/Typography';
 import { ChampStatRowProps, TypographyProps } from 'types';
-import { ChampionIconPropsMapper } from 'utils/propsMapper';
+import { ChampionIconPropsMapper } from 'utils';
 
 const ChampStatRow: FC<ChampStatRowProps> = ({ champInfo }) => {
   const winRate = ((champInfo[1].win * 100) / champInfo[1].total).toFixed(0);
