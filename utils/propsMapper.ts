@@ -274,3 +274,7 @@ export const ChampStatRowPropsMapper = (
 ): ChampStatRowProps => ({
   champInfo: champInfo,
 });
+
+export const SearchWindowPropsMapper = (isMini: boolean) => ({
+  mini: isMini,
+});

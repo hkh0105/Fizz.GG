@@ -36,4 +36,5 @@ export {
   RankCardPropsMapper,
   ChampionIconPropsMapper,
   ChampStatRowPropsMapper,
+  SearchWindowPropsMapper,
 } from './propsMapper';
