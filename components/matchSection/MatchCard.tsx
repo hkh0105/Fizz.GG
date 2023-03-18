@@ -20,9 +20,9 @@ import {
 } from 'utils';
 import { recentInfo } from 'store';
 import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
+import { MatchOverViewPropsMapper } from 'utils/propsMapper';
 import {
   MatchCardProps,
-  MatchOverViewProps,
   QueueTypeMapper,
   RuneInfo,
   SpellInfos,
@@ -136,12 +136,12 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     setRecentMatches((prev) => [...prev, recentMatchUserInfo]);
   };
 
-  const MatchOverViewProps: MatchOverViewProps = {
-    matchType: queueTypeMapper[queueId] ?? '특별모드',
+  const MatchOverViewProps = MatchOverViewPropsMapper(
+    queueTypeMapper[queueId] ?? '특별모드',
     dayDiff,
-    isWin,
     gameTime,
-  };
+    isWin
+  );
 
   const SummonerOverViewProps = {
     champion: championName,

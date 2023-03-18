@@ -14,9 +14,11 @@ import {
   ItemIconProps,
   MasteryInfo,
   MatchInfoByUser,
+  QueueTypeMapper,
   RuneInfo,
   SpellInfos,
   TypoGraphySizeMapper,
+  ValueOf,
 } from 'types';
 
 export const AsyncBoundaryPropsMapper = (key: string) => ({
@@ -132,4 +134,16 @@ export const MasteryRowPropsMapper = (masteryInfo: MasteryInfo) => ({
 export const MatchCardPropsMapper = (matchId: string, nickname: string) => ({
   matchId: matchId,
   nickname: nickname,
+});
+
+export const MatchOverViewPropsMapper = (
+  matchType: ValueOf<QueueTypeMapper>,
+  dayDiff: string,
+  gameTime: string,
+  isWin: boolean
+) => ({
+  matchType: matchType,
+  dayDiff: dayDiff,
+  gameTime: gameTime,
+  isWin: isWin,
 });
