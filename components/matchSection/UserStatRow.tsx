@@ -17,12 +17,12 @@ import {
   SpellInfos,
   RuneInfo,
   RuneIconProps,
-  KdaProps,
   TypographyProps,
 } from 'types';
 import {
   ChampionIconPropsMapper,
   ItemIconPropsMapper,
+  KdaPropsMapper,
 } from 'utils/propsMapper';
 
 const UserStatRow: FC<UserStatRowProps> = ({
@@ -89,15 +89,15 @@ const UserStatRow: FC<UserStatRowProps> = ({
     runes,
   };
 
-  const KdaProps: KdaProps = {
-    marginClass: 'mt-2 ml-5',
-    kdaSize: 'xSmall',
-    size: 'xSmall',
+  const KdaProps = KdaPropsMapper(
     kills,
     deaths,
     assists,
     kda,
-  };
+    'mt-2 ml-5',
+    'xSmall',
+    'xSmall'
+  );
 
   const NicknameProps: TypographyProps = {
     type: 'default',

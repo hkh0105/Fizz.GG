@@ -15,6 +15,7 @@ import {
   MatchInfoByUser,
   RuneInfo,
   SpellInfos,
+  TypoGraphySizeMapper,
 } from 'types';
 
 export const AsyncBoundaryPropsMapper = (key: string) => ({
@@ -103,4 +104,22 @@ export const ItemIconPropsMapper = (
   summonerItems,
   width,
   marginClass,
+});
+
+export const KdaPropsMapper = (
+  kills: number,
+  deaths: number,
+  assists: number,
+  kda?: number,
+  marginClass?: string,
+  size?: keyof TypoGraphySizeMapper,
+  kdaSize?: keyof TypoGraphySizeMapper
+) => ({
+  kills: kills,
+  deaths: deaths,
+  assists: assists,
+  kda: kda,
+  marginClass: marginClass,
+  size: size,
+  kdaSize: kdaSize,
 });
