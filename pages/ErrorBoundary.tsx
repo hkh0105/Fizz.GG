@@ -1,7 +1,8 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { BoxProps, TypographyProps } from 'types';
+
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
+import { BoxPropsMapper, TypographyPropsMapper } from 'utils';
 
 interface Props {
   children?: ReactNode;
@@ -29,16 +30,16 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     const { error } = this.state;
-    const BoxProps: BoxProps = {
+    const BoxProps = BoxPropsMapper({
       size: 'custom',
       height: 'h-[300px]',
       width: 'w-full',
-    };
+    });
 
-    const TextProps: TypographyProps = {
+    const TextProps = TypographyPropsMapper({
       type: 'title',
       text: error,
-    };
+    });
 
     if (error) {
       return (

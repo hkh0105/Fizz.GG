@@ -5,15 +5,17 @@ import Typography from 'userInterface/typography/Typography';
 import PieChart from 'components/pieChart/PieChart';
 import Box from 'userInterface/box/Box';
 import { IMAGES } from 'constant';
-import { PieChartPropsMapper } from 'utils';
+import {
+  BoxPropsMapper,
+  PieChartPropsMapper,
+  TypographyPropsMapper,
+} from 'utils';
 import {
   ChartData,
   Margin,
   Images,
   RankContentsProps,
   RankTitleMapper,
-  TypographyProps,
-  BoxProps,
 } from 'types';
 
 const RankCard: FC<RankContentsProps> = ({
@@ -36,12 +38,12 @@ const RankCard: FC<RankContentsProps> = ({
     RANKED_FLEX_SR: '자유랭크',
   };
 
-  const BoxProps: BoxProps = {
+  const BoxProps = BoxPropsMapper({
     size: 'custom',
     width: 'w-[300px] max-sm:hidden',
-  };
+  });
 
-  const LpProps: TypographyProps = {
+  const LpProps = TypographyPropsMapper({
     type: 'default',
     text:
       rankTitleMapper[queueType] +
@@ -52,7 +54,7 @@ const RankCard: FC<RankContentsProps> = ({
       ' ' +
       String(leaguePoints) +
       'LP',
-  };
+  });
 
   const ImageProps = {
     src: IMAGES[tier as keyof Images] ?? IMAGES['UNRANKED'],

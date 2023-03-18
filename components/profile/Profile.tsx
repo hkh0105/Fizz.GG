@@ -7,11 +7,14 @@ import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
 import { useGetSummoner } from 'hooks/queries';
+import { ProfileProps } from 'types';
 import {
+  BoxPropsMapper,
   ButtonGroupPropsMapper,
+  ButtonPropsMapper,
   ProfileIconPropsMapper,
+  TypographyPropsMapper,
 } from 'utils/propsMapper';
-import { ButtonProps, ProfileProps, TypographyProps } from 'types';
 
 const Profile: FC<ProfileProps> = ({ nickname }) => {
   const router = useRouter();
@@ -53,26 +56,26 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     summonerLevel
   );
 
-  const InGameButtonProps: ButtonProps = {
+  const InGameButtonProps = ButtonPropsMapper({
     onClick: onClickInGameButton,
     label: '인게임 정보',
-  };
+  });
 
-  const MatchesButtonProps: ButtonProps = {
+  const MatchesButtonProps = ButtonPropsMapper({
     onClick: onClickMatchesButton,
     label: '매치 정보',
-  };
+  });
 
-  const MasteryButtonProps: ButtonProps = {
+  const MasteryButtonProps = ButtonPropsMapper({
     onClick: onClickSummonerButton,
     label: '소환사 정보',
-  };
+  });
 
-  const UpdateButtonProps: ButtonProps = {
+  const UpdateButtonProps = ButtonPropsMapper({
     color: 'transparent',
     onClick: onClickUpdateButton,
     label: '업데이트',
-  };
+  });
 
   const ButtonGroupProps = ButtonGroupPropsMapper('flex gap-3', [
     isInGame ? MatchesButtonProps : InGameButtonProps,
@@ -80,13 +83,17 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     UpdateButtonProps,
   ]);
 
-  const SummonerNameProps: TypographyProps = {
+  const SummonerNameProps = TypographyPropsMapper({
     type: 'title',
     text: name,
-  };
+  });
+
+  const BoxProps = BoxPropsMapper({
+    size: 'full',
+  });
 
   return (
-    <Box size='full'>
+    <Box {...BoxProps}>
       <div className='flex'>
         <ProfileIcon {...ProfileIconProps} />
         <div className='flex flex-col items-start justify-center gap-y-10'>

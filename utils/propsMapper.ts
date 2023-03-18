@@ -1,5 +1,6 @@
 import { ReactNode, SuspenseProps } from 'react';
 import {
+  BoxProps,
   ButtonGroupProps,
   ButtonProps,
   ChampionIconProps,
@@ -13,6 +14,7 @@ import {
   InGameTeamColumnProps,
   InGameUser,
   InGameUserRowProps,
+  InputProps,
   ItemIconProps,
   KdaProps,
   Margin,
@@ -22,7 +24,6 @@ import {
   MatchInfoByUser,
   MatchOverViewProps,
   MatchSummonerOverViewProps,
-  PieChartProps,
   ProfileIconProps,
   QueueTypeMapper,
   RankContentsProps,
@@ -37,6 +38,7 @@ import {
   TeamChampionProps,
   TotalMatchChampData,
   TypoGraphyColorMapper,
+  TypographyProps,
   TypoGraphySizeMapper,
   UserStatRowProps,
   ValueOf,
@@ -329,3 +331,15 @@ export const TeamChampionPropsMapper = (
   team: team,
   typoSize: typoSize,
 });
+
+export const BoxPropsMapper = (BoxProps: BoxProps): BoxProps => BoxProps;
+
+export const ButtonPropsMapper = (ButtonProps: ButtonProps): ButtonProps =>
+  ButtonProps;
+
+export const InputPropsMapper = (InputProps: InputProps): InputProps =>
+  InputProps;
+
+export const TypographyPropsMapper = (
+  TypographyProps: TypographyProps
+): TypographyProps => TypographyProps;

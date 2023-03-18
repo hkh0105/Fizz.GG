@@ -8,6 +8,7 @@ import DetailSection from '../detailSection/DetailSection';
 import { recentInfo } from 'store';
 import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
 import {
+  BoxPropsMapper,
   DetailSectionPropsMapper,
   getDateDiff,
   getEnemyTeam,
@@ -27,7 +28,6 @@ import {
   QueueTypeMapper,
   RuneInfo,
   SpellInfos,
-  BoxProps,
   RecentMatchUserInfo,
 } from 'types';
 
@@ -162,13 +162,13 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     enemyTeam
   );
 
-  const BoxProps: BoxProps = {
+  const BoxProps = BoxPropsMapper({
     size: 'custom',
     height: 'h-32',
     width: 'w-full',
     color: isWin ? 'blue' : 'red',
     marginClass: isShownDetail ? '' : 'mb-2',
-  };
+  });
 
   const ShowDetailButtonProps = {
     className: isWin

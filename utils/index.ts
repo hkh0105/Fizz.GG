@@ -1,3 +1,5 @@
+export { getInGameSpells, getInGameRunes } from './inGame';
+export { getChampName, convertLastPlayTime } from './mastery';
 export {
   getDateDiff,
   getSpells,
@@ -10,8 +12,6 @@ export {
   getMaxDamage,
   getMaxTakenDamage,
 } from './match';
-export { getInGameSpells, getInGameRunes } from './inGame';
-export { getChampName, convertLastPlayTime } from './mastery';
 export {
   SuspensePropsMapper,
   AsyncBoundaryPropsMapper,
@@ -39,4 +39,8 @@ export {
   SearchWindowPropsMapper,
   SingleBarChartPropsMapper,
   TeamChampionPropsMapper,
+  BoxPropsMapper,
+  ButtonPropsMapper,
+  InputPropsMapper,
+  TypographyPropsMapper,
 } from './propsMapper';

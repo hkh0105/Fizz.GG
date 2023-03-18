@@ -9,6 +9,7 @@ import Kda from 'components/kda/Kda';
 import Typography from 'userInterface/typography/Typography';
 import SingleBarChart from 'components/singleBarChart/SingleBarChart';
 import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
+import { UserStatRowProps, SpellInfos, RuneInfo, TypographyProps } from 'types';
 import {
   getKda,
   getMainRune,
@@ -20,8 +21,8 @@ import {
   RuneIconPropsMapper,
   SpellIconPropsMapper,
   SingleBarChartPropsMapper,
+  TypographyPropsMapper,
 } from 'utils';
-import { UserStatRowProps, SpellInfos, RuneInfo, TypographyProps } from 'types';
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
@@ -89,19 +90,19 @@ const UserStatRow: FC<UserStatRowProps> = ({
     'xSmall'
   );
 
-  const NicknameProps: TypographyProps = {
+  const NicknameProps = TypographyPropsMapper({
     type: 'default',
     size: 'xSmall',
     color: 'gray',
     text: summonerName,
-  };
+  });
 
-  const CsProps: TypographyProps = {
+  const CsProps = TypographyPropsMapper({
     type: 'default',
     size: 'xSmall',
     color: 'gray',
     text: 'CS :' + String(totalMinionsKilled),
-  };
+  });
 
   const VisionScoreProps: TypographyProps = {
     type: 'default',

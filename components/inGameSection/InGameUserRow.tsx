@@ -4,12 +4,13 @@ import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import RuneIcon from 'components/runeIcon/RuneIcon';
 import SpellIcon from 'components/spellIcon/SpellIcon';
 import Typography from 'userInterface/typography/Typography';
+import { InGameUserRowProps } from 'types';
 import {
   ProfileIconPropsMapper,
   RuneIconPropsMapper,
   SpellIconPropsMapper,
+  TypographyPropsMapper,
 } from 'utils/propsMapper';
-import { InGameUserRowProps, TypographyProps } from 'types';
 
 const InGameUserRow: FC<InGameUserRowProps> = ({
   nickname,
@@ -17,12 +18,12 @@ const InGameUserRow: FC<InGameUserRowProps> = ({
   spells,
   profileIconId,
 }) => {
-  const NicknameProps: TypographyProps = {
+  const NicknameProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: nickname,
-  };
+  });
 
   const SpellIconProps = SpellIconPropsMapper(spells, 25, 'pt-1');
 

@@ -3,9 +3,12 @@ import { FC } from 'react';
 import UserStatRow from 'components/matchSection/UserStatRow';
 import Box from 'userInterface/box/Box';
 import DetailSectionHeader from './DetailSectionheader';
-import { DetailSectionHeaderPropsMapper, UserStatRowPropsMapper } from 'utils';
 import {
-  BoxProps,
+  BoxPropsMapper,
+  DetailSectionHeaderPropsMapper,
+  UserStatRowPropsMapper,
+} from 'utils';
+import {
   DetailHeaderColorMapper,
   DetailSectionProps,
   MatchInfoByUser,
@@ -18,19 +21,19 @@ const DetailSection: FC<DetailSectionProps> = ({
   maxDamage,
   maxTakenDamage,
 }) => {
-  const SummonerTeamDetailBoxProps: BoxProps = {
+  const SummonerTeamDetailBoxProps = BoxPropsMapper({
     size: 'custom',
     height: 'h-[350px]',
     width: 'w-full',
     color: summonerTeam[0]?.win ? 'blue' : 'red',
-  };
+  });
 
-  const EnemyTeamDetailBoxProps: BoxProps = {
+  const EnemyTeamDetailBoxProps = BoxPropsMapper({
     size: 'custom',
     height: 'h-[350px]',
     width: 'w-full',
     color: enemyTeam[0]?.win ? 'blue' : 'red',
-  };
+  });
 
   const SummonerTeamHeader = DetailSectionHeaderPropsMapper(
     SummonerTeamDetailBoxProps.color as keyof DetailHeaderColorMapper

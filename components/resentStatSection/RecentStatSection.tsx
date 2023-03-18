@@ -7,8 +7,13 @@ import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import PieChart from 'components/pieChart/PieChart';
 import ChampStatRow from './ChampStatRow';
 import { recentChampInfo, recentWinStats } from 'store';
-import { PieChartPropsMapper, ChampStatRowPropsMapper } from 'utils';
-import { BoxProps, ChartData, TypographyProps } from 'types';
+import { ChartData } from 'types';
+import {
+  PieChartPropsMapper,
+  ChampStatRowPropsMapper,
+  BoxPropsMapper,
+  TypographyPropsMapper,
+} from 'utils';
 
 const RecentStatSection: FC = () => {
   const champions = useRecoilValue(recentChampInfo);
@@ -19,22 +24,22 @@ const RecentStatSection: FC = () => {
     { id: 'Lose', value: winStats.total - winStats.win, color: 'red' },
   ];
 
-  const BoxProps: BoxProps = {
+  const BoxProps = BoxPropsMapper({
     size: 'custom',
     width: 'w-[300px] max-sm:hidden',
-  };
+  });
 
   const PieChartProps = PieChartPropsMapper(chartData, { top: 40, right: 50 });
 
-  const RecentMatchTextProps: TypographyProps = {
+  const RecentMatchTextProps = TypographyPropsMapper({
     type: 'default',
     text: `최근 ${winStats.total} 경기 데이터`,
-  };
+  });
 
-  const WinRateProps: TypographyProps = {
+  const WinRateProps = TypographyPropsMapper({
     type: 'default',
     text: `${(winStats.winRate * 100).toFixed(0)}%`,
-  };
+  });
 
   return (
     <AsyncBoundary>
