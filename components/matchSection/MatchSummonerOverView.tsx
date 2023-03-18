@@ -8,17 +8,17 @@ import Kda from 'components/kda/Kda';
 import ItemIcon from 'components/itemIcon.tsx/ItemIcon';
 import TeamChampion from 'components/teamChampion/TeamChampion';
 import {
+  ChampionIconPropsMapper,
+  ItemIconPropsMapper,
+  RuneIconPropsMapper,
+  SpellIconPropsMapper,
+} from 'utils/propsMapper';
+import {
   KdaProps,
   MatchSummonerOverViewProps,
-  RuneIconProps,
-  SpellIconProps,
   TeamChampionProps,
   TypographyProps,
 } from 'types';
-import {
-  ChampionIconPropsMapper,
-  ItemIconPropsMapper,
-} from 'utils/propsMapper';
 
 const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
   champion,
@@ -43,17 +43,9 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
     championLevel
   );
 
-  const SpellIconProps: SpellIconProps = {
-    width: 25,
-    marginClass: 'ml-2',
-    spells,
-  };
+  const SpellIconProps = SpellIconPropsMapper(spells, 25, 'ml-2');
 
-  const RuneIconProps: RuneIconProps = {
-    width: 25,
-    marginClass: 'ml-1',
-    runes,
-  };
+  const RuneIconProps = RuneIconPropsMapper(runes, 25, 'ml-1');
 
   const KdaProps: KdaProps = {
     marginClass: 'mt-2 ml-2',

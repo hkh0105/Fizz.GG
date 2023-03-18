@@ -22,8 +22,11 @@ import {
   MatchOverViewProps,
   MatchSummonerOverViewProps,
   PieChartProps,
+  ProfileIconProps,
   QueueTypeMapper,
+  RuneIconProps,
   RuneInfo,
+  SpellIconProps,
   SpellInfos,
   TypoGraphySizeMapper,
   UserStatRowProps,
@@ -212,4 +215,36 @@ export const PieChartPropsMapper = (
 ) => ({
   data: data,
   margin: margin,
+});
+
+export const ProfileIconPropsMapper = (
+  profileIconId: number,
+  width: number,
+  height: number,
+  summonerLevel?: number
+): ProfileIconProps => ({
+  profileIconId: profileIconId,
+  width: width,
+  height: height,
+  summonerLevel: summonerLevel,
+});
+
+export const RuneIconPropsMapper = (
+  runes: RuneInfo[],
+  width: number,
+  marginClass: string
+): RuneIconProps => ({
+  runes: runes,
+  width: width,
+  marginClass: marginClass,
+});
+
+export const SpellIconPropsMapper = (
+  spells: SpellInfos,
+  width: number,
+  marginClass: string
+): SpellIconProps => ({
+  spells: spells,
+  width: width,
+  marginClass: marginClass,
 });

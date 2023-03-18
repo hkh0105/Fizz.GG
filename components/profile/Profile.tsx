@@ -7,13 +7,12 @@ import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
 import { useGetSummoner } from 'hooks/queries';
-import { ButtonGroupPropsMapper } from 'utils/propsMapper';
 import {
-  ButtonProps,
-  ProfileIconProps,
-  ProfileProps,
-  TypographyProps,
-} from 'types';
+  ButtonGroupPropsMapper,
+  ProfileIconPropsMapper,
+} from 'utils/propsMapper';
+import { ButtonProps, ProfileProps, TypographyProps } from 'types';
+
 const Profile: FC<ProfileProps> = ({ nickname }) => {
   const router = useRouter();
   const isInGame = router.pathname === '/search/[nickname]/ingame';
@@ -47,12 +46,12 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     });
   };
 
-  const ProfileIconProps: ProfileIconProps = {
-    profileIconId: profileIconId,
-    summonerLevel: summonerLevel,
-    width: 100,
-    height: 100,
-  };
+  const ProfileIconProps = ProfileIconPropsMapper(
+    profileIconId,
+    100,
+    100,
+    summonerLevel
+  );
 
   const InGameButtonProps: ButtonProps = {
     onClick: onClickInGameButton,

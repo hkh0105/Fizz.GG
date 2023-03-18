@@ -11,19 +11,19 @@ import SingleBarChart from 'components/singleBarChart/SingleBarChart';
 import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
 import { getKda, getMainRune, getSpells, getSubRune } from 'utils';
 import {
-  SingleBarChartProps,
-  SpellIconProps,
-  UserStatRowProps,
-  SpellInfos,
-  RuneInfo,
-  RuneIconProps,
-  TypographyProps,
-} from 'types';
-import {
   ChampionIconPropsMapper,
   ItemIconPropsMapper,
   KdaPropsMapper,
+  RuneIconPropsMapper,
+  SpellIconPropsMapper,
 } from 'utils/propsMapper';
+import {
+  SingleBarChartProps,
+  UserStatRowProps,
+  SpellInfos,
+  RuneInfo,
+  TypographyProps,
+} from 'types';
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
@@ -77,17 +77,9 @@ const UserStatRow: FC<UserStatRowProps> = ({
     champLevel
   );
 
-  const SpellIconProps: SpellIconProps = {
-    width: 15,
-    spells: spell,
-    marginClass: 'pt-1',
-  };
+  const SpellIconProps = SpellIconPropsMapper(spell, 15, 'pt-1');
 
-  const RuneIconProps: RuneIconProps = {
-    width: 15,
-    marginClass: 'pt-1',
-    runes,
-  };
+  const RuneIconProps = RuneIconPropsMapper(runes, 15, 'pt-1');
 
   const KdaProps = KdaPropsMapper(
     kills,
