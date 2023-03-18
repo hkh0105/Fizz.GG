@@ -7,18 +7,14 @@ import RuneIcon from 'components/runeIcon/RuneIcon';
 import Kda from 'components/kda/Kda';
 import ItemIcon from 'components/itemIcon.tsx/ItemIcon';
 import TeamChampion from 'components/teamChampion/TeamChampion';
+import { KdaProps, MatchSummonerOverViewProps, TypographyProps } from 'types';
 import {
   ChampionIconPropsMapper,
   ItemIconPropsMapper,
   RuneIconPropsMapper,
   SpellIconPropsMapper,
+  TeamChampionPropsMapper,
 } from 'utils';
-import {
-  KdaProps,
-  MatchSummonerOverViewProps,
-  TeamChampionProps,
-  TypographyProps,
-} from 'types';
 
 const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
   champion,
@@ -85,19 +81,19 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
     text: 'Gold :' + String(goldEarned),
   };
 
-  const SummonerTeamChampionProps: TeamChampionProps = {
-    team: summonerTeam,
-    imageSize: 20,
-    typoSize: 'small',
-    width: 140,
-  };
+  const SummonerTeamChampionProps = TeamChampionPropsMapper(
+    20,
+    140,
+    summonerTeam,
+    'small'
+  );
 
-  const EnemyTeamChampionProps: TeamChampionProps = {
-    team: enemyTeam,
-    imageSize: 20,
-    typoSize: 'small',
-    width: 140,
-  };
+  const EnemyTeamChampionProps = TeamChampionPropsMapper(
+    20,
+    140,
+    enemyTeam,
+    'small'
+  );
 
   return (
     <div className='flex w-[700px] py-5 ml-10'>

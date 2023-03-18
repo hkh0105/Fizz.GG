@@ -38,4 +38,5 @@ export {
   ChampStatRowPropsMapper,
   SearchWindowPropsMapper,
   SingleBarChartPropsMapper,
+  TeamChampionPropsMapper,
 } from './propsMapper';

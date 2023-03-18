@@ -34,6 +34,7 @@ import {
   SingleBarColorMapper,
   SpellIconProps,
   SpellInfos,
+  TeamChampionProps,
   TotalMatchChampData,
   TypoGraphyColorMapper,
   TypoGraphySizeMapper,
@@ -315,4 +316,16 @@ export const SingleBarChartPropsMapper = (
   titleColor: titleColor,
   valueSize: valueSize,
   valueColor: valueColor,
+});
+
+export const TeamChampionPropsMapper = (
+  imageSize: number,
+  width: number,
+  team: MatchInfoByUser[],
+  typoSize: keyof TypoGraphySizeMapper
+): TeamChampionProps => ({
+  imageSize: imageSize,
+  width: width,
+  team: team,
+  typoSize: typoSize,
 });
