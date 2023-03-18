@@ -19,14 +19,9 @@ import {
   KdaPropsMapper,
   RuneIconPropsMapper,
   SpellIconPropsMapper,
+  SingleBarChartPropsMapper,
 } from 'utils';
-import {
-  SingleBarChartProps,
-  UserStatRowProps,
-  SpellInfos,
-  RuneInfo,
-  TypographyProps,
-} from 'types';
+import { UserStatRowProps, SpellInfos, RuneInfo, TypographyProps } from 'types';
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
@@ -115,33 +110,32 @@ const UserStatRow: FC<UserStatRowProps> = ({
     text: '시야점수 : ' + String(visionScore),
   };
 
-  const DamageChartProps: SingleBarChartProps = {
-    width: 100,
-    height: 15,
-    title: String(totalDamageDealtToChampions),
-    startValue: totalDamageDealtToChampions,
-    totalValue: maxDamage,
-    endValue: maxDamage - totalDamageDealtToChampions,
-    startColor: 'red',
-    endColor: 'white',
-    isValueShow: false,
-    titleSize: 'xSmall',
-    titleColor: 'gray',
-  };
-
-  const DamagedChartProps: SingleBarChartProps = {
-    width: 100,
-    height: 15,
-    title: String(totalDamageTaken),
-    startValue: totalDamageTaken,
-    totalValue: maxTakenDamage,
-    endValue: maxTakenDamage - totalDamageTaken,
-    startColor: 'blue',
-    endColor: 'white',
-    isValueShow: false,
-    titleSize: 'xSmall',
-    titleColor: 'gray',
-  };
+  const DamageChartProps = SingleBarChartPropsMapper(
+    100,
+    15,
+    totalDamageDealtToChampions,
+    maxDamage,
+    'red',
+    'white',
+    false,
+    String(totalDamageDealtToChampions),
+    maxDamage - totalDamageDealtToChampions,
+    'xSmall',
+    'gray'
+  );
+  const DamagedChartProps = SingleBarChartPropsMapper(
+    100,
+    15,
+    totalDamageDealtToChampions,
+    maxTakenDamage,
+    'blue',
+    'white',
+    false,
+    String(totalDamageTaken),
+    maxTakenDamage - totalDamageTaken,
+    'xSmall',
+    'gray'
+  );
 
   const ItemIconProps = ItemIconPropsMapper(
     [item0, item1, item2, item3, item4, item5, item6],

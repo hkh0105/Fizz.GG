@@ -29,9 +29,13 @@ import {
   RankTitleMapper,
   RuneIconProps,
   RuneInfo,
+  SearchWindowProps,
+  SingleBarChartProps,
+  SingleBarColorMapper,
   SpellIconProps,
   SpellInfos,
   TotalMatchChampData,
+  TypoGraphyColorMapper,
   TypoGraphySizeMapper,
   UserStatRowProps,
   ValueOf,
@@ -275,6 +279,40 @@ export const ChampStatRowPropsMapper = (
   champInfo: champInfo,
 });
 
-export const SearchWindowPropsMapper = (isMini: boolean) => ({
+export const SearchWindowPropsMapper = (
+  isMini: boolean
+): SearchWindowProps => ({
   mini: isMini,
+});
+
+export const SingleBarChartPropsMapper = (
+  width: number,
+  height: number,
+  startValue: number,
+  totalValue: number,
+  startColor: keyof SingleBarColorMapper,
+  endColor: keyof SingleBarColorMapper,
+  isValueShow: boolean,
+  title?: string,
+  endValue?: string | number,
+  titleSize?: keyof TypoGraphySizeMapper,
+  titleColor?: keyof TypoGraphyColorMapper,
+  valueSize?: keyof TypoGraphySizeMapper,
+  valueColor?: keyof TypoGraphyColorMapper,
+  marginClass?: string
+): SingleBarChartProps => ({
+  width: width,
+  height: height,
+  startValue: startValue,
+  totalValue: totalValue,
+  startColor: startColor,
+  endColor: endColor,
+  isValueShow: isValueShow,
+  title: title,
+  endValue: endValue,
+  marginClass: marginClass,
+  titleSize: titleSize,
+  titleColor: titleColor,
+  valueSize: valueSize,
+  valueColor: valueColor,
 });
