@@ -6,13 +6,9 @@ import Typography from 'userInterface/typography/Typography';
 import MasteryRow from './MasteryRow';
 import MasteryHeader from './MasteryHeader';
 import { useGetMastery } from 'hooks/queries';
-import {
-  BoxProps,
-  IngameSectionProps,
-  MasteryRowProps,
-  TypographyProps,
-} from 'types';
+import { BoxProps, IngameSectionProps, TypographyProps } from 'types';
 import { AsyncBoundaryPropsMapper } from 'utils';
+import { MasteryRowPropsMapper } from 'utils/propsMapper';
 
 const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
   const { masteryInfo } = useGetMastery(nickname);
@@ -37,9 +33,7 @@ const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
         <Box {...BoxProps}>
           <MasteryHeader />
           {masteryInfo.map((mastery) => {
-            const MasteryRowProps: MasteryRowProps = {
-              masteryInfo: mastery,
-            };
+            const MasteryRowProps = MasteryRowPropsMapper(mastery);
 
             return (
               <AsyncBoundary key={String(mastery.championId)}>

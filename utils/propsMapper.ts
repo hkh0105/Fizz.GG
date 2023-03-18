@@ -12,6 +12,7 @@ import {
   InGameUser,
   InGameUserRowProps,
   ItemIconProps,
+  MasteryInfo,
   MatchInfoByUser,
   RuneInfo,
   SpellInfos,
@@ -122,4 +123,8 @@ export const KdaPropsMapper = (
   marginClass: marginClass,
   size: size,
   kdaSize: kdaSize,
+});
+
+export const MasteryRowPropsMapper = (masteryInfo: MasteryInfo) => ({
+  masteryInfo: masteryInfo,
 });
