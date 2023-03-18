@@ -3,6 +3,7 @@ import { FC } from 'react';
 import UserStatRow from 'components/matchSection/UserStatRow';
 import Box from 'userInterface/box/Box';
 import DetailSectionHeader from './DetailSectionheader';
+import { DetailSectionHeaderPropsMapper } from 'utils';
 import {
   BoxProps,
   DetailHeaderColorMapper,
@@ -10,7 +11,7 @@ import {
   MatchInfoByUser,
   UserStatRowProps,
 } from 'types';
-import { DetailSectionHeaderPropsMapper } from 'utils';
+import { UserStatRowPropsMapper } from 'utils/propsMapper';
 
 const DetailSection: FC<DetailSectionProps> = ({
   summonerTeam,
@@ -45,11 +46,11 @@ const DetailSection: FC<DetailSectionProps> = ({
       <Box {...SummonerTeamDetailBoxProps}>
         <DetailSectionHeader {...SummonerTeamHeader} />
         {summonerTeam.map((user: MatchInfoByUser) => {
-          const UserStatRowProps: UserStatRowProps = {
-            summoner: user,
+          const UserStatRowProps = UserStatRowPropsMapper(
+            user,
             maxDamage,
-            maxTakenDamage,
-          };
+            maxTakenDamage
+          );
 
           return <UserStatRow {...UserStatRowProps} key={user.puuid} />;
         })}

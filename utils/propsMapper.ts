@@ -181,3 +181,13 @@ export const MatchSummonerOverViewPropsMapper = (
   summonerTeam: summonerTeam,
   enemyTeam: enemyTeam,
 });
+
+export const UserStatRowPropsMapper = (
+  summoner: MatchInfoByUser,
+  maxDamage: number,
+  maxTakenDamage: number
+) => ({
+  summoner: summoner,
+  maxDamage: maxDamage,
+  maxTakenDamage: maxTakenDamage,
+});
