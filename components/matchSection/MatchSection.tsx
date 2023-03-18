@@ -6,7 +6,8 @@ import useIntersectionObserver from 'hooks/useInterSectionObserver';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import { recentInfo } from 'store';
 import { useGetMatchIds } from 'hooks/queries';
-import { MatchCardProps, MatchSection, RecentMatchUserInfo } from 'types';
+import { MatchSection, RecentMatchUserInfo } from 'types';
+import { MatchCardPropsMapper } from 'utils/propsMapper';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
   const [count, setCount] = useState(10);
@@ -33,10 +34,7 @@ const MatchSection: FC<MatchSection> = ({ nickname }) => {
   return (
     <>
       {matchIds?.map((matchId: string) => {
-        const MatchCardProps: MatchCardProps = {
-          matchId,
-          nickname,
-        };
+        const MatchCardProps = MatchCardPropsMapper(matchId, nickname);
 
         return (
           <AsyncBoundary key={matchId}>

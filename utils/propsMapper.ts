@@ -128,3 +128,8 @@ export const KdaPropsMapper = (
 export const MasteryRowPropsMapper = (masteryInfo: MasteryInfo) => ({
   masteryInfo: masteryInfo,
 });
+
+export const MatchCardPropsMapper = (matchId: string, nickname: string) => ({
+  matchId: matchId,
+  nickname: nickname,
+});
