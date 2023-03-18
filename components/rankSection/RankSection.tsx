@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import RankContents from './RankCard';
+import RankCard from './RankCard';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import { useGetLeagueInfo } from 'hooks/queries';
+import { RankCardPropsMapper } from 'utils';
 import { LeagueInfo, RankProps } from 'types';
 
 const RankSection: FC<RankProps> = ({ nickname }) => {
@@ -11,22 +12,22 @@ const RankSection: FC<RankProps> = ({ nickname }) => {
 
   return (
     <>
-      {leagueInfos.map((leagueInfo: LeagueInfo) => {
+      {leagueInfos?.map((leagueInfo: LeagueInfo) => {
         const { wins, losses, queueType, tier, rank, leaguePoints } =
           leagueInfo;
 
-        const RankContentsProps = {
+        const RankCardProps = RankCardPropsMapper(
           wins,
           losses,
           queueType,
           tier,
           rank,
-          leaguePoints,
-        };
+          leaguePoints
+        );
 
         return (
           <AsyncBoundary key={uuidv4()}>
-            <RankContents {...RankContentsProps} />
+            <RankCard {...RankCardProps} />
           </AsyncBoundary>
         );
       })}

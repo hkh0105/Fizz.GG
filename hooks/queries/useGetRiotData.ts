@@ -2,7 +2,13 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
-import { QueryOptions, RiotChampInfo, RiotSpellData, RuneData } from 'types';
+import {
+  ChampDetails,
+  QueryOptions,
+  RiotChampInfo,
+  RiotSpellData,
+  RuneData,
+} from 'types';
 
 export const useGetSpellJson = (options?: QueryOptions<RiotSpellData>) => {
   const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(
@@ -14,7 +20,7 @@ export const useGetSpellJson = (options?: QueryOptions<RiotSpellData>) => {
   const spellData = riotSpellData?.data;
 
   if (!spellData) {
-    const message = '찾을 수 있는 데이터가 없습니다';
+    const message = '찾을 수 있는 라이엇 데이터가 없습니다';
 
     throw { status: 404, message: message, name: '404Error' };
   }
@@ -25,17 +31,13 @@ export const useGetSpellJson = (options?: QueryOptions<RiotSpellData>) => {
 };
 
 export const useGetRuneJson = (options?: QueryOptions<RuneData>) => {
-  const { data: runeData }: UseQueryResult<RuneData> = useQuery(
+  const { data }: UseQueryResult<RuneData> = useQuery(
     [QUERY_KEYS.getRune],
     CLIENT_API.getRune,
     options
   );
 
-  if (!runeData) {
-    const message = '찾을 수 있는 데이터가 없습니다';
-
-    throw { status: 404, message: message, name: '404Error' };
-  }
+  const runeData = data as RuneData;
 
   return {
     runeData,
@@ -49,13 +51,7 @@ export const useGetChampJson = (options?: QueryOptions<RiotChampInfo>) => {
     options
   );
 
-  const champData = riotChampData?.data;
-
-  if (!champData) {
-    const message = '찾을 수 있는 데이터가 없습니다';
-
-    throw { status: 404, message: message, name: '404Error' };
-  }
+  const champData = riotChampData?.data as ChampDetails;
 
   return {
     champData,

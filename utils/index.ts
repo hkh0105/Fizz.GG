@@ -1,3 +1,5 @@
+export { getInGameSpells, getInGameRunes } from './inGame';
+export { getChampName, convertLastPlayTime } from './mastery';
 export {
   getDateDiff,
   getSpells,
@@ -10,5 +12,35 @@ export {
   getMaxDamage,
   getMaxTakenDamage,
 } from './match';
-export { getInGameSpells, getInGameRunes } from './inGame';
-export { getChampName, convertLastPlayTime } from './mastery';
+export {
+  SuspensePropsMapper,
+  AsyncBoundaryPropsMapper,
+  ButtonGroupPropsMapper,
+  CustomImagePropsMapper,
+  DetailSectionPropsMapper,
+  DetailSectionHeaderPropsMapper,
+  DefaultSectionPropsMapper,
+  InGameTeamColumnPropsMapper,
+  InGamerUserRowPropsMapper,
+  ItemIconPropsMapper,
+  SpellIconPropsMapper,
+  RuneIconPropsMapper,
+  ProfileIconPropsMapper,
+  PieChartPropsMapper,
+  UserStatRowPropsMapper,
+  MatchSummonerOverViewPropsMapper,
+  MatchOverViewPropsMapper,
+  MatchCardPropsMapper,
+  MasteryRowPropsMapper,
+  KdaPropsMapper,
+  RankCardPropsMapper,
+  ChampionIconPropsMapper,
+  ChampStatRowPropsMapper,
+  SearchWindowPropsMapper,
+  SingleBarChartPropsMapper,
+  TeamChampionPropsMapper,
+  BoxPropsMapper,
+  ButtonPropsMapper,
+  InputPropsMapper,
+  TypographyPropsMapper,
+} from './propsMapper';

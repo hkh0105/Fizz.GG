@@ -7,16 +7,18 @@ import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
 import { useGetSummoner } from 'hooks/queries';
+import { ProfileProps } from 'types';
 import {
-  ButtonGroupProps,
-  ButtonProps,
-  ProfileIconProps,
-  ProfileProps,
-  TypographyProps,
-} from 'types';
+  BoxPropsMapper,
+  ButtonGroupPropsMapper,
+  ButtonPropsMapper,
+  ProfileIconPropsMapper,
+  TypographyPropsMapper,
+} from 'utils/propsMapper';
+
 const Profile: FC<ProfileProps> = ({ nickname }) => {
   const router = useRouter();
-  const isInGame = router.pathname === '/search/[nickname/ingame';
+  const isInGame = router.pathname === '/search/[nickname]/ingame';
   const isSummoner = router.pathname === '/search/[nickname]/summoner';
   const queryClient = useQueryClient();
   const { name, summonerLevel, profileIconId } = useGetSummoner(nickname);
@@ -30,6 +32,7 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
 
   const onClickUpdateButton = async () => {
     await queryClient.invalidateQueries();
+    window.location.reload();
   };
 
   const onClickSummonerButton = async () => {
@@ -46,50 +49,51 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     });
   };
 
-  const ProfileIconProps: ProfileIconProps = {
-    profileIconId: profileIconId,
-    summonerLevel: summonerLevel,
-    width: 100,
-    height: 100,
-  };
+  const ProfileIconProps = ProfileIconPropsMapper(
+    profileIconId,
+    100,
+    100,
+    summonerLevel
+  );
 
-  const InGameButtonProps: ButtonProps = {
+  const InGameButtonProps = ButtonPropsMapper({
     onClick: onClickInGameButton,
     label: '인게임 정보',
-  };
+  });
 
-  const MatchesButtonProps: ButtonProps = {
+  const MatchesButtonProps = ButtonPropsMapper({
     onClick: onClickMatchesButton,
     label: '매치 정보',
-  };
+  });
 
-  const MasteryButtonProps: ButtonProps = {
+  const MasteryButtonProps = ButtonPropsMapper({
     onClick: onClickSummonerButton,
     label: '소환사 정보',
-  };
+  });
 
-  const UpdateButtonProps: ButtonProps = {
+  const UpdateButtonProps = ButtonPropsMapper({
     color: 'transparent',
     onClick: onClickUpdateButton,
     label: '업데이트',
-  };
+  });
 
-  const ButtonGroupProps: ButtonGroupProps = {
-    containerClassName: 'flex gap-3',
-    buttons: [
-      isInGame ? MatchesButtonProps : InGameButtonProps,
-      isSummoner ? MatchesButtonProps : MasteryButtonProps,
-      UpdateButtonProps,
-    ],
-  };
+  const ButtonGroupProps = ButtonGroupPropsMapper('flex gap-3', [
+    isInGame ? MatchesButtonProps : InGameButtonProps,
+    isSummoner ? MatchesButtonProps : MasteryButtonProps,
+    UpdateButtonProps,
+  ]);
 
-  const SummonerNameProps: TypographyProps = {
+  const SummonerNameProps = TypographyPropsMapper({
     type: 'title',
     text: name,
-  };
+  });
+
+  const BoxProps = BoxPropsMapper({
+    size: 'full',
+  });
 
   return (
-    <Box size='full'>
+    <Box {...BoxProps}>
       <div className='flex'>
         <ProfileIcon {...ProfileIconProps} />
         <div className='flex flex-col items-start justify-center gap-y-10'>

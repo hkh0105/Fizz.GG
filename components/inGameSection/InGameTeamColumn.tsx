@@ -2,8 +2,12 @@ import { FC } from 'react';
 
 import InGameUserRow from './InGameUserRow';
 import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
-import { getInGameRunes, getInGameSpells } from 'utils';
-import { InGameTeamColumnProps, InGameUser, InGameUserRowProps } from 'types';
+import {
+  getInGameRunes,
+  getInGameSpells,
+  InGamerUserRowPropsMapper,
+} from 'utils';
+import { InGameTeamColumnProps, InGameUser } from 'types';
 
 const InGameTeamColumn: FC<InGameTeamColumnProps> = ({ users }) => {
   const { spellData } = useGetSpellJson();
@@ -17,12 +21,12 @@ const InGameTeamColumn: FC<InGameTeamColumnProps> = ({ users }) => {
         //Rune
         const runes = getInGameRunes(runeData, user.perks);
 
-        const InGameUserRowProps: InGameUserRowProps = {
-          nickname: user.summonerName,
-          profileIconId: user.profileIconId,
+        const InGameUserRowProps = InGamerUserRowPropsMapper(
+          user.summonerName,
           runes,
           spells,
-        };
+          user.profileIconId
+        );
 
         return <InGameUserRow {...InGameUserRowProps} key={user.summonerId} />;
       })}

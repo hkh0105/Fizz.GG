@@ -2,7 +2,8 @@ import { FC } from 'react';
 
 import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { ChampionIconProps, CustomImageProps } from 'types';
+import { ChampionIconProps } from 'types';
+import { CustomImagePropsMapper } from 'utils';
 
 const ChampionIcon: FC<ChampionIconProps> = ({
   width,
@@ -15,12 +16,12 @@ const ChampionIcon: FC<ChampionIconProps> = ({
   const wrapper =
     `w-[${width}px] flex-col text-white text-start` + ' ' + marginClass;
 
-  const CustomImageProps: CustomImageProps = {
-    className: 'rounded-full',
-    source: championSource,
-    alt: '소환사 챔피언 이미지',
-    size: width,
-  };
+  const CustomImageProps = CustomImagePropsMapper(
+    championSource,
+    '소환사 챔피언 이미지',
+    width,
+    'rounded-full'
+  );
 
   return (
     <div className={wrapper}>

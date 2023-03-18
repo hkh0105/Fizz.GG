@@ -1,11 +1,10 @@
 import { FC } from 'react';
-
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import Typography from 'userInterface/typography/Typography';
-import { TeamChampionProps, TypographyProps } from 'types';
-import Link from 'next/link';
+import { TeamChampionProps } from 'types';
+import { ChampionIconPropsMapper, TypographyPropsMapper } from 'utils';
 
 const TeamChampion: FC<TeamChampionProps> = ({
   team,
@@ -22,16 +21,22 @@ const TeamChampion: FC<TeamChampionProps> = ({
           user.summonerName.length > 6
             ? user.summonerName.slice(0, 5) + '...'
             : user.summonerName;
-        const SummonerNameProps: TypographyProps = {
+
+        const SummonerNameProps = TypographyPropsMapper({
           type: 'default',
           size: typoSize,
           color: 'gray',
           text: userName,
-        };
+        });
+
+        const ChampionIconProps = ChampionIconPropsMapper(
+          imageSize,
+          user.championName
+        );
 
         return (
           <div className={wrapperClassName} key={user.puuid}>
-            <ChampionIcon width={imageSize} championName={user.championName} />
+            <ChampionIcon {...ChampionIconProps} />
             <Link
               href={{
                 pathname: '/search/[nickname]',

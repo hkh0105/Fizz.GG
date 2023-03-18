@@ -3,13 +3,13 @@ import type { NextPage } from 'next';
 import SearchWindow from 'components/searchWindow/SearchWindow';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import Typography from 'userInterface/typography/Typography';
-import { TypographyProps } from 'types';
+import { TypographyPropsMapper } from 'utils';
 
 const Home: NextPage = () => {
-  const TitleProps: TypographyProps = {
+  const TitleProps = TypographyPropsMapper({
     type: 'mainTitle',
     text: '당신의 전적이 궁금하다면? Fizz.GG',
-  };
+  });
 
   return (
     <AsyncBoundary>

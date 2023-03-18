@@ -1,65 +1,64 @@
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
-import {
-  DetailHeaderColorMapper,
-  DetailSectionHeaderProps,
-  TypographyProps,
-} from 'types';
+import { TypographyPropsMapper } from 'utils';
+import { DetailHeaderColorMapper, DetailSectionHeaderProps } from 'types';
 
 const DetailSectionHeader: FC<DetailSectionHeaderProps> = ({ color }) => {
   const ColorMapper: DetailHeaderColorMapper = {
     red: 'flex w-full h-[35px] border-b-2 border-red-200 pl-5 gap-x-1',
     blue: 'flex w-full h-[35px] border-b-2 border-blue-200 pl-5 gap-x-1',
   };
-  const ChampKeyProps: TypographyProps = {
+
+  const ChampKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: '챔피언',
-  };
+  });
 
-  const KdaKeyProps: TypographyProps = {
+  const KdaKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: 'KDA',
-  };
+  });
 
-  const NicknameKeyProps: TypographyProps = {
+  const NicknameKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: '닉네임',
-  };
+  });
 
-  const StatKeyProps: TypographyProps = {
+  const StatKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: 'Stat',
-  };
+  });
 
-  const DamageBarChartKeyProps: TypographyProps = {
+  const DamageBarChartKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: '가한 피해량',
-  };
+  });
 
-  const DamagedBarChartKeyProps: TypographyProps = {
+  const DamagedBarChartKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: '받은 피해량',
-  };
+  });
 
-  const ItemsKeyProps: TypographyProps = {
+  const ItemsKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: '아이템',
-  };
+  });
+
   return (
     <div className={ColorMapper[color]}>
       <div className='w-[75px] pt-2'>

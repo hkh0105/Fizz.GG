@@ -3,18 +3,20 @@ import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
 import PieChart from 'components/pieChart/PieChart';
+import Box from 'userInterface/box/Box';
 import { IMAGES } from 'constant';
+import {
+  BoxPropsMapper,
+  PieChartPropsMapper,
+  TypographyPropsMapper,
+} from 'utils';
 import {
   ChartData,
   Margin,
   Images,
-  PieChartProps,
   RankContentsProps,
   RankTitleMapper,
-  TypographyProps,
-  BoxProps,
 } from 'types';
-import Box from 'userInterface/box/Box';
 
 const RankCard: FC<RankContentsProps> = ({
   wins,
@@ -36,12 +38,12 @@ const RankCard: FC<RankContentsProps> = ({
     RANKED_FLEX_SR: '자유랭크',
   };
 
-  const BoxProps: BoxProps = {
+  const BoxProps = BoxPropsMapper({
     size: 'custom',
     width: 'w-[300px] max-sm:hidden',
-  };
+  });
 
-  const LpProps: TypographyProps = {
+  const LpProps = TypographyPropsMapper({
     type: 'default',
     text:
       rankTitleMapper[queueType] +
@@ -52,7 +54,7 @@ const RankCard: FC<RankContentsProps> = ({
       ' ' +
       String(leaguePoints) +
       'LP',
-  };
+  });
 
   const ImageProps = {
     src: IMAGES[tier as keyof Images] ?? IMAGES['UNRANKED'],
@@ -61,10 +63,7 @@ const RankCard: FC<RankContentsProps> = ({
     alt: '소환사 랭크 티어 이미지',
   };
 
-  const PieChartProps: PieChartProps<ChartData<number>> = {
-    data: chartData,
-    margin,
-  };
+  const PieChartProps = PieChartPropsMapper(chartData, margin);
 
   return (
     <Box {...BoxProps}>

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
@@ -43,17 +45,25 @@ instance.interceptors.response.use(
     return res;
   },
   (err) => {
-    if (err.response.data.status.status_code === 404) {
+    const statusCode = err.response.data.status.status_code;
+    if (
+      typeof err.config.url === 'string' &&
+      err.config.url.includes('spectator/v4/active-games/by-summoner') &&
+      statusCode === 404
+    ) {
+      const message = '유저가 게임중이지 않습니다';
+
+      throw { status: 404, message: message, name: '404Error' };
+    }
+
+    if (statusCode === 404) {
       const message = '찾을 수 있는 데이터가 없습니다';
 
       throw { status: 404, message: message, name: '404Error' };
-    } else if (
-      err.response.data.status.status_code === 403 ||
-      err.response.data.status.status_code === 401
-    ) {
+    } else if (statusCode === 403 || statusCode === 401) {
       const message = '서버 접근 권한 확인이 필요합니다';
       throw { status: 403, message: message, name: '403Error' };
-    } else if (err.response.data.status.status_code === 429) {
+    } else if (statusCode === 429) {
       const message = '허용 검색량을 초과하였습니다. 3분 후 다시 시도해 주세요';
       throw { status: 404, message: message, name: 'LimitError' };
     }
@@ -85,17 +95,16 @@ regionInstance.interceptors.response.use(
     return res;
   },
   (err) => {
-    if (err.response.data.status.status_code === 404) {
+    const statusCode = err.response.data.status.status_code;
+
+    if (statusCode === 404) {
       const message = '찾을 수 있는 데이터가 없습니다';
 
       throw { status: 404, message: message, name: '404Error' };
-    } else if (
-      err.response.data.status.status_code === 403 ||
-      err.response.data.status.status_code === 401
-    ) {
+    } else if (statusCode === 403 || statusCode === 401) {
       const message = '서버 접근 권한 확인이 필요합니다';
       throw { status: 403, message: message, name: '403Error' };
-    } else if (err.response.data.status.status_code === 429) {
+    } else if (statusCode === 429) {
       const message = '허용 검색량을 초과하였습니다. 3분 후 다시 시도해 주세요';
       throw { status: 404, message: message, name: 'LimitError' };
     }

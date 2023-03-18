@@ -1,43 +1,43 @@
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
-import { TypographyProps } from 'types';
+import { TypographyPropsMapper } from 'utils';
 
 const MasteryHeader: FC = () => {
-  const ChampionKeyProps: TypographyProps = {
+  const ChampionKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: 'Champion',
-  };
+  });
 
-  const IconKeyProps: TypographyProps = {
+  const IconKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: 'Icon',
-  };
+  });
 
-  const LevelKeyProps: TypographyProps = {
+  const LevelKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: 'Level',
-  };
+  });
 
-  const MasteryKeyProps: TypographyProps = {
+  const MasteryKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: 'Mastery Point',
-  };
+  });
 
-  const PlayTimeKeyProps: TypographyProps = {
+  const PlayTimeKeyProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: 'PlayTime',
-  };
+  });
 
   return (
     <div className=' w-[800px] h-[60px] pt-3 flex shrink-0 grow-0 justify-center'>

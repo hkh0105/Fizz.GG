@@ -3,8 +3,13 @@ import { FC } from 'react';
 import Typography from 'userInterface/typography/Typography';
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import { useGetChampJson } from 'hooks/queries';
-import { ChampionIconProps, MasteryRowProps, TypographyProps } from 'types';
-import { convertLastPlayTime, getChampName } from 'utils';
+import { MasteryRowProps } from 'types';
+import {
+  convertLastPlayTime,
+  getChampName,
+  ChampionIconPropsMapper,
+  TypographyPropsMapper,
+} from 'utils';
 
 const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
   const { champData } = useGetChampJson();
@@ -17,38 +22,35 @@ const MasteryRow: FC<MasteryRowProps> = ({ masteryInfo }) => {
   //Champ Name
   const champName = getChampName(champData, championId);
 
-  const ChampNameProps: TypographyProps = {
+  const ChampNameProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: champName,
-  };
+  });
 
-  const ChampLevelProps: TypographyProps = {
+  const ChampLevelProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: String(championLevel),
-  };
+  });
 
-  const ChampPointProps: TypographyProps = {
+  const ChampPointProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: String(championPoints),
-  };
+  });
 
-  const PlayTimeProps: TypographyProps = {
+  const PlayTimeProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: convertedLastPlayTime,
-  };
+  });
 
-  const ChampionIconProps: ChampionIconProps = {
-    width: 30,
-    championName: champName,
-  };
+  const ChampionIconProps = ChampionIconPropsMapper(30, champName);
 
   return (
     <div className=' w-[800px] h-[60px] pt-3 flex shrink-0 grow-0 justify-center '>

@@ -7,23 +7,26 @@ import RankSection from 'components/rankSection/RankSection';
 import MatchSection from 'components/matchSection/MatchSection';
 import RecentStatSection from 'components/resentStatSection/RecentStatSection';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
+import { AsyncBoundaryPropsMapper, DefaultSectionPropsMapper } from 'utils';
 
 const Search: FC = () => {
   const nickname = useRouter().query.nickname as string;
+  const AsyncBoundaryProps = AsyncBoundaryPropsMapper(nickname);
+  const SectionPropsMapper = DefaultSectionPropsMapper(nickname);
 
   return (
-    <AsyncBoundary key={nickname}>
+    <AsyncBoundary {...AsyncBoundaryProps}>
       <SearchLayout>
         <div className='w-[1110px] max-lg:w-[800px]'>
-          <Profile nickname={nickname} />
+          <Profile {...SectionPropsMapper} />
         </div>
         <div className='flex'>
           <div className='w-[300px] max-lg:hidden mr-3'>
-            <RankSection nickname={nickname} />
+            <RankSection {...SectionPropsMapper} />
             <RecentStatSection />
           </div>
           <div className='w-[800px]'>
-            <MatchSection nickname={nickname} />
+            <MatchSection {...SectionPropsMapper} />
           </div>
         </div>
       </SearchLayout>

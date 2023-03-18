@@ -6,30 +6,29 @@ import Typography from 'userInterface/typography/Typography';
 import MasteryRow from './MasteryRow';
 import MasteryHeader from './MasteryHeader';
 import { useGetMastery } from 'hooks/queries';
+import { IngameSectionProps } from 'types';
 import {
-  BoxProps,
-  IngameSectionProps,
-  MasteryRowProps,
-  TypographyProps,
-} from 'types';
+  AsyncBoundaryPropsMapper,
+  BoxPropsMapper,
+  MasteryRowPropsMapper,
+  TypographyPropsMapper,
+} from 'utils';
 
 const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
   const { masteryInfo } = useGetMastery(nickname);
 
-  const GameModeProps: TypographyProps = {
+  const GameModeProps = TypographyPropsMapper({
     type: 'title',
     color: 'gray',
     text: `${nickname} 의 챔피언 통계`,
-  };
+  });
 
-  const BoxProps: BoxProps = {
+  const BoxProps = BoxPropsMapper({
     size: 'custom',
     width: 'w-[800px]',
-  };
+  });
 
-  const AsyncBoundaryProps = {
-    key: nickname,
-  };
+  const AsyncBoundaryProps = AsyncBoundaryPropsMapper(nickname);
 
   return (
     <AsyncBoundary {...AsyncBoundaryProps}>
@@ -38,9 +37,7 @@ const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
         <Box {...BoxProps}>
           <MasteryHeader />
           {masteryInfo.map((mastery) => {
-            const MasteryRowProps: MasteryRowProps = {
-              masteryInfo: mastery,
-            };
+            const MasteryRowProps = MasteryRowPropsMapper(mastery);
 
             return (
               <AsyncBoundary key={String(mastery.championId)}>

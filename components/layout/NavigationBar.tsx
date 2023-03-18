@@ -1,17 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
+import { useRouter } from 'next/router';
 
 import SearchWindow from 'components/searchWindow/SearchWindow';
 import { IMAGES } from 'constant';
-import { SearchWindowProps } from 'types';
-import { useRouter } from 'next/router';
+import { SearchWindowPropsMapper } from 'utils';
 
 const NavigationBar: FC = () => {
   const path = useRouter().pathname;
-  const SearchWindowProps: SearchWindowProps = {
-    mini: true,
-  };
+  const SearchWindowProps = SearchWindowPropsMapper(true);
 
   return (
     <nav className='flex items-center h-24 mx-3'>

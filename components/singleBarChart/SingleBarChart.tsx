@@ -1,11 +1,8 @@
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
-import {
-  SingleBarChartProps,
-  SingleBarColorMapper,
-  TypographyProps,
-} from 'types';
+import { SingleBarChartProps, SingleBarColorMapper } from 'types';
+import { TypographyPropsMapper } from 'utils';
 
 const SingleBarChart: FC<SingleBarChartProps> = ({
   title,
@@ -40,26 +37,26 @@ const SingleBarChart: FC<SingleBarChartProps> = ({
   const endBarColorClassName = colorMapper[endColor];
   const endBarClassName = endBarColorClassName;
 
-  const TitleProps: TypographyProps = {
+  const TitleProps = TypographyPropsMapper({
     text: title ?? '',
     size: titleSize,
     color: titleColor,
     type: 'default',
-  };
+  });
 
-  const StartValueProps: TypographyProps = {
+  const StartValueProps = TypographyPropsMapper({
     text: String(startValue) ?? '',
     size: valueSize,
     color: valueColor,
     type: 'default',
-  };
+  });
 
-  const EndValueProps: TypographyProps = {
+  const EndValueProps = TypographyPropsMapper({
     text: String(endValue) ?? '',
     size: valueSize,
     color: valueColor,
     type: 'default',
-  };
+  });
 
   return (
     <div className={className}>

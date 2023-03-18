@@ -4,9 +4,12 @@ import UserStatRow from 'components/matchSection/UserStatRow';
 import Box from 'userInterface/box/Box';
 import DetailSectionHeader from './DetailSectionheader';
 import {
-  BoxProps,
+  BoxPropsMapper,
+  DetailSectionHeaderPropsMapper,
+  UserStatRowPropsMapper,
+} from 'utils';
+import {
   DetailHeaderColorMapper,
-  DetailSectionHeaderProps,
   DetailSectionProps,
   MatchInfoByUser,
   UserStatRowProps,
@@ -18,38 +21,38 @@ const DetailSection: FC<DetailSectionProps> = ({
   maxDamage,
   maxTakenDamage,
 }) => {
-  const SummonerTeamDetailBoxProps: BoxProps = {
+  const SummonerTeamDetailBoxProps = BoxPropsMapper({
     size: 'custom',
     height: 'h-[350px]',
     width: 'w-full',
     color: summonerTeam[0]?.win ? 'blue' : 'red',
-  };
+  });
 
-  const EnemyTeamDetailBoxProps: BoxProps = {
+  const EnemyTeamDetailBoxProps = BoxPropsMapper({
     size: 'custom',
     height: 'h-[350px]',
     width: 'w-full',
     color: enemyTeam[0]?.win ? 'blue' : 'red',
-  };
+  });
 
-  const SummonerTeamHeader: DetailSectionHeaderProps = {
-    color: SummonerTeamDetailBoxProps.color as keyof DetailHeaderColorMapper,
-  };
+  const SummonerTeamHeader = DetailSectionHeaderPropsMapper(
+    SummonerTeamDetailBoxProps.color as keyof DetailHeaderColorMapper
+  );
 
-  const EnemyTeamHeader: DetailSectionHeaderProps = {
-    color: EnemyTeamDetailBoxProps.color as keyof DetailHeaderColorMapper,
-  };
+  const EnemyTeamHeader = DetailSectionHeaderPropsMapper(
+    EnemyTeamDetailBoxProps.color as keyof DetailHeaderColorMapper
+  );
 
   return (
     <>
       <Box {...SummonerTeamDetailBoxProps}>
         <DetailSectionHeader {...SummonerTeamHeader} />
         {summonerTeam.map((user: MatchInfoByUser) => {
-          const UserStatRowProps: UserStatRowProps = {
-            summoner: user,
+          const UserStatRowProps = UserStatRowPropsMapper(
+            user,
             maxDamage,
-            maxTakenDamage,
-          };
+            maxTakenDamage
+          );
 
           return <UserStatRow {...UserStatRowProps} key={user.puuid} />;
         })}

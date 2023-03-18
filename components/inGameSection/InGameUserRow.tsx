@@ -4,13 +4,13 @@ import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import RuneIcon from 'components/runeIcon/RuneIcon';
 import SpellIcon from 'components/spellIcon/SpellIcon';
 import Typography from 'userInterface/typography/Typography';
+import { InGameUserRowProps } from 'types';
 import {
-  InGameUserRowProps,
-  ProfileIconProps,
-  RuneIconProps,
-  SpellIconProps,
-  TypographyProps,
-} from 'types';
+  ProfileIconPropsMapper,
+  RuneIconPropsMapper,
+  SpellIconPropsMapper,
+  TypographyPropsMapper,
+} from 'utils/propsMapper';
 
 const InGameUserRow: FC<InGameUserRowProps> = ({
   nickname,
@@ -18,30 +18,18 @@ const InGameUserRow: FC<InGameUserRowProps> = ({
   spells,
   profileIconId,
 }) => {
-  const NicknameProps: TypographyProps = {
+  const NicknameProps = TypographyPropsMapper({
     type: 'default',
     size: 'small',
     color: 'gray',
     text: nickname,
-  };
+  });
 
-  const SpellIconProps: SpellIconProps = {
-    width: 25,
-    spells: spells,
-    marginClass: 'pt-1',
-  };
+  const SpellIconProps = SpellIconPropsMapper(spells, 25, 'pt-1');
 
-  const RuneIconProps: RuneIconProps = {
-    width: 25,
-    marginClass: 'pt-1',
-    runes,
-  };
+  const RuneIconProps = RuneIconPropsMapper(runes, 25, 'pt-1');
 
-  const ProfileIconProps: ProfileIconProps = {
-    profileIconId: profileIconId,
-    width: 25,
-    height: 25,
-  };
+  const ProfileIconProps = ProfileIconPropsMapper(profileIconId, 25, 25);
 
   return (
     <div className='flex w-[300px] h-[60px] mx-5 mt-1 items-center'>

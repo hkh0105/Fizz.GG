@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
-import { KdaProps, TypographyProps } from 'types';
+import { KdaProps } from 'types';
+import { TypographyPropsMapper } from 'utils';
 
 const Kda: FC<KdaProps> = ({
   kills,
@@ -14,33 +15,33 @@ const Kda: FC<KdaProps> = ({
 }) => {
   const wrapperClassName = 'flex-col' + ' ' + marginClass;
 
-  const KillsProps: TypographyProps = {
+  const KillsProps = TypographyPropsMapper({
     type: 'semibold',
     color: 'gray',
     text: String(kills) + '  /',
     size,
-  };
+  });
 
-  const DeathsProps: TypographyProps = {
+  const DeathsProps = TypographyPropsMapper({
     type: 'semibold',
     color: 'red',
     text: String(deaths),
     size,
-  };
+  });
 
-  const AssistsProps: TypographyProps = {
+  const AssistsProps = TypographyPropsMapper({
     type: 'semibold',
     color: 'gray',
     text: '/ ' + String(assists),
     size,
-  };
+  });
 
-  const KdaProps: TypographyProps = {
+  const KdaProps = TypographyPropsMapper({
     type: 'default',
     color: 'gray',
     text: String(kda?.toFixed(2)) + ' : 1',
     size: kdaSize,
-  };
+  });
 
   return (
     <div className={wrapperClassName}>

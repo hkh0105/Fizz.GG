@@ -5,7 +5,11 @@ import Box from 'userInterface/box/Box';
 import MatchOverView from './MatchOverView';
 import MatchSummonerOverView from './MatchSummonerOverView';
 import DetailSection from '../detailSection/DetailSection';
+import { recentInfo } from 'store';
+import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
 import {
+  BoxPropsMapper,
+  DetailSectionPropsMapper,
   getDateDiff,
   getEnemyTeam,
   getKda,
@@ -16,16 +20,14 @@ import {
   getSpells,
   getSubRune,
   getSummonerTeam,
+  MatchOverViewPropsMapper,
+  MatchSummonerOverViewPropsMapper,
 } from 'utils';
-import { recentInfo } from 'store';
-import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
 import {
   MatchCardProps,
-  MatchOverViewProps,
   QueueTypeMapper,
   RuneInfo,
   SpellInfos,
-  BoxProps,
   RecentMatchUserInfo,
 } from 'types';
 
@@ -135,21 +137,19 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     setRecentMatches((prev) => [...prev, recentMatchUserInfo]);
   };
 
-  const MatchOverViewProps: MatchOverViewProps = {
-    matchType: queueTypeMapper[queueId] ?? '특별모드',
+  const MatchOverViewProps = MatchOverViewPropsMapper(
+    queueTypeMapper[queueId] ?? '특별모드',
     dayDiff,
-    isWin,
     gameTime,
-  };
+    isWin
+  );
 
-  const SummonerOverViewProps = {
-    champion: championName,
-    championLevel: champLevel,
-    summonerItems: items,
-    spells: [spellD, spellF] as SpellInfos,
-    runes: [mainRune, subRune] as RuneInfo[],
-    summonerTeam: summonerTeam,
-    enemyTeam: enemyTeam,
+  const SummonerOverViewProps = MatchSummonerOverViewPropsMapper(
+    championName,
+    champLevel,
+    items,
+    [spellD, spellF] as SpellInfos,
+    [mainRune, subRune] as RuneInfo[],
     kills,
     deaths,
     assists,
@@ -158,15 +158,17 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     totalMinionsKilled,
     visionScore,
     goldEarned,
-  };
+    summonerTeam,
+    enemyTeam
+  );
 
-  const BoxProps: BoxProps = {
+  const BoxProps = BoxPropsMapper({
     size: 'custom',
     height: 'h-32',
     width: 'w-full',
     color: isWin ? 'blue' : 'red',
     marginClass: isShownDetail ? '' : 'mb-2',
-  };
+  });
 
   const ShowDetailButtonProps = {
     className: isWin
@@ -175,12 +177,12 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     onClick: () => setShownDetail(!isShownDetail),
   };
 
-  const DetailSectionProps = {
+  const DetailSectionProps = DetailSectionPropsMapper(
     summonerTeam,
     enemyTeam,
     maxDamage,
-    maxTakenDamage,
-  };
+    maxTakenDamage
+  );
 
   useEffect(() => {
     if (gameInfo) {
