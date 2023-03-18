@@ -7,7 +7,7 @@ import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import PieChart from 'components/pieChart/PieChart';
 import ChampStatRow from './ChampStatRow';
 import { recentChampInfo, recentWinStats } from 'store';
-import { PieChartPropsMapper } from 'utils';
+import { PieChartPropsMapper, ChampStatRowPropsMapper } from 'utils';
 import { BoxProps, ChartData, TypographyProps } from 'types';
 
 const RecentStatSection: FC = () => {
@@ -48,9 +48,7 @@ const RecentStatSection: FC = () => {
             </div>
           </div>
           {champions.map((champInfo) => {
-            const ChampStatRowProps = {
-              champInfo,
-            };
+            const ChampStatRowProps = ChampStatRowPropsMapper(champInfo);
 
             return <ChampStatRow {...ChampStatRowProps} key={champInfo[0]} />;
           })}

@@ -35,4 +35,5 @@ export {
   KdaPropsMapper,
   RankCardPropsMapper,
   ChampionIconPropsMapper,
+  ChampStatRowPropsMapper,
 } from './propsMapper';

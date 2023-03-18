@@ -3,6 +3,7 @@ import {
   ButtonGroupProps,
   ButtonProps,
   ChampionIconProps,
+  ChampStatRowProps,
   ChartData,
   CustomImageProps,
   DetailHeaderColorMapper,
@@ -30,6 +31,7 @@ import {
   RuneInfo,
   SpellIconProps,
   SpellInfos,
+  TotalMatchChampData,
   TypoGraphySizeMapper,
   UserStatRowProps,
   ValueOf,
@@ -265,4 +267,10 @@ export const RankCardPropsMapper = (
   tier: tier,
   rank: rank,
   leaguePoints: leaguePoints,
+});
+
+export const ChampStatRowPropsMapper = (
+  champInfo: [string, TotalMatchChampData]
+): ChampStatRowProps => ({
+  champInfo: champInfo,
 });
