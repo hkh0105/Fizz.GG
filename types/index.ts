@@ -40,7 +40,6 @@ export interface InputProps {
   size?: keyof InputSize;
   color?: keyof InputBorderColor;
   required?: boolean;
-  labelStyle?: string;
 }
 
 export type InputBorderColor = {
