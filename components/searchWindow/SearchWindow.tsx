@@ -21,47 +21,36 @@ const SearchWindow: FC<SearchWindowProps> = ({ mini = false }) => {
     });
   };
 
-  const MiniFormProps = { className: 'w-96', onsubmit: handleSubmit };
-
   const MiniIconProps = {
     size: '30',
     className: 'translate-x-10 translate-y-3',
   };
 
+  const IconProps = {
+    size: '40',
+    className: 'translate-x-10 translate-y-2',
+  };
+
   const MiniInputProps = InputPropsMapper({
     onChange,
     value: nickname,
-    labelFor: 'Search',
-    labelStyle:
-      'peer-focus:-translate-y-[1px] peer-focus:-translate-x-20 peer-focus:text-[3px] peer-focus:text-blue-600 peer-focus:text-blue-600 peer-focus:text-blue-500 absolute -translate-x-14 translate-y-4 italic focus-visible:translate-x-[-30px] focus-within:translate-y-[-30px],translate-y-10 text-gray-400 text-sm',
+    placeholder: 'Search',
     required: true,
+    labelFor: 'Search',
   });
 
-  const MiniButtonWrapperProps = {
-    className: 'translate-x-[-55px] translate-y-[7px]',
-  };
+  const InputProps = InputPropsMapper({
+    onChange,
+    value: nickname,
+    placeholder: 'Search summoner nickname',
+    required: true,
+    labelFor: 'Search',
+  });
 
   const MiniButtonProps = ButtonPropsMapper({
     label: 'GG',
     color: 'transparent',
     type: 'submit',
-  });
-
-  const FormProps = { className: 'w-[800px]', onsubmit: handleSubmit };
-
-  const WrapperProps = {
-    className: 'flex flex-row justify-center w-full justify-items-center',
-  };
-
-  const IconProps = { size: '40', className: 'translate-x-10 translate-y-2' };
-
-  const InputProps = InputPropsMapper({
-    onChange,
-    value: nickname,
-    labelFor: 'Search summoner nickname',
-    labelStyle:
-      'peer-focus:-translate-y-[1px] peer-focus:translate-x-[365px] peer-focus:text-[3px] peer-focus:text-blue-600 peer-focus:text-blue-600 peer-focus:text-blue-500 absolute left-1 translate-x-[380px] translate-y-4 italic focus-visible:translate-x-[-30px] focus-within:translate-y-[-30px],translate-y-10 text-gray-400 text-sm',
-    required: true,
   });
 
   const ButtonProps = ButtonPropsMapper({
@@ -70,27 +59,23 @@ const SearchWindow: FC<SearchWindowProps> = ({ mini = false }) => {
   });
 
   return (
-    <>
+    <form className='w-2/5' onSubmit={handleSubmit}>
       {mini ? (
-        <form {...MiniFormProps}>
-          <div {...WrapperProps}>
-            <AiOutlineSearch {...MiniIconProps} />
-            <Input {...MiniInputProps} />
-            <div {...MiniButtonWrapperProps}>
-              <Button {...MiniButtonProps} />
-            </div>
+        <div className='flex flex-row justify-center w-full justify-items-center'>
+          <AiOutlineSearch {...MiniIconProps} />
+          <Input {...MiniInputProps} />
+          <div className='translate-x-[-55px] translate-y-[7px]'>
+            <Button {...MiniButtonProps} />
           </div>
-        </form>
+        </div>
       ) : (
-        <form {...FormProps}>
-          <div {...WrapperProps}>
-            <AiOutlineSearch {...IconProps} />
-            <Input {...InputProps} />
-            <Button {...ButtonProps} />
-          </div>
-        </form>
+        <div className='flex flex-row justify-center w-full justify-items-center'>
+          <AiOutlineSearch {...IconProps} />
+          <Input {...InputProps} />
+          <Button {...ButtonProps} />
+        </div>
       )}
-    </>
+    </form>
   );
 };
 
