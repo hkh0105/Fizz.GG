@@ -3,14 +3,14 @@ import { FC } from 'react';
 import ErrorBoundary from 'pages/ErrorBoundary';
 import SsrSuspense from './SsrSuspense';
 import { AsyncBoundaryProps } from 'types';
-import { SuspensePropsMapper } from 'utils';
+import { SsrSuspenseProps } from './AsyncBoundary.props';
 
 const AsyncBoundary: FC<AsyncBoundaryProps> = ({ children, key }) => {
-  const SsrSuspenseProps = SuspensePropsMapper(<div>...Loading</div>, children);
+  const SuspenseProps = SsrSuspenseProps(children);
 
   return (
     <ErrorBoundary key={key}>
-      <SsrSuspense {...SsrSuspenseProps} />
+      <SsrSuspense {...SuspenseProps} />
     </ErrorBoundary>
   );
 };
