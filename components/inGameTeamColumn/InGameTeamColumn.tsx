@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import InGameUserRow from 'components/inGameSection/InGameUserRow';
+import InGameUserRow from 'components/inGameUserRow/InGameUserRow';
 import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
 import { getInGameRunes, getInGameSpells } from 'utils';
 import { InGameTeamColumnProps, InGameUser } from './InGameTeamColumn.types';

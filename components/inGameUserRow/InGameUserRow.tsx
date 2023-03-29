@@ -4,7 +4,7 @@ import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import RuneIcon from 'components/runeIcon/RuneIcon';
 import SpellIcon from 'components/spellIcon/SpellIcon';
 import Typography from 'userInterface/typography/Typography';
-import { InGameUserRowProps } from 'types';
+import { InGameUserRowProps } from './InGameUserRow.types';
 import {
   NicknamePropsMapper,
   ProfileIconPropsMapper,
