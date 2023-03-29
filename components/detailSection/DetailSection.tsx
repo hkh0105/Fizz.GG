@@ -2,18 +2,13 @@ import { FC } from 'react';
 
 import UserStatRow from 'components/matchSection/UserStatRow';
 import Box from 'userInterface/box/Box';
-import DetailSectionHeader from './DetailSectionheader';
+import DetailSectionHeader from './DetailSectionHeader';
+import { DetailSectionProps, MatchInfoByUser } from 'types';
 import {
-  BoxPropsMapper,
-  DetailSectionHeaderPropsMapper,
+  TeamBoxMapper,
+  TeamHeaderMapper,
   UserStatRowPropsMapper,
-} from 'utils';
-import {
-  DetailHeaderColorMapper,
-  DetailSectionProps,
-  MatchInfoByUser,
-  UserStatRowProps,
-} from 'types';
+} from './DetailSection.props';
 
 const DetailSection: FC<DetailSectionProps> = ({
   summonerTeam,
@@ -21,27 +16,13 @@ const DetailSection: FC<DetailSectionProps> = ({
   maxDamage,
   maxTakenDamage,
 }) => {
-  const SummonerTeamDetailBoxProps = BoxPropsMapper({
-    size: 'custom',
-    height: 'h-[350px]',
-    width: 'w-full',
-    color: summonerTeam[0]?.win ? 'blue' : 'red',
-  });
+  const summonerTeamColor = summonerTeam[0]?.win ? 'blue' : 'red';
+  const enemyTeamColor = enemyTeam[0]?.win ? 'blue' : 'red';
 
-  const EnemyTeamDetailBoxProps = BoxPropsMapper({
-    size: 'custom',
-    height: 'h-[350px]',
-    width: 'w-full',
-    color: enemyTeam[0]?.win ? 'blue' : 'red',
-  });
-
-  const SummonerTeamHeader = DetailSectionHeaderPropsMapper(
-    SummonerTeamDetailBoxProps.color as keyof DetailHeaderColorMapper
-  );
-
-  const EnemyTeamHeader = DetailSectionHeaderPropsMapper(
-    EnemyTeamDetailBoxProps.color as keyof DetailHeaderColorMapper
-  );
+  const SummonerTeamDetailBoxProps = TeamBoxMapper(summonerTeamColor);
+  const EnemyTeamDetailBoxProps = TeamBoxMapper(enemyTeamColor);
+  const SummonerTeamHeader = TeamHeaderMapper(summonerTeamColor);
+  const EnemyTeamHeader = TeamHeaderMapper(enemyTeamColor);
 
   return (
     <>
@@ -60,11 +41,11 @@ const DetailSection: FC<DetailSectionProps> = ({
       <Box {...EnemyTeamDetailBoxProps}>
         <DetailSectionHeader {...EnemyTeamHeader} />
         {enemyTeam.map((user: MatchInfoByUser) => {
-          const UserStatRowProps: UserStatRowProps = {
-            summoner: user,
+          const UserStatRowProps = UserStatRowPropsMapper(
+            user,
             maxDamage,
-            maxTakenDamage,
-          };
+            maxTakenDamage
+          );
 
           return <UserStatRow {...UserStatRowProps} key={user.puuid} />;
         })}
