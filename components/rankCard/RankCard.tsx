@@ -4,7 +4,8 @@ import { FC } from 'react';
 import Typography from 'userInterface/typography/Typography';
 import PieChart from 'components/pieChart/PieChart';
 import Box from 'userInterface/box/Box';
-import { ChartData, Margin, RankContentsProps } from 'types';
+import { RankCardProps } from './RankCard.types';
+import { ChartData, Margin } from 'types';
 import {
   ImagePropsMapper,
   LpPropsMapper,
@@ -12,7 +13,7 @@ import {
   RankCardBoxProps,
 } from './RankCard.props';
 
-const RankCard: FC<RankContentsProps> = ({
+const RankCard: FC<RankCardProps> = ({
   wins,
   losses,
   queueType,
