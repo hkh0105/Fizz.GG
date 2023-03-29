@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import Typography from 'userInterface/typography/Typography';
-import { ChampStatRowProps } from 'types';
+import { ChampStatRowProps } from './ChampStatRow.types';
 import {
   ChampionIconPropsMapper,
   ChampKdaPropsMapper,
