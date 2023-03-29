@@ -3,7 +3,7 @@ import { FC } from 'react';
 import Typography from 'userInterface/typography/Typography';
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import { useGetChampJson } from 'hooks/queries';
-import { MasteryRowProps } from 'types';
+import { MasteryRowProps } from './MasteryRow.types';
 import { convertLastPlayTime, getChampName } from 'utils';
 import { IconPropsMapper, TypographyPropsMapper } from './MasteryRow.props';
 
