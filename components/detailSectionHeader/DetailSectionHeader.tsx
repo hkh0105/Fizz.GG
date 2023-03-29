@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
-import { DetailSectionHeaderProps } from 'types';
+import { DetailSectionHeaderProps } from './DetailSectionHeader.types';
 import {
   ChampKeyProps,
   ColorMapper,
