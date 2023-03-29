@@ -4,19 +4,13 @@ import { FC } from 'react';
 import Typography from 'userInterface/typography/Typography';
 import PieChart from 'components/pieChart/PieChart';
 import Box from 'userInterface/box/Box';
-import { IMAGES } from 'constant';
+import { ChartData, Margin, RankContentsProps } from 'types';
 import {
-  BoxPropsMapper,
+  ImagePropsMapper,
+  LpPropsMapper,
   PieChartPropsMapper,
-  TypographyPropsMapper,
-} from 'utils';
-import {
-  ChartData,
-  Margin,
-  Images,
-  RankContentsProps,
-  RankTitleMapper,
-} from 'types';
+  RankCardBoxProps,
+} from './RankCard.props';
 
 const RankCard: FC<RankContentsProps> = ({
   wins,
@@ -33,40 +27,12 @@ const RankCard: FC<RankContentsProps> = ({
     { id: 'Lose', value: losses, color: 'red' },
   ];
 
-  const rankTitleMapper: RankTitleMapper = {
-    RANKED_SOLO_5x5: '솔로랭크',
-    RANKED_FLEX_SR: '자유랭크',
-  };
-
-  const BoxProps = BoxPropsMapper({
-    size: 'custom',
-    width: 'w-[300px] max-sm:hidden',
-  });
-
-  const LpProps = TypographyPropsMapper({
-    type: 'default',
-    text:
-      rankTitleMapper[queueType] +
-      ' : ' +
-      tier +
-      ' ' +
-      rank +
-      ' ' +
-      String(leaguePoints) +
-      'LP',
-  });
-
-  const ImageProps = {
-    src: IMAGES[tier as keyof Images] ?? IMAGES['UNRANKED'],
-    width: 70,
-    height: 70,
-    alt: '소환사 랭크 티어 이미지',
-  };
-
+  const LpProps = LpPropsMapper(queueType, tier, rank, leaguePoints);
+  const ImageProps = ImagePropsMapper(tier);
   const PieChartProps = PieChartPropsMapper(chartData, margin);
 
   return (
-    <Box {...BoxProps}>
+    <Box {...RankCardBoxProps}>
       <div className='flex-col mx-3 my-3 divide-y'>
         <Typography {...LpProps} />
         <div className='flex items-center'>
