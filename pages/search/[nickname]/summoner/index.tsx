@@ -4,18 +4,18 @@ import { FC } from 'react';
 import Profile from 'components/profile/Profile';
 import MasterySection from 'components/masterySection/MasterySection';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
-import { AsyncBoundaryPropsMapper, DefaultSectionPropsMapper } from 'utils';
+import { AsyncBoundaryPropsMapper, SectionPropsMapper } from './props';
 
 const Summoner: FC = () => {
   const router = useRouter();
   const { nickname } = (router.query as { nickname: string }) || '';
   const AsyncBoundaryProps = AsyncBoundaryPropsMapper(nickname);
-  const SectionPropsMapper = DefaultSectionPropsMapper(nickname);
+  const SectionProps = SectionPropsMapper(nickname);
 
   return (
     <AsyncBoundary {...AsyncBoundaryProps}>
-      <Profile {...SectionPropsMapper} />
-      <MasterySection {...SectionPropsMapper} />
+      <Profile {...SectionProps} />
+      <MasterySection {...SectionProps} />
     </AsyncBoundary>
   );
 };

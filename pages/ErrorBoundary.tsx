@@ -2,7 +2,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
-import { BoxPropsMapper, TypographyPropsMapper } from 'utils';
+import { ErrorBoxProps, ErrorTextPropsMapper } from './props';
 
 interface Props {
   children?: ReactNode;
@@ -30,23 +30,14 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     const { error } = this.state;
-    const BoxProps = BoxPropsMapper({
-      size: 'custom',
-      height: 'h-[300px]',
-      width: 'w-full',
-    });
-
-    const TextProps = TypographyPropsMapper({
-      type: 'title',
-      text: error,
-    });
+    const ErrorTextProps = ErrorTextPropsMapper(error);
 
     if (error) {
       return (
         <div className='w-[800px] h-[300px] mr-auto ml-auto text-center text-xl'>
-          <Box {...BoxProps}>
+          <Box {...ErrorBoxProps}>
             <div className='mt-7'>
-              <Typography {...TextProps} />
+              <Typography {...ErrorTextProps} />
             </div>
           </Box>
         </div>
