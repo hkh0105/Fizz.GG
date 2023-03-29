@@ -8,8 +8,6 @@ import DetailSection from '../detailSection/DetailSection';
 import { recentInfo } from 'store';
 import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
 import {
-  BoxPropsMapper,
-  DetailSectionPropsMapper,
   getDateDiff,
   getEnemyTeam,
   getKda,
@@ -20,21 +18,27 @@ import {
   getSpells,
   getSubRune,
   getSummonerTeam,
-  MatchOverViewPropsMapper,
-  MatchSummonerOverViewPropsMapper,
 } from 'utils';
 import {
   MatchCardProps,
-  QueueTypeMapper,
   RuneInfo,
   SpellInfos,
   RecentMatchUserInfo,
 } from 'types';
+import {
+  CardBoxPropsMapper,
+  DetailButtonPropsMapper,
+  DetailSectionPropsMapper,
+  MatchOverViewPropsMapper,
+  MatchSummonerOverViewPropsMapper,
+} from './MatchCard.props';
 
 const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
   const [isShownDetail, setShownDetail] = useState(false);
   const [recentMatches, setRecentMatches] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
+
+  const handleClickButton = () => setShownDetail(!isShownDetail);
 
   const { spellData } = useGetSpellJson();
   const { runeData } = useGetRuneJson();
@@ -71,6 +75,12 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     gameInfo,
   } = useGetGameInfo(matchId, nickname);
 
+  useEffect(() => {
+    if (gameInfo) {
+      setMatchInfo();
+    }
+  }, [gameInfo]);
+
   //DayDiff
   const dayDiff = getDateDiff(gameCreation);
 
@@ -87,16 +97,6 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
 
   //Items
   const items = [item0, item1, item2, item3, item4, item5, item6];
-
-  const queueTypeMapper: QueueTypeMapper = {
-    0: '커스텀 게임',
-    400: '노말',
-    430: '노말',
-    420: '솔로랭크',
-    440: '자유랭크',
-    83: 'AI모드',
-    450: '칼바람나락',
-  };
 
   //킬관여
   const totalKills = summonerTeamInfo.objectives.champion.kills;
@@ -137,13 +137,20 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     setRecentMatches((prev) => [...prev, recentMatchUserInfo]);
   };
 
+  const CardBoxProps = CardBoxPropsMapper(isWin, isShownDetail);
+  const DetailButtonProps = DetailButtonPropsMapper(isWin, handleClickButton);
+  const DetailSectionProps = DetailSectionPropsMapper(
+    summonerTeam,
+    enemyTeam,
+    maxDamage,
+    maxTakenDamage
+  );
   const MatchOverViewProps = MatchOverViewPropsMapper(
-    queueTypeMapper[queueId] ?? '특별모드',
+    queueId,
     dayDiff,
     gameTime,
     isWin
   );
-
   const SummonerOverViewProps = MatchSummonerOverViewPropsMapper(
     championName,
     champLevel,
@@ -162,41 +169,13 @@ const MatchCard: FC<MatchCardProps> = ({ matchId, nickname }) => {
     enemyTeam
   );
 
-  const BoxProps = BoxPropsMapper({
-    size: 'custom',
-    height: 'h-32',
-    width: 'w-full',
-    color: isWin ? 'blue' : 'red',
-    marginClass: isShownDetail ? '' : 'mb-2',
-  });
-
-  const ShowDetailButtonProps = {
-    className: isWin
-      ? 'bg-blue-200 text-blue-500 hover:bg-blue-500 hover:text-blue-700'
-      : 'bg-red-200 text-red-500 hover:bg-red-500 hover:text-red-700',
-    onClick: () => setShownDetail(!isShownDetail),
-  };
-
-  const DetailSectionProps = DetailSectionPropsMapper(
-    summonerTeam,
-    enemyTeam,
-    maxDamage,
-    maxTakenDamage
-  );
-
-  useEffect(() => {
-    if (gameInfo) {
-      setMatchInfo();
-    }
-  }, [gameInfo]);
-
   return (
     <>
-      <Box {...BoxProps}>
+      <Box {...CardBoxProps}>
         <div className='flex'>
           <MatchOverView {...MatchOverViewProps} />
           <MatchSummonerOverView {...SummonerOverViewProps} />
-          <button {...ShowDetailButtonProps}>&darr;</button>
+          <button {...DetailButtonProps}>&darr;</button>
         </div>
       </Box>
       {isShownDetail && <DetailSection {...DetailSectionProps} />}

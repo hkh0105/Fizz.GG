@@ -3,26 +3,23 @@ import { FC } from 'react';
 
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import SpellIcon from 'components/spellIcon/SpellIcon';
-import ItemIcon from 'components/itemIcon.tsx/ItemIcon';
+import ItemIcon from 'components/itemIcon/ItemIcon';
 import RuneIcon from 'components/runeIcon/RuneIcon';
 import Kda from 'components/kda/Kda';
 import Typography from 'userInterface/typography/Typography';
 import SingleBarChart from 'components/singleBarChart/SingleBarChart';
 import { useGetRuneJson, useGetSpellJson } from 'hooks/queries';
 import { UserStatRowProps, SpellInfos, RuneInfo, TypographyProps } from 'types';
+import { getKda, getMainRune, getSpells, getSubRune } from 'utils';
 import {
-  getKda,
-  getMainRune,
-  getSpells,
-  getSubRune,
   ChampionIconPropsMapper,
   ItemIconPropsMapper,
   KdaPropsMapper,
   RuneIconPropsMapper,
-  SpellIconPropsMapper,
   SingleBarChartPropsMapper,
+  SpellIconPropsMapper,
   TypographyPropsMapper,
-} from 'utils';
+} from './UserStatRow.props';
 
 const UserStatRow: FC<UserStatRowProps> = ({
   summoner,
@@ -70,79 +67,36 @@ const UserStatRow: FC<UserStatRowProps> = ({
   //KDA
   const kda = getKda(kills, assists, deaths);
 
-  const ChampionIconProps = ChampionIconPropsMapper(
-    30,
-    championName,
-    champLevel
-  );
-
-  const SpellIconProps = SpellIconPropsMapper(spell, 15, 'pt-1');
-
-  const RuneIconProps = RuneIconPropsMapper(runes, 15, 'pt-1');
-
-  const KdaProps = KdaPropsMapper(
-    kills,
-    deaths,
-    assists,
-    kda,
-    'mt-2 ml-5',
-    'xSmall',
-    'xSmall'
-  );
-
-  const NicknameProps = TypographyPropsMapper({
-    type: 'default',
-    size: 'xSmall',
-    color: 'gray',
-    text: summonerName,
-  });
-
-  const CsProps = TypographyPropsMapper({
-    type: 'default',
-    size: 'xSmall',
-    color: 'gray',
-    text: 'CS :' + String(totalMinionsKilled),
-  });
-
-  const VisionScoreProps: TypographyProps = {
-    type: 'default',
-    size: 'xSmall',
-    color: 'gray',
-    text: '시야점수 : ' + String(visionScore),
-  };
-
+  const ChampionIconProps = ChampionIconPropsMapper(championName, champLevel);
+  const SpellIconProps = SpellIconPropsMapper(spell);
+  const RuneIconProps = RuneIconPropsMapper(runes);
+  const KdaProps = KdaPropsMapper(kills, deaths, assists, kda);
+  const NicknameProps = TypographyPropsMapper(summonerName);
+  const CsProps = TypographyPropsMapper('CS :' + totalMinionsKilled);
+  const VisionScoreProps = TypographyPropsMapper('시야점수 : ' + visionScore);
   const DamageChartProps = SingleBarChartPropsMapper(
-    100,
-    15,
     totalDamageDealtToChampions,
     maxDamage,
     'red',
-    'white',
-    false,
-    String(totalDamageDealtToChampions),
-    maxDamage - totalDamageDealtToChampions,
-    'xSmall',
-    'gray'
+    totalDamageDealtToChampions,
+    maxDamage - totalDamageDealtToChampions
   );
   const DamagedChartProps = SingleBarChartPropsMapper(
-    100,
-    15,
     totalDamageDealtToChampions,
     maxTakenDamage,
     'blue',
-    'white',
-    false,
-    String(totalDamageTaken),
-    maxTakenDamage - totalDamageTaken,
-    'xSmall',
-    'gray'
+    totalDamageTaken,
+    maxTakenDamage - totalDamageTaken
   );
-
-  const ItemIconProps = ItemIconPropsMapper(
-    [item0, item1, item2, item3, item4, item5, item6],
-    25,
-    'pt-7'
-  );
+  const ItemIconProps = ItemIconPropsMapper([
+    item0,
+    item1,
+    item2,
+    item3,
+    item4,
+    item5,
+    item6,
+  ]);
 
   return (
     <div className='w-[800px] h-[60px] justify-center flex items-center gap-x-1 '>

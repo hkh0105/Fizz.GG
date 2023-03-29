@@ -5,17 +5,19 @@ import ChampionIcon from 'components/championIcon/ChampionIcon';
 import SpellIcon from 'components/spellIcon/SpellIcon';
 import RuneIcon from 'components/runeIcon/RuneIcon';
 import Kda from 'components/kda/Kda';
-import ItemIcon from 'components/itemIcon.tsx/ItemIcon';
+import ItemIcon from 'components/itemIcon/ItemIcon';
 import TeamChampion from 'components/teamChampion/TeamChampion';
-import { KdaProps, MatchSummonerOverViewProps } from 'types';
+import { MatchSummonerOverViewProps } from 'types';
 import {
   ChampionIconPropsMapper,
+  GrayTypographyPropsMapper,
   ItemIconPropsMapper,
+  KdaPropsMapper,
+  RedTypographyPropsMapper,
   RuneIconPropsMapper,
   SpellIconPropsMapper,
   TeamChampionPropsMapper,
-  TypographyPropsMapper,
-} from 'utils';
+} from './MatchSummonerOverView.props';
 
 const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
   champion,
@@ -34,66 +36,20 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
   summonerTeam,
   enemyTeam,
 }) => {
-  const ChampionIconProps = ChampionIconPropsMapper(
-    50,
-    champion,
-    championLevel
+  const ChampionIconProps = ChampionIconPropsMapper(champion, championLevel);
+  const SpellIconProps = SpellIconPropsMapper(spells);
+  const RuneIconProps = RuneIconPropsMapper(runes);
+  const KdaProps = KdaPropsMapper(kills, deaths, assists, kda);
+  const ItemIconProps = ItemIconPropsMapper(summonerItems);
+  const GoldProps = GrayTypographyPropsMapper('Gold :' + String(goldEarned));
+  const SummonerTeamChampionProps = TeamChampionPropsMapper(summonerTeam);
+  const EnemyTeamChampionProps = TeamChampionPropsMapper(enemyTeam);
+  const CsProps = RedTypographyPropsMapper('CS :' + String(totalMinionsKilled));
+  const KillProps = RedTypographyPropsMapper(
+    '킬관여율 :' + String(killInvolvedRate.toFixed(1)) + '%'
   );
-
-  const SpellIconProps = SpellIconPropsMapper(spells, 25, 'ml-2');
-
-  const RuneIconProps = RuneIconPropsMapper(runes, 25, 'ml-1');
-
-  const KdaProps: KdaProps = {
-    marginClass: 'mt-2 ml-2',
-    kills,
-    deaths,
-    assists,
-    kda,
-  };
-
-  const ItemIconProps = ItemIconPropsMapper(summonerItems, 25, 'mt-3');
-
-  const KillProps = TypographyPropsMapper({
-    type: 'default',
-    size: 'small',
-    color: 'red',
-    text: '킬관여율 :' + String(killInvolvedRate.toFixed(1)) + '%',
-  });
-
-  const CsProps = TypographyPropsMapper({
-    type: 'default',
-    size: 'small',
-    color: 'red',
-    text: 'CS :' + String(totalMinionsKilled),
-  });
-
-  const VisionScoreProps = TypographyPropsMapper({
-    type: 'default',
-    size: 'small',
-    color: 'gray',
-    text: '시야점수 : ' + String(visionScore),
-  });
-
-  const GoldProps = TypographyPropsMapper({
-    type: 'default',
-    size: 'small',
-    color: 'gray',
-    text: 'Gold :' + String(goldEarned),
-  });
-
-  const SummonerTeamChampionProps = TeamChampionPropsMapper(
-    20,
-    140,
-    summonerTeam,
-    'small'
-  );
-
-  const EnemyTeamChampionProps = TeamChampionPropsMapper(
-    20,
-    140,
-    enemyTeam,
-    'small'
+  const VisionScoreProps = GrayTypographyPropsMapper(
+    '시야점수 : ' + String(visionScore)
   );
 
   return (

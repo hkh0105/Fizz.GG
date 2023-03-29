@@ -2,8 +2,13 @@ import { FC } from 'react';
 
 import Divider from 'userInterface/divider/Divider';
 import Typography from 'userInterface/typography/Typography';
-import { MatchOverViewProps, TypographyProps } from 'types';
-import { TypographyPropsMapper } from 'utils';
+import { MatchOverViewProps } from 'types';
+import {
+  DayDiffPropsMapper,
+  GameTimePropsMapper,
+  MatchResultPropsMapper,
+  MatchTypePropsMapper,
+} from './MatchOverView.props';
 
 const MatchOverView: FC<MatchOverViewProps> = ({
   matchType,
@@ -11,36 +16,10 @@ const MatchOverView: FC<MatchOverViewProps> = ({
   isWin,
   gameTime,
 }) => {
-  const MatchTypeProps = TypographyPropsMapper({
-    type: 'semibold',
-    size: 'small',
-    color: isWin ? 'blue' : 'red',
-    text: matchType,
-    isTitle: false,
-  });
-
-  const DayDiffProps = TypographyPropsMapper({
-    type: 'default',
-    size: 'small',
-    color: 'gray',
-    text: dayDiff,
-    isTitle: false,
-  });
-  const MatchResultProps = TypographyPropsMapper({
-    type: 'semibold',
-    size: 'small',
-    color: 'gray',
-    text: isWin ? '승리' : '패배',
-    isTitle: false,
-  });
-
-  const GameTimeProps = TypographyPropsMapper({
-    type: 'default',
-    size: 'small',
-    color: 'gray',
-    text: gameTime,
-    isTitle: false,
-  });
+  const MatchTypeProps = MatchTypePropsMapper(isWin, matchType);
+  const DayDiffProps = DayDiffPropsMapper(dayDiff);
+  const MatchResultProps = MatchResultPropsMapper(isWin);
+  const GameTimeProps = GameTimePropsMapper(gameTime);
 
   return (
     <div className='flex flex-col py-5 ml-5 gap-y-[1px] w-[80px]'>

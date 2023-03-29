@@ -7,7 +7,7 @@ import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import { recentInfo } from 'store';
 import { useGetMatchIds } from 'hooks/queries';
 import { MatchSection, RecentMatchUserInfo } from 'types';
-import { MatchCardPropsMapper } from 'utils';
+import { MatchCardPropsMapper } from './MatchSection.props';
 
 const MatchSection: FC<MatchSection> = ({ nickname }) => {
   const [count, setCount] = useState(10);
