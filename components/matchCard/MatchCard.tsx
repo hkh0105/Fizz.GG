@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import Box from 'userInterface/box/Box';
-import MatchOverView from './MatchOverView';
-import MatchSummonerOverView from './MatchSummonerOverView';
+import MatchOverView from '../matchSection/MatchOverView';
+import MatchSummonerOverView from '../matchSection/MatchSummonerOverView';
 import DetailSection from '../detailSection/DetailSection';
 import { recentInfo } from 'store';
 import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
@@ -24,7 +24,7 @@ import {
   RuneInfo,
   SpellInfos,
   RecentMatchUserInfo,
-} from 'types';
+} from './MatchCard.types';
 import {
   CardBoxPropsMapper,
   DetailButtonPropsMapper,

@@ -1,7 +1,6 @@
 import { MouseEventHandler } from 'react';
 import {
   BoxProps,
-  ButtonProps,
   DetailSectionProps,
   MatchInfoByUser,
   MatchOverViewProps,
@@ -9,7 +8,6 @@ import {
   QueueTypeMapper,
   RuneInfo,
   SpellInfos,
-  ValueOf,
 } from 'types';
 
 export const queueTypeMapper: QueueTypeMapper = {
