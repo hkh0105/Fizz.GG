@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import Divider from 'userInterface/divider/Divider';
 import Typography from 'userInterface/typography/Typography';
-import { MatchOverViewProps } from 'types';
+import { MatchOverViewProps } from './MatchOverView.types';
 import {
   DayDiffPropsMapper,
   GameTimePropsMapper,

@@ -7,7 +7,7 @@ import RuneIcon from 'components/runeIcon/RuneIcon';
 import Kda from 'components/kda/Kda';
 import ItemIcon from 'components/itemIcon/ItemIcon';
 import TeamChampion from 'components/teamChampion/TeamChampion';
-import { MatchSummonerOverViewProps } from 'types';
+import { MatchSummonerOverViewProps } from './MatchSummonerOverView.types';
 import {
   ChampionIconPropsMapper,
   GrayTypographyPropsMapper,

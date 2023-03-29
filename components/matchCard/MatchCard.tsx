@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import Box from 'userInterface/box/Box';
-import MatchOverView from '../matchSection/MatchOverView';
-import MatchSummonerOverView from '../matchSection/MatchSummonerOverView';
+import MatchOverView from '../matchOverView/MatchOverView';
+import MatchSummonerOverView from '../matchSummonerOverView/MatchSummonerOverView';
 import DetailSection from '../detailSection/DetailSection';
 import { recentInfo } from 'store';
 import { useGetRuneJson, useGetSpellJson, useGetGameInfo } from 'hooks/queries';
