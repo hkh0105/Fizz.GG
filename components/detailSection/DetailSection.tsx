@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import UserStatRow from 'components/matchSection/UserStatRow';
+import UserStatRow from 'components/userStatRow/UserStatRow';
 import Box from 'userInterface/box/Box';
-import DetailSectionHeader from './DetailSectionHeader';
-import { DetailSectionProps, MatchInfoByUser } from 'types';
+import DetailSectionHeader from 'components/detailSectionHeader/DetailSectionHeader';
+import { DetailSectionProps, MatchInfoByUser } from './DetailSection.types';
 import {
   TeamBoxMapper,
   TeamHeaderMapper,
