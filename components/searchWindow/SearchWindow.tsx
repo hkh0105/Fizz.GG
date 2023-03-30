@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Button from 'userInterface/button/Button';
 import Input from 'userInterface/input/Input';
 import { useInput } from 'hooks/useInput';
-import { SearchWindowProps } from 'types';
+import { SearchWindowProps } from './SearchWindow.types';
 import {
   DefaultButtonProps,
   IconProps,
