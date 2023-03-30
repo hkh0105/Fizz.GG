@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import MatchCard from './MatchCard';
+import MatchCard from '../matchCard/MatchCard';
 import useIntersectionObserver from 'hooks/useInterSectionObserver';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import { recentInfo } from 'store';
 import { useGetMatchIds } from 'hooks/queries';
-import { MatchSection, RecentMatchUserInfo } from 'types';
+import { MatchSectionProps, RecentMatchUserInfo } from './MatchSection.types';
 import { MatchCardPropsMapper } from './MatchSection.props';
 
-const MatchSection: FC<MatchSection> = ({ nickname }) => {
+const MatchSection: FC<MatchSectionProps> = ({ nickname }) => {
   const [count, setCount] = useState(10);
   const [recentMatches, setRecentMatches] =
     useRecoilState<RecentMatchUserInfo[]>(recentInfo);
