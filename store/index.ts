@@ -1,10 +1,11 @@
 import { atom, selector } from 'recoil';
+
 import {
   ChampTotalMatchInfoArray,
   RecentChampInfo,
   RecentMatchUserInfo,
   recentWinInfo,
-} from 'types';
+} from './store.types';
 
 export const recentInfo = atom<RecentMatchUserInfo[]>({
   key: 'MatchUserInfo',
