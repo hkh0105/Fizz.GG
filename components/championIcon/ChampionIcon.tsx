@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { ChampionIconProps } from 'types';
+import { ChampionIconProps } from './ChampionIcon.types';
 import { CustomImagePropsMapper } from './ChampionIcon.props';
 
 const ChampionIcon: FC<ChampionIconProps> = ({
