@@ -1,4 +1,4 @@
-import { Images } from 'types';
+import { Images } from './types';
 
 export const IMAGES: Images = {
   logo: '/Logo.png',
