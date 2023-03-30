@@ -1,8 +1,11 @@
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
-import { SingleBarChartProps, SingleBarColorMapper } from 'types';
 import { SingleBarTypographyPropsMapper } from './SingleBarChart.props';
+import {
+  SingleBarChartProps,
+  SingleBarColorMapper,
+} from './SingleBarChart.types';
 
 const SingleBarChart: FC<SingleBarChartProps> = ({
   title,
