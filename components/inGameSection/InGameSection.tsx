@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
-import InGameTeamColumn from './InGameTeamColumn';
+import InGameTeamColumn from 'components/inGameTeamColumn/InGameTeamColumn';
 import { useGetInGame } from 'hooks/queries';
-import { IngameSectionProps } from 'types';
+import { IngameSectionProps } from './InGameSection.types';
 import {
   GameModePropsMapper,
   InGameBoxProps,
