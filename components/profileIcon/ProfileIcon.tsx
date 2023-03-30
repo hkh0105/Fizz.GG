@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { ProfileIconProps } from 'types';
+import { ProfileIconProps } from './ProfileIcon.types';
 import { CustomImagePropsMapper } from './ProfileIcon.props';
 
 const ProfileIcon: FC<ProfileIconProps> = ({

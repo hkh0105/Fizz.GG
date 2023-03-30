@@ -7,7 +7,7 @@ import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
 import { useGetSummoner } from 'hooks/queries';
-import { ProfileProps } from 'types';
+import { ProfileProps } from './Profile.types';
 import {
   ButtonGroupPropsMapper,
   InGameButtonPropsMapper,
