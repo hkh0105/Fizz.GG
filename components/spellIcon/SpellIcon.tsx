@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { SpellIconProps } from 'types';
+import { SpellIconProps } from './SpellIcon.types';
 import { CustomImagePropsMapper } from './SpellIcon.props';
 
 const SpellIcon: FC<SpellIconProps> = ({ width, spells, marginClass }) => {
