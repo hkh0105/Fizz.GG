@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import ErrorBoundary from 'pages/ErrorBoundary';
 import SsrSuspense from './SsrSuspense';
-import { AsyncBoundaryProps } from 'types';
+import { AsyncBoundaryProps } from './AsyncBoundary.types';
 import { SsrSuspenseProps } from './AsyncBoundary.props';
 
 const AsyncBoundary: FC<AsyncBoundaryProps> = ({ children, key }) => {
