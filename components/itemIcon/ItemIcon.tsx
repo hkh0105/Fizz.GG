@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { ItemIconProps } from 'types';
+import { ItemIconProps } from './ItemIcon.types';
 import { CustomImagePropsMapper } from './ItemIcon.props';
 
 const ItemIcon: FC<ItemIconProps> = ({ width, summonerItems, marginClass }) => {
