@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import Typography from 'userInterface/typography/Typography';
-import { TeamChampionProps } from 'types';
+import { TeamChampionProps } from './TeamChampion.types';
 import {
   ChampionIconPropsMapper,
   SummonerNamePropsMapper,
