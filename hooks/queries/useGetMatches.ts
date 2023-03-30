@@ -6,7 +6,7 @@ import {
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
 import { useGetSummoner } from './useGetSummoner';
-import { Response, QueryOptions, MatchIds } from 'types';
+import { Response, QueryOptions, MatchIds } from './query.types';
 
 export const useGetMatchIds = (
   nickname: string,

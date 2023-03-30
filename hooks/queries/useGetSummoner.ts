@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
-import { Response, SummonerInfo, QueryOptions } from 'types';
+import { Response, SummonerInfo, QueryOptions } from './query.types';
 
 export const useGetSummoner = (
   nickname: string,

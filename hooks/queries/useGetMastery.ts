@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
 import { useGetSummoner } from './useGetSummoner';
-import { Response, QueryOptions, MasteryInfo } from 'types';
+import { Response, QueryOptions, MasteryInfo } from './query.types';
 
 export const useGetMastery = (
   nickname: string,

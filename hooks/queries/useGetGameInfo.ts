@@ -9,7 +9,7 @@ import {
   MatchTeam,
   GameDetailInfo,
   MatchInfoByUser,
-} from 'types';
+} from './query.types';
 
 export const useGetGameInfo = (
   matchId: string,

@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
 import { useGetSummoner } from './useGetSummoner';
-import { Response, QueryOptions, InGameInfo, InGameUser } from 'types';
+import { Response, QueryOptions, InGameInfo, InGameUser } from './query.types';
 
 export const useGetInGame = (
   nickname: string,
