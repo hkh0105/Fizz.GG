@@ -8,7 +8,7 @@ import {
   RiotChampInfo,
   RiotSpellData,
   RuneData,
-} from 'types';
+} from './query.types';
 
 export const useGetSpellJson = (options?: QueryOptions<RiotSpellData>) => {
   const { data: riotSpellData }: UseQueryResult<RiotSpellData> = useQuery(

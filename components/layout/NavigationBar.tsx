@@ -5,10 +5,11 @@ import { useRouter } from 'next/router';
 
 import SearchWindow from 'components/searchWindow/SearchWindow';
 import { IMAGES } from 'constant';
-import { SearchWindowPropsMapper } from 'utils';
+import { SearchWindowPropsMapper } from './NavigationBar.props';
 
 const NavigationBar: FC = () => {
   const path = useRouter().pathname;
+
   const SearchWindowProps = SearchWindowPropsMapper(true);
 
   return (

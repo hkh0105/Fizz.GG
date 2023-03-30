@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useIntersectionObserverProps } from 'types';
+import { useIntersectionObserverProps } from './useInterSectionObserver.types';
 
 const useIntersectionObserver = ({
   root,

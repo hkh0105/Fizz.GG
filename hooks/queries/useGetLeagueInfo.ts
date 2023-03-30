@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { CLIENT_API } from 'api/api';
 import { QUERY_KEYS } from 'constant';
 import { useGetSummoner } from './useGetSummoner';
-import { LeagueInfos, QueryOptions, Response } from 'types';
+import { LeagueInfos, QueryOptions, Response } from './query.types';
 
 export const useGetLeagueInfo = (
   nickname: string,

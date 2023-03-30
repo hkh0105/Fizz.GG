@@ -1,18 +1,18 @@
 import { FC } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import RankCard from './RankCard';
+import RankCard from 'components/rankCard/RankCard';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import { useGetLeagueInfo } from 'hooks/queries';
-import { RankCardPropsMapper } from 'utils';
-import { LeagueInfo, RankProps } from 'types';
+import { RankSectionProps } from './RankSection.types';
+import { RankCardPropsMapper } from './RankSection.props';
 
-const RankSection: FC<RankProps> = ({ nickname }) => {
+const RankSection: FC<RankSectionProps> = ({ nickname }) => {
   const { leagueInfos } = useGetLeagueInfo(nickname);
 
   return (
     <>
-      {leagueInfos?.map((leagueInfo: LeagueInfo) => {
+      {leagueInfos?.map((leagueInfo) => {
         const { wins, losses, queueType, tier, rank, leaguePoints } =
           leagueInfo;
 

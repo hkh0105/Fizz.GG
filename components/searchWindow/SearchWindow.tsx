@@ -5,8 +5,15 @@ import { useRouter } from 'next/router';
 import Button from 'userInterface/button/Button';
 import Input from 'userInterface/input/Input';
 import { useInput } from 'hooks/useInput';
-import { SearchWindowProps } from 'types';
-import { ButtonPropsMapper, InputPropsMapper } from 'utils';
+import { SearchWindowProps } from './SearchWindow.types';
+import {
+  DefaultButtonProps,
+  IconProps,
+  InputPropsMapper,
+  MiniButtonProps,
+  MiniIconProps,
+  MiniInputPropsMapper,
+} from './SearchWindow.props';
 
 const SearchWindow: FC<SearchWindowProps> = ({ mini = false }) => {
   const { value: nickname, onChange } = useInput('');
@@ -21,42 +28,8 @@ const SearchWindow: FC<SearchWindowProps> = ({ mini = false }) => {
     });
   };
 
-  const MiniIconProps = {
-    size: '30',
-    className: 'translate-x-10 translate-y-3',
-  };
-
-  const IconProps = {
-    size: '40',
-    className: 'translate-x-10 translate-y-2',
-  };
-
-  const MiniInputProps = InputPropsMapper({
-    onChange,
-    value: nickname,
-    placeholder: 'Search',
-    required: true,
-    labelFor: 'Search',
-  });
-
-  const InputProps = InputPropsMapper({
-    onChange,
-    value: nickname,
-    placeholder: 'Search summoner nickname',
-    required: true,
-    labelFor: 'Search',
-  });
-
-  const MiniButtonProps = ButtonPropsMapper({
-    label: 'GG',
-    color: 'transparent',
-    type: 'submit',
-  });
-
-  const ButtonProps = ButtonPropsMapper({
-    label: 'Search',
-    type: 'submit',
-  });
+  const MiniInputProps = MiniInputPropsMapper(onChange, nickname);
+  const InputProps = InputPropsMapper(onChange, nickname);
 
   return (
     <form className='w-2/5' onSubmit={handleSubmit}>
@@ -72,7 +45,7 @@ const SearchWindow: FC<SearchWindowProps> = ({ mini = false }) => {
         <div className='flex flex-row justify-center w-full justify-items-center'>
           <AiOutlineSearch {...IconProps} />
           <Input {...InputProps} />
-          <Button {...ButtonProps} />
+          <Button {...DefaultButtonProps} />
         </div>
       )}
     </form>

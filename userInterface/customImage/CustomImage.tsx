@@ -2,7 +2,7 @@ import Image, { ImageProps } from 'next/image';
 import { FC, useState } from 'react';
 
 import { IMAGES } from 'constant';
-import { CustomImageProps } from 'types';
+import { CustomImageProps } from './CustomImage.types';
 
 const CustomImage: FC<CustomImageProps> = ({
   className,

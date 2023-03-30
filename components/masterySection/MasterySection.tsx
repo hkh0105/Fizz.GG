@@ -3,38 +3,28 @@ import { FC } from 'react';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
-import MasteryRow from './MasteryRow';
-import MasteryHeader from './MasteryHeader';
+import MasteryRow from '../masteryRow/MasteryRow';
+import MasteryHeader from '../masteryHeader/MasteryHeader';
 import { useGetMastery } from 'hooks/queries';
-import { IngameSectionProps } from 'types';
+import { MasterySectionProps } from './MasterySection.types';
 import {
   AsyncBoundaryPropsMapper,
-  BoxPropsMapper,
+  GameModePropsMapper,
+  MasteryBoxProps,
   MasteryRowPropsMapper,
-  TypographyPropsMapper,
-} from 'utils';
+} from './MasterySection.props';
 
-const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
+const MasterySection: FC<MasterySectionProps> = ({ nickname }) => {
   const { masteryInfo } = useGetMastery(nickname);
 
-  const GameModeProps = TypographyPropsMapper({
-    type: 'title',
-    color: 'gray',
-    text: `${nickname} 의 챔피언 통계`,
-  });
-
-  const BoxProps = BoxPropsMapper({
-    size: 'custom',
-    width: 'w-[800px]',
-  });
-
+  const GameModeProps = GameModePropsMapper(nickname);
   const AsyncBoundaryProps = AsyncBoundaryPropsMapper(nickname);
 
   return (
     <AsyncBoundary {...AsyncBoundaryProps}>
       <section className='flex flex-col items-center my-32 mt-10 gap-y-10'>
         <Typography {...GameModeProps} />
-        <Box {...BoxProps}>
+        <Box {...MasteryBoxProps}>
           <MasteryHeader />
           {masteryInfo.map((mastery) => {
             const MasteryRowProps = MasteryRowPropsMapper(mastery);

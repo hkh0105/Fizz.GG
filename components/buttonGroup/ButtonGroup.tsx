@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from 'userInterface/button/Button';
-import { ButtonGroupProps } from 'types';
+import { ButtonGroupProps } from './ButtonGroup.types';
 
 const ButtonGroup: FC<ButtonGroupProps> = ({ containerClassName, buttons }) => {
   return (

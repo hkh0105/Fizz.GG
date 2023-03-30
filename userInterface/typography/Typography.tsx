@@ -5,7 +5,7 @@ import {
   TypographyProps,
   TypoGraphySizeMapper,
   TypographyTypeMapper,
-} from 'types';
+} from './Typography.types';
 
 const Typography: FC<TypographyProps> = ({
   text,

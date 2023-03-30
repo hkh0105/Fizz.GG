@@ -3,8 +3,11 @@ import Link from 'next/link';
 
 import ChampionIcon from 'components/championIcon/ChampionIcon';
 import Typography from 'userInterface/typography/Typography';
-import { TeamChampionProps } from 'types';
-import { ChampionIconPropsMapper, TypographyPropsMapper } from 'utils';
+import { TeamChampionProps } from './TeamChampion.types';
+import {
+  ChampionIconPropsMapper,
+  SummonerNamePropsMapper,
+} from './TeamChampion.props';
 
 const TeamChampion: FC<TeamChampionProps> = ({
   team,
@@ -22,13 +25,7 @@ const TeamChampion: FC<TeamChampionProps> = ({
             ? user.summonerName.slice(0, 5) + '...'
             : user.summonerName;
 
-        const SummonerNameProps = TypographyPropsMapper({
-          type: 'default',
-          size: typoSize,
-          color: 'gray',
-          text: userName,
-        });
-
+        const SummonerNameProps = SummonerNamePropsMapper(typoSize, userName);
         const ChampionIconProps = ChampionIconPropsMapper(
           imageSize,
           user.championName

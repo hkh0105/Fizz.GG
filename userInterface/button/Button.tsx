@@ -1,6 +1,10 @@
 import type { FC } from 'react';
 
-import { ButtonProps, ButtonColor, ButtonSize } from 'types';
+import {
+  ButtonProps,
+  ButtonColorMapper,
+  ButtonSizeMapper,
+} from './Button.types';
 
 const Button: FC<ButtonProps> = ({
   label = 'Button',
@@ -10,12 +14,12 @@ const Button: FC<ButtonProps> = ({
   type = 'button',
 }) => {
   const defaultVariants = 'font-medium rounded-lg';
-  const colorVariants: ButtonColor = {
+  const colorVariants: ButtonColorMapper = {
     blue: 'text-white bg-blue-700 hover:bg-blue-500  ',
     gray: '',
     transparent: 'hover:border-blue-500 border-transparent border-2 rounded-lg',
   };
-  const sizeVariants: ButtonSize = {
+  const sizeVariants: ButtonSizeMapper = {
     small: '',
     medium: 'px-4 py-2 text-sm ',
     large: '',

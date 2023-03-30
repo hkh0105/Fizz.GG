@@ -7,14 +7,17 @@ import Typography from 'userInterface/typography/Typography';
 import ProfileIcon from 'components/profileIcon/ProfileIcon';
 import ButtonGroup from 'components/buttonGroup/ButtonGroup';
 import { useGetSummoner } from 'hooks/queries';
-import { ProfileProps } from 'types';
+import { ProfileProps } from './Profile.types';
 import {
-  BoxPropsMapper,
   ButtonGroupPropsMapper,
-  ButtonPropsMapper,
+  InGameButtonPropsMapper,
+  MasteryButtonPropsMapper,
+  MatchesButtonPropsMapper,
+  ProfileBoxProps,
   ProfileIconPropsMapper,
-  TypographyPropsMapper,
-} from 'utils/propsMapper';
+  SummonerNamePropsMapper,
+  UpdateButtonPropsMapper,
+} from './Profile.props';
 
 const Profile: FC<ProfileProps> = ({ nickname }) => {
   const router = useRouter();
@@ -49,51 +52,20 @@ const Profile: FC<ProfileProps> = ({ nickname }) => {
     });
   };
 
-  const ProfileIconProps = ProfileIconPropsMapper(
-    profileIconId,
-    100,
-    100,
-    summonerLevel
-  );
-
-  const InGameButtonProps = ButtonPropsMapper({
-    onClick: onClickInGameButton,
-    label: '인게임 정보',
-  });
-
-  const MatchesButtonProps = ButtonPropsMapper({
-    onClick: onClickMatchesButton,
-    label: '매치 정보',
-  });
-
-  const MasteryButtonProps = ButtonPropsMapper({
-    onClick: onClickSummonerButton,
-    label: '소환사 정보',
-  });
-
-  const UpdateButtonProps = ButtonPropsMapper({
-    color: 'transparent',
-    onClick: onClickUpdateButton,
-    label: '업데이트',
-  });
-
-  const ButtonGroupProps = ButtonGroupPropsMapper('flex gap-3', [
+  const ProfileIconProps = ProfileIconPropsMapper(profileIconId, summonerLevel);
+  const InGameButtonProps = InGameButtonPropsMapper(onClickInGameButton);
+  const MatchesButtonProps = MatchesButtonPropsMapper(onClickMatchesButton);
+  const MasteryButtonProps = MasteryButtonPropsMapper(onClickSummonerButton);
+  const UpdateButtonProps = UpdateButtonPropsMapper(onClickUpdateButton);
+  const SummonerNameProps = SummonerNamePropsMapper(name);
+  const ButtonGroupProps = ButtonGroupPropsMapper([
     isInGame ? MatchesButtonProps : InGameButtonProps,
     isSummoner ? MatchesButtonProps : MasteryButtonProps,
     UpdateButtonProps,
   ]);
 
-  const SummonerNameProps = TypographyPropsMapper({
-    type: 'title',
-    text: name,
-  });
-
-  const BoxProps = BoxPropsMapper({
-    size: 'full',
-  });
-
   return (
-    <Box {...BoxProps}>
+    <Box {...ProfileBoxProps}>
       <div className='flex'>
         <ProfileIcon {...ProfileIconProps} />
         <div className='flex flex-col items-start justify-center gap-y-10'>
