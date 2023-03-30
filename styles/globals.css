@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Typography */
+.main-title {
+  @apply bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center text-6xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm leading-[5rem] my-20
+}
+.title {
+  @apply text-2xl font-medium
+}
+.semi-bold {
+  @apply font-semibold
+}
+
+/* Input */
+.input-blue {
+  @apply border border-blue-300 focus:border-gray-500
+}
+.input-gray {
+  @apply border border-gray-300 focus:border-blue-500
+}
+.input-small {
+  @apply w-1/5 text-xs
+}
+.input-medium {
+  @apply w-3/5 text-sm
+}
+.input-large {
+  @apply w-full text-lg
+} 

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import classNames from 'classnames';
 
 import {
   TypoGraphyColorMapper,
@@ -15,10 +16,9 @@ const Typography: FC<TypographyProps> = ({
   color = 'black',
 }) => {
   const typeMapper: TypographyTypeMapper = {
-    mainTitle:
-      'bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center text-6xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm leading-[5rem] my-20',
-    title: 'text-2xl font-medium',
-    semibold: 'font-semibold',
+    mainTitle: 'main-title',
+    title: 'title',
+    semibold: 'semi-bold',
     default: '',
   };
 
@@ -35,8 +35,11 @@ const Typography: FC<TypographyProps> = ({
     gray: 'text-gray-600',
   };
 
-  const className =
-    typeMapper[type] + ' ' + sizeMapper[size] + ' ' + colorMapper[color];
+  const className = classNames(
+    typeMapper[type],
+    sizeMapper[size],
+    colorMapper[color]
+  );
 
   if (isTitle) {
     return <h1 className={className}>{text}</h1>;
