@@ -1,8 +1,7 @@
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
-import { KdaProps } from 'types';
-import { TypographyPropsMapper } from 'utils';
+import { KdaProps } from './Kda.types';
 import {
   AssistsPropsMapper,
   DeathsPropsMapper,
