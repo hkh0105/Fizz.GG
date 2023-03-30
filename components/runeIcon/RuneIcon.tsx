@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import CustomImage from 'userInterface/customImage/CustomImage';
 import { IMAGES } from 'constant';
-import { RuneIconProps, RuneInfo } from 'types';
+import { RuneIconProps, RuneInfo } from './RuneIcon.types';
 import { CustomImagePropsMapper } from './RuneIcon.props';
 
 const RuneIcon: FC<RuneIconProps> = ({ width, runes, marginClass }) => {

@@ -5,7 +5,7 @@ import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import PieChart from 'components/pieChart/PieChart';
-import ChampStatRow from './ChampStatRow';
+import ChampStatRow from 'components/champStatRow/ChampStatRow';
 import { recentChampInfo, recentWinStats } from 'store';
 import {
   RecentStatBoxProps,
