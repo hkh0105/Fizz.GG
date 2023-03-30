@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import SearchWindow from 'components/searchWindow/SearchWindow';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import Typography from 'userInterface/typography/Typography';
-import { TitleProps } from './props';
+import { TitleProps } from 'types';
 
 const Home: NextPage = () => {
   return (

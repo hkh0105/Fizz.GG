@@ -2,7 +2,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
-import { ErrorBoxProps, ErrorTextPropsMapper } from './props';
+import { ErrorBoxProps, ErrorTextPropsMapper } from 'types';
 
 interface Props {
   children?: ReactNode;

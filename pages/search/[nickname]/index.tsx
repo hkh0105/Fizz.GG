@@ -7,7 +7,7 @@ import RankSection from 'components/rankSection/RankSection';
 import MatchSection from 'components/matchSection/MatchSection';
 import RecentStatSection from 'components/resentStatSection/RecentStatSection';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
-import { AsyncBoundaryPropsMapper, SectionPropsMapper } from './props';
+import { AsyncBoundaryPropsMapper, SectionPropsMapper } from 'types';
 
 const Search: FC = () => {
   const nickname = useRouter().query.nickname as string;

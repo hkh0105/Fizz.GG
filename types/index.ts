@@ -1,3 +1,6 @@
+import { BoxProps } from 'userInterface/box/Box.types';
+import { TypographyProps } from 'userInterface/typography/Typography.types';
+
 export type {
   SpellIconProps,
   SpellInfos,
@@ -74,7 +77,10 @@ export type {
   RecentChampInfo,
   RecentMatchUserInfo,
   recentWinInfo,
+  TotalMatchChampData,
 } from 'store/store.types';
+
+export type { Images, TierImages } from 'constant/types';
 
 export type { useIntersectionObserverProps } from 'hooks/useInterSectionObserver.types';
 
@@ -126,3 +132,27 @@ export type CustomError = {
   status: number;
   name: string;
 };
+
+export const AsyncBoundaryPropsMapper = (nickname: string) => ({
+  key: nickname,
+});
+
+export const SectionPropsMapper = (nickname: string) => ({
+  nickname,
+});
+
+export const TitleProps: TypographyProps = {
+  type: 'mainTitle',
+  text: '당신의 전적이 궁금하다면? Fizz.GG',
+};
+
+export const ErrorBoxProps: BoxProps = {
+  size: 'custom',
+  height: 'h-[300px]',
+  width: 'w-full',
+};
+
+export const ErrorTextPropsMapper = (error: string): TypographyProps => ({
+  type: 'title',
+  text: error,
+});

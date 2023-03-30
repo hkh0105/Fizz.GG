@@ -4,7 +4,7 @@ import { FC } from 'react';
 import IngameSection from 'components/inGameSection/InGameSection';
 import Profile from 'components/profile/Profile';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
-import { AsyncBoundaryPropsMapper, SectionPropsMapper } from './props';
+import { AsyncBoundaryPropsMapper, SectionPropsMapper } from 'types';
 
 const Ingame: FC = () => {
   const router = useRouter();

@@ -4,7 +4,7 @@ import { FC } from 'react';
 import Profile from 'components/profile/Profile';
 import MasterySection from 'components/masterySection/MasterySection';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
-import { AsyncBoundaryPropsMapper, SectionPropsMapper } from './props';
+import { AsyncBoundaryPropsMapper, SectionPropsMapper } from 'types';
 
 const Summoner: FC = () => {
   const router = useRouter();
