@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import { BoxColorMapper, BoxProps, BoxSizeMapper } from 'types';
+
+import { BoxColorMapper, BoxProps, BoxSizeMapper } from './Box.types';
 
 const Box: FC<BoxProps> = ({
   children,

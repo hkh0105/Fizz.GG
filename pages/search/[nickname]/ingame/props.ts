@@ -1,5 +1,3 @@
-import { AsyncBoundaryProps } from 'types';
-
 export const AsyncBoundaryPropsMapper = (nickname: string) => ({
   key: nickname,
 });
