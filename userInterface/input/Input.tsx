@@ -1,6 +1,10 @@
 import type { FC } from 'react';
 
-import { InputProps, InputBorderColor, InputSize } from 'types';
+import {
+  InputProps,
+  InputBorderColorMapper,
+  InputSizeMapper,
+} from './Input.types';
 
 const Input: FC<InputProps> = ({
   placeholder,
@@ -12,11 +16,11 @@ const Input: FC<InputProps> = ({
   color = 'gray',
   required,
 }) => {
-  const colorVariants: InputBorderColor = {
+  const colorVariants: InputBorderColorMapper = {
     blue: '',
     gray: 'border border-gray-300 rounded-lg focus:border-blue-500',
   };
-  const sizeVariants: InputSize = {
+  const sizeVariants: InputSizeMapper = {
     small: '',
     medium: 'w-3/5 p-4 pl-10 text-sm ',
     big: '',
