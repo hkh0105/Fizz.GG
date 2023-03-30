@@ -1,4 +1,4 @@
-import { RankContentsProps, RankTitleMapper } from 'types';
+import { RankCardProps, RankTitleMapper } from 'types';
 
 export const RankCardPropsMapper = (
   wins: number,
@@ -7,7 +7,7 @@ export const RankCardPropsMapper = (
   tier: string,
   rank: string,
   leaguePoints: number
-): RankContentsProps => ({
+): RankCardProps => ({
   wins: wins,
   losses: losses,
   queueType: queueType,
