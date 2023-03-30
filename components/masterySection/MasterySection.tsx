@@ -3,10 +3,10 @@ import { FC } from 'react';
 import AsyncBoundary from 'components/asyncBoundary/AsyncBoundary';
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
-import MasteryRow from './MasteryRow';
-import MasteryHeader from './MasteryHeader';
+import MasteryRow from '../masteryRow/MasteryRow';
+import MasteryHeader from '../masteryHeader/MasteryHeader';
 import { useGetMastery } from 'hooks/queries';
-import { IngameSectionProps } from 'types';
+import { MasterySectionProps } from './MasterySection.types';
 import {
   AsyncBoundaryPropsMapper,
   GameModePropsMapper,
@@ -14,7 +14,7 @@ import {
   MasteryRowPropsMapper,
 } from './MasterySection.props';
 
-const MasterySection: FC<IngameSectionProps> = ({ nickname }) => {
+const MasterySection: FC<MasterySectionProps> = ({ nickname }) => {
   const { masteryInfo } = useGetMastery(nickname);
 
   const GameModeProps = GameModePropsMapper(nickname);
