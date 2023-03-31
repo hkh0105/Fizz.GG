@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface BoxProps {
-  size: keyof BoxSizeMapper;
+  size?: keyof BoxSizeMapper;
   color?: keyof BoxColorMapper;
   width?: string;
   height?: string;

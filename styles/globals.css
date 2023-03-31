@@ -1,6 +1,6 @@
 @tailwind base;
-@tailwind components;
 @tailwind utilities;
+@tailwind components;
 
 /* Typography */
 .main-title {
@@ -28,4 +28,26 @@
 }
 .input-large {
   @apply w-full text-lg
-} 
+}
+
+/* Button */
+.button-blue {
+  @apply text-white bg-blue-700 hover:bg-blue-500
+}
+.button-gray {
+  @apply text-white bg-gray-700 hover:bg-gray-500
+}
+.button-transparent {
+  @apply hover:border-blue-500 border-transparent border-2
+}
+.button-small {
+  @apply text-xs
+}
+.button-medium {
+  @apply text-sm
+}
+.button-large {
+  @apply text-lg
+}
+
+/* Box */
