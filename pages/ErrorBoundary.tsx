@@ -34,7 +34,7 @@ class ErrorBoundary extends Component<Props, State> {
 
     if (error) {
       return (
-        <div className='w-[800px] h-[300px] mr-auto ml-auto text-center text-xl'>
+        <div className='ml-auto mr-auto text-xl text-center w-bg-section h-bg-section'>
           <Box {...ErrorBoxProps}>
             <div className='mt-7'>
               <Typography {...ErrorTextProps} />
