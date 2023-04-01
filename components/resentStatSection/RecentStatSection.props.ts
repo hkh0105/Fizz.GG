@@ -7,8 +7,8 @@ import {
 } from 'types';
 
 export const RecentStatBoxProps: BoxProps = {
-  size: 'custom',
-  width: 'w-[300px] max-sm:hidden',
+  width: 'smSection',
+  hidden: 'sm',
 };
 
 export const PieChartPropsMapper = (winStats: recentWinInfo) => ({

@@ -63,7 +63,8 @@ export type {
 export type {
   BoxProps,
   BoxColorMapper,
-  BoxSizeMapper,
+  BoxWidthMapper,
+  BoxHeightMapper,
 } from 'userInterface/box/Box.types';
 export type {
   TypographyProps,
@@ -147,9 +148,8 @@ export const TitleProps: TypographyProps = {
 };
 
 export const ErrorBoxProps: BoxProps = {
-  size: 'custom',
-  height: 'h-[300px]',
-  width: 'w-full',
+  height: 'bgSection',
+  width: 'full',
 };
 
 export const ErrorTextPropsMapper = (error: string): TypographyProps => ({

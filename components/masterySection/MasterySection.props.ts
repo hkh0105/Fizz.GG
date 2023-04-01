@@ -7,8 +7,7 @@ export const GameModePropsMapper = (nickname: string): TypographyProps => ({
 });
 
 export const MasteryBoxProps: BoxProps = {
-  size: 'custom',
-  width: 'w-[800px]',
+  width: 'bgSection',
 };
 
 export const AsyncBoundaryPropsMapper = (key: string) => ({
