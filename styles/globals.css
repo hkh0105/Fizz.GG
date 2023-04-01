@@ -54,3 +54,24 @@
 .box {
   @apply overflow-hidden border border-gray-200 shadow-md rounded-xl
 }
+.w-bg-section {
+  @apply w-[800px]
+}
+.w-sm-section {
+  @apply w-[350px]
+}
+.h-bg-section {
+  @apply h-[350px]
+}
+.h-sm-section {
+  @apply h-32
+}
+.box-default-color {
+  @apply bg-white
+}
+.box-red {
+  @apply bg-red-100
+}
+.box-blue {
+  @apply bg-blue-100
+}

@@ -15,8 +15,8 @@ export type BoxWidthMapper = {
   large: 'w-3/5';
   xLarge: 'w-4/5';
   full: 'w-full';
-  bgSection: 'w-[800px]';
-  smSection: 'w-[300px]';
+  bgSection: 'w-bg-section';
+  smSection: 'w-sm-section';
   auto: '';
 };
 
@@ -26,13 +26,13 @@ export type BoxHeightMapper = {
   large: 'h-3/5';
   xLarge: 'h-4/5';
   full: 'h-full';
-  bgSection: 'h-[350px]';
-  smSection: 'h-32';
+  bgSection: 'h-bg-section';
+  smSection: 'h-sm-section';
   auto: '';
 };
 
 export type BoxColorMapper = {
-  default: 'bg-white';
-  red: 'bg-red-100';
-  blue: 'bg-blue-100';
+  default: 'box-default-color';
+  red: 'box-red';
+  blue: 'box-blue';
 };
