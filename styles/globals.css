@@ -51,3 +51,6 @@
 }
 
 /* Box */
+.box {
+  @apply overflow-hidden border border-gray-200 shadow-md rounded-xl
+}
