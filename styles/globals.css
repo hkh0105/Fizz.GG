@@ -58,7 +58,7 @@
   @apply w-[800px]
 }
 .w-sm-section {
-  @apply w-[350px]
+  @apply w-[300px]
 }
 .h-bg-section {
   @apply h-[350px]
