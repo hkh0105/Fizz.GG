@@ -5,10 +5,10 @@ export interface BoxProps {
   width?: keyof BoxWidthMapper;
   height?: keyof BoxHeightMapper;
   children?: ReactNode;
-  mb?: string | number;
-  mt?: string | number;
-  ml?: string | number;
-  mr?: string | number;
+  mb?: 'auto' | number;
+  mt?: 'auto' | number;
+  ml?: 'auto' | number;
+  mr?: 'auto' | number;
   hidden?: string;
 }
 

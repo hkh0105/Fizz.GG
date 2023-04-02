@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 
 import Typography from 'userInterface/typography/Typography';
@@ -16,12 +17,19 @@ const SingleBarChart: FC<SingleBarChartProps> = ({
   endColor,
   width,
   height,
-  marginClass = '',
   titleSize,
   titleColor,
   valueSize,
   valueColor,
   isValueShow,
+  pt,
+  pl,
+  pr,
+  pb,
+  ml,
+  mb,
+  mr,
+  mt,
 }) => {
   const colorMapper: SingleBarColorMapper = {
     red: 'bg-red-400',
@@ -30,7 +38,25 @@ const SingleBarChart: FC<SingleBarChartProps> = ({
     gray: 'bg-gray-500',
   };
 
-  const className = 'flex flex-col items-center' + ' ' + marginClass;
+  const mtMapper = mt ? `mt-${mt}` : '';
+  const mbMapper = mb ? `mb-${mb}` : '';
+  const mlMapper = ml ? `ml-${ml}` : '';
+  const mrMapper = mr ? `mt-${mr}` : '';
+  const ptMapper = pt ? `mt-${pt}` : '';
+  const pbMapper = pb ? `mb-${pb}` : '';
+  const plMapper = pl ? `ml-${pl}` : '';
+  const prMapper = pr ? `mt-${pr}` : '';
+  const className = classNames(
+    'items-center col',
+    mtMapper,
+    mbMapper,
+    mlMapper,
+    mrMapper,
+    ptMapper,
+    pbMapper,
+    plMapper,
+    prMapper
+  );
 
   const startRate = startValue / totalValue;
   const startWidth = width * startRate;

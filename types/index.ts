@@ -125,7 +125,14 @@ export type ValueOf<T> = T[keyof T];
 
 export interface IconProps {
   width: number;
-  marginClass?: string;
+  mt?: number;
+  ml?: number;
+  mr?: number;
+  mb?: number;
+  pt?: number;
+  pl?: number;
+  pr?: number;
+  pb?: number;
 }
 
 export type CustomError = {

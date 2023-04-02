@@ -16,7 +16,14 @@ export interface SingleBarChartProps {
   startColor: keyof SingleBarColorMapper;
   endColor: keyof SingleBarColorMapper;
   endValue?: string | number;
-  marginClass?: string;
+  mt?: number;
+  ml?: number;
+  mr?: number;
+  mb?: number;
+  pt?: number;
+  pl?: number;
+  pr?: number;
+  pb?: number;
   titleSize?: keyof TypoGraphySizeMapper;
   titleColor?: keyof TypoGraphyColorMapper;
   valueSize?: keyof TypoGraphySizeMapper;

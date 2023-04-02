@@ -39,7 +39,7 @@ export const ItemIconPropsMapper = (
 ): ItemIconProps => ({
   summonerItems,
   width: 25,
-  marginClass: 'mt-3',
+  mt: 3,
 });
 
 export const KdaPropsMapper = (
@@ -52,19 +52,20 @@ export const KdaPropsMapper = (
   deaths: deaths,
   assists: assists,
   kda: kda,
-  marginClass: 'mt-2 ml-2',
+  mt: 2,
+  ml: 2,
 });
 
 export const RuneIconPropsMapper = (runes: RuneInfo[]): RuneIconProps => ({
   runes: runes,
   width: 25,
-  marginClass: 'ml-1',
+  ml: 1,
 });
 
 export const SpellIconPropsMapper = (spells: SpellInfos): SpellIconProps => ({
   spells: spells,
   width: 25,
-  marginClass: 'ml-2',
+  ml: 2,
 });
 
 export const ChampionIconPropsMapper = (

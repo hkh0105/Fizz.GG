@@ -49,8 +49,8 @@ export const CardBoxPropsMapper = (
   height: 'smSection',
   width: 'full',
   color: isWin ? 'blue' : 'red',
-  mb: isShownDetail ? '' : '2',
-  mt: '2',
+  mb: isShownDetail ? 0 : 2,
+  mt: 2,
 });
 
 export const MatchSummonerOverViewPropsMapper = (
