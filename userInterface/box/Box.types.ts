@@ -5,7 +5,10 @@ export interface BoxProps {
   width?: keyof BoxWidthMapper;
   height?: keyof BoxHeightMapper;
   children?: ReactNode;
-  marginClass?: string;
+  mb?: string | number;
+  mt?: string | number;
+  ml?: string | number;
+  mr?: string | number;
   hidden?: string;
 }
 

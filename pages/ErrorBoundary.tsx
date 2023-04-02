@@ -2,7 +2,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 import Box from 'userInterface/box/Box';
 import Typography from 'userInterface/typography/Typography';
-import { ErrorBoxProps, ErrorTextPropsMapper } from 'types';
+import { BoxProps, TypographyProps } from 'types';
 
 interface Props {
   children?: ReactNode;
@@ -13,6 +13,18 @@ interface State {
   error: string;
 }
 
+export const ErrorBoxProps: BoxProps = {
+  height: 'bgSection',
+  width: 'bgSection',
+  ml: 'auto',
+  mr: 'auto',
+};
+
+export const ErrorTextPropsMapper = (error: string): TypographyProps => ({
+  type: 'title',
+  text: error,
+});
+
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
@@ -20,12 +32,11 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   public static getDerivedStateFromError(error: Error): State {
-    // Update state so the next render will show the fallback UI.
     return { hasError: true, error: error.message };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', 'ㄸㄲ꺆', error, 'ㅑㅜ럐', errorInfo);
+    console.error('Uncaught error:', error, errorInfo);
   }
 
   public render() {
@@ -34,7 +45,7 @@ class ErrorBoundary extends Component<Props, State> {
 
     if (error) {
       return (
-        <div className='ml-auto mr-auto text-xl text-center w-bg-section h-bg-section'>
+        <div className='ml-auto mr-auto text-center h-bg-section'>
           <Box {...ErrorBoxProps}>
             <div className='mt-7'>
               <Typography {...ErrorTextProps} />

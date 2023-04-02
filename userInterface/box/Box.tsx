@@ -14,7 +14,10 @@ const Box: FC<BoxProps> = ({
   height = 'auto',
   hidden,
   color = 'default',
-  marginClass = 'mb-2',
+  mb = '2',
+  mr,
+  mt,
+  ml,
 }) => {
   const colorMapper: BoxColorMapper = {
     default: 'box-default-color',
@@ -45,6 +48,10 @@ const Box: FC<BoxProps> = ({
   };
 
   const hiddenMapper = hidden ? `max-${hidden}:hidden` : '';
+  const mtMapper = mt ? `mt-${mt}` : '';
+  const mbMapper = mb ? `mb-${mb}` : '';
+  const mlMapper = ml ? `ml-${ml}` : '';
+  const mrMapper = mr ? `mt-${mr}` : '';
 
   const className = classNames(
     'box',
@@ -52,7 +59,10 @@ const Box: FC<BoxProps> = ({
     heightMapper[height],
     hiddenMapper,
     colorMapper[color],
-    marginClass
+    mtMapper,
+    mrMapper,
+    mbMapper,
+    mlMapper
   );
 
   return <section className={className}>{children}</section>;
