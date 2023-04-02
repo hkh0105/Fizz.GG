@@ -75,3 +75,8 @@
 .box-blue {
   @apply bg-blue-100
 }
+
+/* Main Search Section */
+.search-section {
+  @apply flex flex-col items-center w-full my-10 duration-700 animate-pulse
+}

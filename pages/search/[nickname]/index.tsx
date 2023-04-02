@@ -11,6 +11,7 @@ import { AsyncBoundaryPropsMapper, SectionPropsMapper } from 'types';
 
 const Search: FC = () => {
   const nickname = useRouter().query.nickname as string;
+
   const AsyncBoundaryProps = AsyncBoundaryPropsMapper(nickname);
   const SectionProps = SectionPropsMapper(nickname);
 
