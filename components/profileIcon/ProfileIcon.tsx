@@ -16,10 +16,10 @@ const ProfileIcon: FC<ProfileIconProps> = ({
   const CustomImageProps = CustomImagePropsMapper(source, width);
 
   return (
-    <div className='flex-col w-[140px] mx-3 my-5 font-medium flex items-center'>
+    <div className='flex flex-col items-center mx-3 my-5 font-medium w-35'>
       <CustomImage {...CustomImageProps} />
       {summonerLevel && (
-        <p className='w-[50px] text-white bg-black border text-center rounded-xl'>
+        <p className='w-12.5 text-white bg-black border text-center rounded-xl'>
           {summonerLevel}
         </p>
       )}

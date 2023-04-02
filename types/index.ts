@@ -63,7 +63,8 @@ export type {
 export type {
   BoxProps,
   BoxColorMapper,
-  BoxSizeMapper,
+  BoxWidthMapper,
+  BoxHeightMapper,
 } from 'userInterface/box/Box.types';
 export type {
   TypographyProps,
@@ -124,7 +125,14 @@ export type ValueOf<T> = T[keyof T];
 
 export interface IconProps {
   width: number;
-  marginClass?: string;
+  mt?: number;
+  ml?: number;
+  mr?: number;
+  mb?: number;
+  pt?: number;
+  pl?: number;
+  pr?: number;
+  pb?: number;
 }
 
 export type CustomError = {
@@ -145,14 +153,3 @@ export const TitleProps: TypographyProps = {
   type: 'mainTitle',
   text: '당신의 전적이 궁금하다면? Fizz.GG',
 };
-
-export const ErrorBoxProps: BoxProps = {
-  size: 'custom',
-  height: 'h-[300px]',
-  width: 'w-full',
-};
-
-export const ErrorTextPropsMapper = (error: string): TypographyProps => ({
-  type: 'title',
-  text: error,
-});

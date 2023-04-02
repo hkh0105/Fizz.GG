@@ -9,6 +9,7 @@ import { AsyncBoundaryPropsMapper, SectionPropsMapper } from 'types';
 const Summoner: FC = () => {
   const router = useRouter();
   const { nickname } = (router.query as { nickname: string }) || '';
+
   const AsyncBoundaryProps = AsyncBoundaryPropsMapper(nickname);
   const SectionProps = SectionPropsMapper(nickname);
 

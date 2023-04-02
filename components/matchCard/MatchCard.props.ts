@@ -46,11 +46,11 @@ export const CardBoxPropsMapper = (
   isWin: boolean,
   isShownDetail: boolean
 ): BoxProps => ({
-  size: 'custom',
-  height: 'h-32',
-  width: 'w-full',
+  height: 'smSection',
+  width: 'full',
   color: isWin ? 'blue' : 'red',
-  marginClass: isShownDetail ? '' : 'mb-2',
+  mb: isShownDetail ? 0 : 2,
+  mt: 2,
 });
 
 export const MatchSummonerOverViewPropsMapper = (

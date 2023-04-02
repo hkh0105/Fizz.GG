@@ -29,9 +29,8 @@ export const VersusProps: TypographyProps = {
 };
 
 export const InGameBoxProps: BoxProps = {
-  size: 'custom',
-  height: 'h-[350px]',
-  width: 'w-[800px]',
+  height: 'bgSection',
+  width: 'bgSection',
   color: 'blue',
 };
 

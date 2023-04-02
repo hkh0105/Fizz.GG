@@ -15,8 +15,8 @@ const rankTitleMapper: RankTitleMapper = {
 };
 
 export const RankCardBoxProps: BoxProps = {
-  size: 'custom',
-  width: 'w-[300px] max-sm:hidden',
+  width: 'smSection',
+  hidden: 'sm',
 };
 
 export const LpPropsMapper = (

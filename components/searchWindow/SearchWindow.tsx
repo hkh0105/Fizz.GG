@@ -37,7 +37,7 @@ const SearchWindow: FC<SearchWindowProps> = ({ mini = false }) => {
         <div className='flex flex-row justify-center w-full justify-items-center'>
           <AiOutlineSearch {...MiniIconProps} />
           <Input {...MiniInputProps} />
-          <div className='translate-x-[-55px] translate-y-[7px]'>
+          <div className='-translate-x-13.5 translate-y-1.5'>
             <Button {...MiniButtonProps} />
           </div>
         </div>

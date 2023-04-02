@@ -17,13 +17,13 @@ export const NicknamePropsMapper = (nickname: string): TypographyProps => ({
 export const SpellIconPropsMapper = (spells: SpellInfos): SpellIconProps => ({
   spells: spells,
   width: 25,
-  marginClass: 'pt-1',
+  pt: 1,
 });
 
 export const RuneIconPropsMapper = (runes: RuneInfo[]): RuneIconProps => ({
   runes,
   width: 25,
-  marginClass: 'pt-1',
+  pt: 1,
 });
 
 export const ProfileIconPropsMapper = (

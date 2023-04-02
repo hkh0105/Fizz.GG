@@ -38,9 +38,9 @@ const RankCard: FC<RankCardProps> = ({
         <Typography {...LpProps} />
         <div className='flex items-center'>
           <Image {...ImageProps} />
-          <div className='flex items-center w-[240px] h-[100px] my-5'>
+          <div className='flex items-center my-5 w-60 h-25'>
             <PieChart {...PieChartProps} />
-            <p className='translate-x-[-127px]'>{winRate}</p>
+            <p className='-translate-x-32'>{winRate}</p>
           </div>
         </div>
       </div>

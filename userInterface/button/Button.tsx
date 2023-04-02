@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import type { FC } from 'react';
 
 import {
@@ -13,24 +14,25 @@ const Button: FC<ButtonProps> = ({
   size = 'medium',
   type = 'button',
 }) => {
-  const defaultVariants = 'font-medium rounded-lg';
-  const colorVariants: ButtonColorMapper = {
-    blue: 'text-white bg-blue-700 hover:bg-blue-500  ',
-    gray: '',
-    transparent: 'hover:border-blue-500 border-transparent border-2 rounded-lg',
+  const colorMapper: ButtonColorMapper = {
+    blue: 'button-blue',
+    gray: 'button-gray',
+    transparent: 'button-transparent',
   };
-  const sizeVariants: ButtonSizeMapper = {
-    small: '',
-    medium: 'px-4 py-2 text-sm ',
-    large: '',
+  const sizeMapper: ButtonSizeMapper = {
+    small: 'button-small',
+    medium: 'button-medium ',
+    large: 'button-large',
   };
 
+  const className = classNames(
+    'font-medium rounded-lg px-4 py-2',
+    colorMapper[color],
+    sizeMapper[size]
+  );
+
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={`${defaultVariants} ${sizeVariants[size]} ${colorVariants[color]}`}
-    >
+    <button type={type} onClick={onClick} className={className}>
       {label}
     </button>
   );

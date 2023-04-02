@@ -8,9 +8,8 @@ import {
 } from 'types';
 
 export const TeamBoxMapper = (color: keyof BoxColorMapper): BoxProps => ({
-  size: 'custom',
-  height: 'h-[350px]',
-  width: 'w-full',
+  height: 'bgSection',
+  width: 'full',
   color,
 });
 

@@ -31,5 +31,5 @@ export const ChampionIconPropsMapper = (
   width: 30,
   championName,
   championLevel: undefined,
-  marginClass: 'mt-2',
+  mt: 2,
 });

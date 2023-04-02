@@ -56,5 +56,5 @@ export const SummonerNamePropsMapper = (name: string): TypographyProps => ({
 });
 
 export const ProfileBoxProps: BoxProps = {
-  size: 'full',
+  width: 'full',
 };

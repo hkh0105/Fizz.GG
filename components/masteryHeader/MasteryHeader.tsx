@@ -11,7 +11,7 @@ import {
 
 const MasteryHeader: FC = () => {
   return (
-    <div className=' w-[800px] h-[60px] pt-3 flex shrink-0 grow-0 justify-center'>
+    <div className='center w-bg-section h-15'>
       <div className='basis-36'>
         <Typography {...ChampionKeyProps} />
       </div>

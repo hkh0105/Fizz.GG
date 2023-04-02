@@ -21,13 +21,13 @@ const ChampStatRow: FC<ChampStatRowProps> = ({ champInfo }) => {
   return (
     <div className='flex items-center gap-3 my-2'>
       <ChampionIcon {...ChampionIconProps} />
-      <div className='w-[80px]'>
+      <div className='w-20'>
         <Typography {...ChampKdaProps} />
       </div>
-      <div className='w-[50px]'>
+      <div className='w-12.5'>
         <Typography {...WinProps} />
       </div>
-      <div className='w-[50px]'>
+      <div className='w-12.5'>
         <Typography {...WinRateProps} />
       </div>
     </div>

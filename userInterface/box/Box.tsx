@@ -1,40 +1,71 @@
+import classNames from 'classnames';
 import type { FC } from 'react';
 
-import { BoxColorMapper, BoxProps, BoxSizeMapper } from './Box.types';
+import {
+  BoxColorMapper,
+  BoxProps,
+  BoxWidthMapper,
+  BoxHeightMapper,
+} from './Box.types';
 
 const Box: FC<BoxProps> = ({
   children,
-  size,
-  width,
-  height,
+  width = 'auto',
+  height = 'auto',
+  hidden,
   color = 'default',
-  marginClass = 'mb-2',
+  mb = '2',
+  mr,
+  mt,
+  ml,
 }) => {
-  const defaultClassName =
-    'overflow-hidden border border-gray-200 shadow-md rounded-xl';
-
   const colorMapper: BoxColorMapper = {
-    default: 'bg-white',
-    red: 'bg-red-100',
-    blue: 'bg-blue-100',
+    default: 'box-default-color',
+    red: 'box-red',
+    blue: 'box-blue',
   };
 
-  const sizeMapper: BoxSizeMapper = {
+  const widthMapper: BoxWidthMapper = {
     small: 'w-1/4',
     medium: 'w-2/5',
     large: 'w-3/5',
     xLarge: 'w-4/5',
     full: 'w-full',
-    custom: width + ' ' + height,
+    bgSection: 'w-bg-section',
+    smSection: 'w-sm-section',
+    auto: '',
   };
 
-  return (
-    <section
-      className={`${sizeMapper[size]} ${colorMapper[color]} ${defaultClassName} ${marginClass}`}
-    >
-      {children}
-    </section>
+  const heightMapper: BoxHeightMapper = {
+    small: 'h-1/4',
+    medium: 'h-2/5',
+    large: 'h-3/5',
+    xLarge: 'h-4/5',
+    full: 'h-full',
+    bgSection: 'h-bg-section',
+    smSection: 'h-sm-section',
+    auto: '',
+  };
+
+  const hiddenMapper = hidden ? `max-${hidden}:hidden` : '';
+  const mtMapper = mt ? `mt-${mt}` : '';
+  const mbMapper = mb ? `mb-${mb}` : '';
+  const mlMapper = ml ? `ml-${ml}` : '';
+  const mrMapper = mr ? `mt-${mr}` : '';
+
+  const className = classNames(
+    'box',
+    widthMapper[width],
+    heightMapper[height],
+    hiddenMapper,
+    colorMapper[color],
+    mtMapper,
+    mrMapper,
+    mbMapper,
+    mlMapper
   );
+
+  return <section className={className}>{children}</section>;
 };
 
 export default Box;

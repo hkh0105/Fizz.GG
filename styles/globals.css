@@ -1,3 +1,94 @@
 @tailwind base;
-@tailwind components;
 @tailwind utilities;
+@tailwind components;
+
+/* 공용 */
+.w-full-section {
+  @apply w-[1100px] max-lg:w-[800px]
+}
+.w-full-to-bg {
+  @apply max-lg:w-[800px]
+}
+.w-bg-section {
+  @apply w-[800px]
+}
+.w-sm-section {
+  @apply w-[300px]
+}
+.h-bg-section {
+  @apply h-[350px]
+}
+.h-sm-section {
+  @apply h-32
+}
+.col {
+  @apply flex flex-col
+}
+.pulse {
+  @apply duration-700 animate-pulse
+}
+.center {
+  @apply justify-center flex items-center
+}
+
+/* Typography */
+.main-title {
+  @apply bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center text-6xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm leading-[5rem] my-20
+}
+.title {
+  @apply text-2xl font-medium
+}
+.semi-bold {
+  @apply font-semibold
+}
+
+/* Input */
+.input-blue {
+  @apply border border-blue-300 focus:border-gray-500
+}
+.input-gray {
+  @apply border border-gray-300 focus:border-blue-500
+}
+.input-small {
+  @apply w-1/5 text-xs
+}
+.input-medium {
+  @apply w-3/5 text-sm
+}
+.input-large {
+  @apply w-full text-lg
+}
+
+/* Button */
+.button-blue {
+  @apply text-white bg-blue-700 hover:bg-blue-500
+}
+.button-gray {
+  @apply text-white bg-gray-700 hover:bg-gray-500
+}
+.button-transparent {
+  @apply hover:border-blue-500 border-transparent border-2
+}
+.button-small {
+  @apply text-xs
+}
+.button-medium {
+  @apply text-sm
+}
+.button-large {
+  @apply text-lg
+}
+
+/* Box */
+.box {
+  @apply overflow-hidden border border-gray-200 shadow-md rounded-xl
+}
+.box-default-color {
+  @apply bg-white
+}
+.box-red {
+  @apply bg-red-100
+}
+.box-blue {
+  @apply bg-blue-100
+}

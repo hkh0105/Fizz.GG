@@ -28,9 +28,9 @@ const RecentStatSection: FC = () => {
       <Box {...RecentStatBoxProps}>
         <div className='items-center mx-2 my-3 divide-y'>
           <Typography {...RecentMatchProps} />
-          <div className='w-[300px] h-[150px] mb-10'>
+          <div className='w-75 h-37.5 mb-10'>
             <PieChart {...PieChartProps} />
-            <div className='translate-x-[109px] translate-y-[-68px]'>
+            <div className='translate-x-27 -translate-y-17'>
               <Typography {...WinRateProps} />
             </div>
           </div>

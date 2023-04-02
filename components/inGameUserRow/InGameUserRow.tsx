@@ -24,17 +24,17 @@ const InGameUserRow: FC<InGameUserRowProps> = ({
   const ProfileIconProps = ProfileIconPropsMapper(profileIconId);
 
   return (
-    <div className='flex w-[300px] h-[60px] mx-5 mt-1 items-center'>
-      <div className='w-[70px] translate-x-[-40px]'>
+    <div className='flex items-center mx-5 mt-1 w-sm-section h-15'>
+      <div className='-translate-x-10 w-18'>
         <ProfileIcon {...ProfileIconProps} />
       </div>
-      <div className='w-[30px]'>
+      <div className='w-8'>
         <SpellIcon {...SpellIconProps} />
       </div>
-      <div className='w-[40px]'>
+      <div className='w-10'>
         <RuneIcon {...RuneIconProps} />
       </div>
-      <div className='ml-5 w-[100]px'>
+      <div className='ml-5 w-25'>
         <Typography {...NicknameProps} />
       </div>
     </div>

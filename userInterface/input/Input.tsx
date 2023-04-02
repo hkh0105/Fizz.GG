@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import type { FC } from 'react';
 
 import {
@@ -16,15 +17,22 @@ const Input: FC<InputProps> = ({
   color = 'gray',
   required,
 }) => {
-  const colorVariants: InputBorderColorMapper = {
-    blue: '',
-    gray: 'border border-gray-300 rounded-lg focus:border-blue-500',
+  const colorMapper: InputBorderColorMapper = {
+    blue: 'input-blue',
+    gray: 'input-gray',
   };
-  const sizeVariants: InputSizeMapper = {
-    small: '',
-    medium: 'w-3/5 p-4 pl-10 text-sm ',
-    big: '',
+
+  const sizeMapper: InputSizeMapper = {
+    small: 'input-small',
+    medium: 'input-medium',
+    large: 'input-large',
   };
+
+  const className = classNames(
+    'rounded-lg p-4 pl-10',
+    sizeMapper[size],
+    colorMapper[color]
+  );
   return (
     <>
       <label htmlFor={labelFor} />
@@ -34,7 +42,7 @@ const Input: FC<InputProps> = ({
         disabled={disabled}
         value={value}
         id={labelFor}
-        className={`${sizeVariants[size]} ${colorVariants[color]}`}
+        className={className}
         required={required}
       />
     </>

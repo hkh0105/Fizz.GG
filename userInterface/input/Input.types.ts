@@ -19,5 +19,5 @@ export type InputBorderColorMapper = {
 export type InputSizeMapper = {
   small: string;
   medium: string;
-  big: string;
+  large: string;
 };
