@@ -99,14 +99,14 @@ const UserStatRow: FC<UserStatRowProps> = ({
   ]);
 
   return (
-    <div className='w-[800px] h-[60px] justify-center flex items-center gap-x-1 '>
-      <div className='flex w-[150px] pt-2'>
+    <div className='w-bg-section h-15 center gap-x-1 '>
+      <div className='flex w-37.5 pt-2'>
         <ChampionIcon {...ChampionIconProps} />
         <SpellIcon {...SpellIconProps} />
         <RuneIcon {...RuneIconProps} />
         <Kda {...KdaProps} />
       </div>
-      <div className='flex w-[100px] pt-4'>
+      <div className='flex pt-4 w-25'>
         <Link
           href={{
             pathname: '/search/[nickname]',
@@ -117,11 +117,11 @@ const UserStatRow: FC<UserStatRowProps> = ({
           <Typography {...NicknameProps} />
         </Link>
       </div>
-      <div className='flex-col w-[80px] pt-4'>
+      <div className='w-20 pt-4 col'>
         <Typography {...CsProps} />
         <Typography {...VisionScoreProps} />
       </div>
-      <div className='flex w-[250px] gap-x-3 pt-2'>
+      <div className='flex w-62.5 gap-x-3 pt-2'>
         <SingleBarChart {...DamageChartProps} />
         <SingleBarChart {...DamagedChartProps} />
       </div>

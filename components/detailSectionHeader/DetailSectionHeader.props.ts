@@ -1,8 +1,8 @@
 import { DetailHeaderColorMapper, TypographyProps } from 'types';
 
 export const ColorMapper: DetailHeaderColorMapper = {
-  red: 'flex w-full h-[35px] border-b-2 border-red-200 pl-5 gap-x-1',
-  blue: 'flex w-full h-[35px] border-b-2 border-blue-200 pl-5 gap-x-1',
+  red: 'flex w-full h-8.75 border-b-2 border-red-200 pl-5 gap-x-1',
+  blue: 'flex w-full h-8.75 border-b-2 border-blue-200 pl-5 gap-x-1',
 };
 
 export const ChampKeyProps: TypographyProps = {

@@ -21,7 +21,7 @@ const ChampionIcon: FC<ChampionIconProps> = ({
   return (
     <div className={wrapper}>
       <CustomImage {...CustomImageProps} />
-      <span className='absolute translate-y-[-15px] bg-black rounded-full text-sm'>
+      <span className='absolute -translate-y-3.75 bg-black rounded-full text-sm'>
         {championLevel}
       </span>
     </div>

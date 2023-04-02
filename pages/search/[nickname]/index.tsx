@@ -18,15 +18,15 @@ const Search: FC = () => {
   return (
     <AsyncBoundary {...AsyncBoundaryProps}>
       <SearchLayout>
-        <div className='w-[1110px] max-lg:w-[800px]'>
+        <div className='w-full-section'>
           <Profile {...SectionProps} />
         </div>
         <div className='flex'>
-          <div className='w-[300px] max-lg:hidden mr-3'>
+          <div className='mt-2 mr-3 w-sm-section max-lg:hidden'>
             <RankSection {...SectionProps} />
             <RecentStatSection />
           </div>
-          <div className='w-[800px]'>
+          <div className='w-bg-section'>
             <MatchSection {...SectionProps} />
           </div>
         </div>

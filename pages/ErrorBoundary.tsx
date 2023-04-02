@@ -16,8 +16,6 @@ interface State {
 export const ErrorBoxProps: BoxProps = {
   height: 'bgSection',
   width: 'bgSection',
-  ml: 'auto',
-  mr: 'auto',
 };
 
 export const ErrorTextPropsMapper = (error: string): TypographyProps => ({
@@ -45,7 +43,7 @@ class ErrorBoundary extends Component<Props, State> {
 
     if (error) {
       return (
-        <div className='ml-auto mr-auto text-center h-bg-section'>
+        <div className='m-auto text-center mt-7 h-bg-section w-bg-section'>
           <Box {...ErrorBoxProps}>
             <div className='mt-7'>
               <Typography {...ErrorTextProps} />

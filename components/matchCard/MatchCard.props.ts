@@ -50,6 +50,7 @@ export const CardBoxPropsMapper = (
   width: 'full',
   color: isWin ? 'blue' : 'red',
   mb: isShownDetail ? '' : '2',
+  mt: '2',
 });
 
 export const MatchSummonerOverViewPropsMapper = (

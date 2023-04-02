@@ -53,8 +53,8 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
   );
 
   return (
-    <div className='flex w-[700px] py-5 ml-10'>
-      <div className='flex-col w-[200px]'>
+    <div className='flex py-5 ml-10'>
+      <div className='col w-52'>
         <div className='flex'>
           <ChampionIcon {...ChampionIconProps} />
           <SpellIcon {...SpellIconProps} />
@@ -63,13 +63,13 @@ const MatchSummonerOverView: FC<MatchSummonerOverViewProps> = ({
         </div>
         <ItemIcon {...ItemIconProps} />
       </div>
-      <div className='flex w-[150px] flex-col justify-center ml-5 border-l-2-slate-300'>
+      <div className='w-37.5 col justify-center ml-5 border-l-2-slate-300'>
         <Typography {...KillProps} />
         <Typography {...CsProps} />
         <Typography {...VisionScoreProps} />
         <Typography {...GoldProps} />
       </div>
-      <div className='flex w-[280px]'>
+      <div className='flex w-70 gap-x-7'>
         <TeamChampion {...SummonerTeamChampionProps} />
         <TeamChampion {...EnemyTeamChampionProps} />
       </div>

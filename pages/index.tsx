@@ -8,7 +8,7 @@ import { TitleProps } from 'types';
 const Home: NextPage = () => {
   return (
     <AsyncBoundary>
-      <section className='search-section'>
+      <section className='items-center w-full my-10 col pulse'>
         <Typography {...TitleProps} />
         <SearchWindow />
       </section>
