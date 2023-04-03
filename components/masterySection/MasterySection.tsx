@@ -22,7 +22,7 @@ const MasterySection: FC<MasterySectionProps> = ({ nickname }) => {
 
   return (
     <AsyncBoundary {...AsyncBoundaryProps}>
-      <section className='flex flex-col items-center my-32 mt-10 gap-y-10'>
+      <section className='items-center my-32 mt-10 col gap-y-10'>
         <Typography {...GameModeProps} />
         <Box {...MasteryBoxProps}>
           <MasteryHeader />

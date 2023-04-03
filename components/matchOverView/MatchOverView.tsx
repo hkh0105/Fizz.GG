@@ -22,7 +22,7 @@ const MatchOverView: FC<MatchOverViewProps> = ({
   const GameTimeProps = GameTimePropsMapper(gameTime);
 
   return (
-    <div className='flex flex-col w-20 py-5 ml-5 gap-y-px'>
+    <div className='w-20 py-5 ml-5 col gap-y-px'>
       <Typography {...MatchTypeProps} />
       <Typography {...DayDiffProps} />
       <Divider />

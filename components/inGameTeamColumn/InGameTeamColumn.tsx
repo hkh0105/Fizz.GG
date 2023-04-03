@@ -11,7 +11,7 @@ const InGameTeamColumn: FC<InGameTeamColumnProps> = ({ users }) => {
   const { runeData } = useGetRuneJson();
 
   return (
-    <div className='flex-col'>
+    <div className='col'>
       {users.map((user: InGameUser) => {
         const { summonerName, profileIconId, summonerId } = user;
 

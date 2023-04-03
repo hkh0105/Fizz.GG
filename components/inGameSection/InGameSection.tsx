@@ -20,7 +20,7 @@ const IngameSection: FC<IngameSectionProps> = ({ nickname }) => {
   const EnemyColumnProps = TeamColumnPropsMapper(enemyTeam);
 
   return (
-    <section className='flex flex-col items-center my-3 gap-y-3'>
+    <section className='items-center my-3 col gap-y-3'>
       <Typography {...GameModeProps} />
       <Box {...InGameBoxProps}>
         <div className='flex items-center justify-evenly'>
