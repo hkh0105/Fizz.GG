@@ -1,34 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fizz.gg
 
-## Getting Started
+League of Legend 의 전적검색사이트
 
-First, run the development server:
+- 링크 : https://summoner-search-git-fix-search-window-hkh0105.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 개발스택
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- TypeScript
+- Next.js
+- React
+- Recoil
+- React Query
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 홈 페이지
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![image](https://user-images.githubusercontent.com/62933450/227794972-7733a4c1-20da-43ec-92b8-79cd6f148783.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- 검색창에 League of Legend 닉네임을 검색할 수 있습니다. 검색 시 전적 화면으로 이동합니다
+- 하단 Header와 Footer를 통해 제 Github과 Home페이지를 이동할 수 있습니다.
 
-## Learn More
+## 전적 페이지
 
-To learn more about Next.js, take a look at the following resources:
+![image](https://user-images.githubusercontent.com/62933450/227795133-4880cd82-ed0c-4674-82b5-a98b5ba12741.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![image](https://user-images.githubusercontent.com/62933450/227795190-dfa074a3-43aa-4b24-bc7a-2a69f5acbcff.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+- 검색한 닉네임의 최근 전적이 나옵니다. 더욱 많은 전적을 원할 시 스크롤을 내리면 무한스크롤로 정보가 나옵니다.
+- 최근 전적의 승, 패 통계, 자유랭크와 솔로랭크의 티어, 최근 챔피언 승률이 좌측 섹션에 나옵니다.
+- 각 매치에 대한 통계를 각각의 카드로 볼 수 있으며, 아래 화살표를 클릭시 더욱 디테일한 정보가 나옵니다.(사진2)
+- 디테일 화면의 다른 닉네임을 클릭시, 그 닉네임의 전적 페이지로 이동합니다.
+- 상단 Header를 통해 다시 검색할 수 있습니다.
+- 인게임 버튼을 통해 인게임페이지, 소환사 정보 버튼을 통해 소환사 정보 페이지로 이동할 수 있습니다. 또한 업데이트를 통해 새로 검색을 할 수 있습니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 인게임 페이지
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![image](https://user-images.githubusercontent.com/62933450/227795326-3ab68d86-1367-44ec-ab28-0c4ccbd40d57.png)
+
+![image](https://user-images.githubusercontent.com/62933450/227795416-70c383ec-436d-4463-b0b6-2887bb619245.png)
+
+- 해당 닉네임 유저가 게임중인지 알 수 있습니다.
+- 게임중일시, 해당 게임에 대한 정보가 나옵니다.
+- 매치 정보 버튼을 통해 매치 페이지, 소환사 정보 버튼을 통해 소환사 정보 페이지로 이동할 수 있습니다. 또한 업데이트를 통해 새로 검색을 할 수 있습니다.
+
+## 소환사 정보 페이지
+
