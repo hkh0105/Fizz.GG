@@ -2,7 +2,7 @@
 
 League of Legend 의 전적검색사이트
 
-- 링크 : https://summoner-search-git-fix-search-window-hkh0105.vercel.app/
+- 링크 : https://summoner-search-lake.vercel.app
 
 ## 개발스택
 
